@@ -4,6 +4,9 @@ import {PhoneSignIn} from "./PhoneSignIn";
 
 import {storage} from "../App";
 import MainScreen from "./MainScreen";
+import Constants, {ScreenName} from "../utils/Constants";
+import SplashScreen from "./SplashScreen";
+import AddReviewScreen from "./AddReviewScreen";
 const Stack = createNativeStackNavigator();
 
 
@@ -42,8 +45,19 @@ export function NavigationStackScreens({navigation}) {
             {/*)}*/}
 
             <Stack.Screen
-                name="MainScreen"
+                name={ScreenName.SPLASH_SCREEN}
+                component={SplashScreen}
+                options={{headerShown: false}}
+            />
+
+            <Stack.Screen
+                name={ScreenName.MAIN_SCREEN}
                 component={MainScreen}
+                options={{headerShown: true}}
+            />
+            <Stack.Screen
+                name={ScreenName.ADD_REVIEW_SCREEN}
+                component={AddReviewScreen}
                 options={{headerShown: true}}
             />
             <Stack.Screen

@@ -3,7 +3,7 @@ import {Alert, Button, SafeAreaView, StatusBar, Text, TextInput, TouchableOpacit
 import auth from '@react-native-firebase/auth';
 import colors from "../styles/colors";
 import fontStyle from "../styles/fontStyle";
-import Constants from "../styles/Constants";
+import Constants from "../utils/Constants";
 import {storage} from "../App";
 
 

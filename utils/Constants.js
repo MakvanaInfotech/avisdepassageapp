@@ -1,0 +1,35 @@
+
+export default {
+  APP_TITLE: "Avis de passage",
+  HOW_WAS_YOUR_LAST_DELIVERY: "How was your last delivery?",
+  NOTE_A_DELIVERY: "NOTE A DELIVERY",
+  REVIEWS: "Reviews",
+  MY_REVIEWS: "My review",
+  REQUIRED: "Required",
+  COMPANY: "Company",
+  SELECT_COMPANY: "Select Company",
+  DATE: "Date",
+  SELECT_DATE: "Select Date",
+  NOTE: "Note",
+  POSTAL_CODE: "Postal Code",
+  ENTER_POSTAL_CODE: "Enter postal Code",
+  CITY: "City",
+  ENTER_CITY: "Enter city",
+  COMMENT: "Comment",
+  ENTER_COMMENT: "Enter comment",
+  CHOOSE_AN_IMAGE: "Cheese an image",
+  ADDITIONAL_PHOTO: "Additional photo",
+  PACKAGE_NUMBER: "Package number",
+  ENTER_PACKAGE_NUMBER: "Enter package number",
+  SUBMIT_A_COMPLAINT: "Submit a complaint",
+  EMAIL: "Email",
+  ENTER_EMAIL: "Enter email",
+  SHOPPING_WEBSITE: "Shopping website",
+  ENTER_SHOPPING_WEBSITE: "ex: Amazon, CDiscount, Zalando",
+
+}
+export const ScreenName = {
+  SPLASH_SCREEN : "SplashScreen",
+  MAIN_SCREEN : "MainScreen",
+  ADD_REVIEW_SCREEN : "AddReviewScreen",
+}
