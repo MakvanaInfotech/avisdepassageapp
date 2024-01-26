@@ -73,5 +73,10 @@ export default {
     DIALOG_BG:'#DEDEDE',
 
     SWEAT_COIN_BG:'#F3F3FA',
-    DIALOG_TEXT_BLUE:'#007AFF'
+    DIALOG_TEXT_BLUE:'#007AFF',
+    white_bg:'#F7F8F9',
+    white_bg1:'#F2F2F7',
+    system: "#3C3C4399",
+
+
 };

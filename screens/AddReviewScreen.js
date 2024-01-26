@@ -12,8 +12,11 @@ import fontStyle from "../styles/fontStyle";
 import Constants from "../utils/Constants";
 import fontDimen from "../styles/fontDimen";
 import {Rating, AirbnbRating} from 'react-native-ratings';
+import {getCompanyList} from "../services/CompanyManager";
+import CompanyListBottomSheet from "../components/CompanyListBottomSheet";
 
 const AddReviewScreen = ({navigation}) => {
+    const [companyList, setCompanyList] = useState([]);
     const [companyName, setCompanyName] = useState('');
     const [date, setDate] = useState('');
     const [rating, setRating] = useState('');
@@ -25,6 +28,28 @@ const AddReviewScreen = ({navigation}) => {
     const [shoppingWebSite, setShoppingWebsite] = useState('');
     const [submitComplaint, setSubmitComplaint] = useState(false);
     const [email, setEmail] = useState("");
+    const [isCompanyDropDownVisible, setCompanyDropDownVisible] = useState(false);
+    useEffect(() => {
+        getCompanyList((company) => {
+            // console.log("company>>>>> ",company)
+            setCompanyList(company)
+        })
+    }, [])
+
+    const handleCompanyList = async (imageUri) => {
+        setCompanyDropDownVisible(false)
+    }
+    const renderCompanyListBottomSheet = () => {
+        return (
+            <CompanyListBottomSheet
+                companyList={companyList}
+                disabled={isCompanyDropDownVisible}
+                onImageSelected={handleCompanyList}
+                onClose={() => {
+                    setCompanyDropDownVisible(false)
+                }}/>
+        )
+    }
 
     const renderTitle = () => {
         return (
@@ -90,60 +115,67 @@ const AddReviewScreen = ({navigation}) => {
                     paddingEnd: 10,
                     paddingTop: 10,
                 }}>
-                    <View>
-                        <View style={{
-                            flexDirection: "row",
-                        }}>
-                            <Text style={{
-                                color: colors.BLACK,
-                                fontFamily: fontStyle.SFProTextRegular,
-                                fontWeight: 400,
-                                fontSize: 16,
-                                flex: 1,
-                                marginStart: 5,
+
+                    <TouchableOpacity
+                    onPress={()=>{
+                        setCompanyDropDownVisible(true)
+                    }}>
+                        <View>
+                            <View style={{
+                                flexDirection: "row",
                             }}>
-                                {Constants.COMPANY + "*"}
-                            </Text>
-                            <Text style={{
-                                color: colors.GRAY_99_COLOR,
-                                fontFamily: fontStyle.SFProTextRegular,
-                                fontWeight: 400,
-                                marginEnd: 10,
-                                fontSize: 12
+                                <Text style={{
+                                    color: colors.BLACK,
+                                    fontFamily: fontStyle.SFProTextRegular,
+                                    fontWeight: 400,
+                                    fontSize: 16,
+                                    flex: 1,
+                                    marginStart: 5,
+                                }}>
+                                    {Constants.COMPANY + "*"}
+                                </Text>
+                                <Text style={{
+                                    color: colors.GRAY_99_COLOR,
+                                    fontFamily: fontStyle.SFProTextRegular,
+                                    fontWeight: 400,
+                                    marginEnd: 10,
+                                    fontSize: 12
+                                }}>
+                                    {Constants.REQUIRED}
+                                </Text>
+                            </View>
+                            <View style={{
+                                marginTop: 10,
+                                flexDirection: 'row',
+                                borderRadius: 10,
+                                padding: 13,
+                                marginBottom: 15,
+                                backgroundColor: colors.BG_TEXT_INPUT_COLOR
                             }}>
-                                {Constants.REQUIRED}
-                            </Text>
+                                <Text style={{
+                                    color: colors.GRAY_99_COLOR,
+                                    fontFamily: fontStyle.SFProTextRegular,
+                                    fontWeight: 400,
+                                    fontSize: 16,
+                                    flex: 1,
+                                }}>
+                                    {Constants.SELECT_COMPANY + ""}
+                                </Text>
+                                <Image
+                                    source={
+                                        require('../assets/images/ic_aerrow_down.png')
+                                    }
+                                    resizeMode={"contain"}
+                                    style={{
+                                        alignSelf: "center",
+                                        width: 16,
+                                        height: 16,
+                                    }}
+                                />
+                            </View>
                         </View>
-                        <View style={{
-                            marginTop: 10,
-                            flexDirection: 'row',
-                            borderRadius: 10,
-                            padding: 13,
-                            marginBottom: 15,
-                            backgroundColor: colors.BG_TEXT_INPUT_COLOR
-                        }}>
-                            <Text style={{
-                                color: colors.GRAY_99_COLOR,
-                                fontFamily: fontStyle.SFProTextRegular,
-                                fontWeight: 400,
-                                fontSize: 16,
-                                flex: 1,
-                            }}>
-                                {Constants.SELECT_COMPANY + ""}
-                            </Text>
-                            <Image
-                                source={
-                                    require('../assets/images/ic_aerrow_down.png')
-                                }
-                                resizeMode={"contain"}
-                                style={{
-                                    alignSelf: "center",
-                                    width: 16,
-                                    height: 16,
-                                }}
-                            />
-                        </View>
-                    </View>
+                    </TouchableOpacity>
+
                     <View>
                         <View style={{
                             flexDirection: "row",
@@ -551,7 +583,7 @@ const AddReviewScreen = ({navigation}) => {
                     <View>
                         <View style={{
                             flexDirection: "row",
-                            marginBottom:10,
+                            marginBottom: 10,
                         }}>
                             <Text style={{
                                 color: colors.BLACK,
@@ -593,6 +625,8 @@ const AddReviewScreen = ({navigation}) => {
                 </View>
 
             </ScrollView>
+
+            {renderCompanyListBottomSheet()}
         </View>
     );
 }

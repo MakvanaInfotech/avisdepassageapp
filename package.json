@@ -32,11 +32,13 @@
     "cleanAll": "npm run clean && npm run androidClean && npm run iOSClean"
   },
   "dependencies": {
+    "@react-native-community/blur": "^4.4.0",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
     "react": "18.2.0",
     "react-native": "0.73.2",
     "react-native-mmkv": "^2.11.0",
+    "react-native-modal": "^13.0.1",
     "react-native-ratings": "^8.1.0",
     "react-native-responsive-fontsize": "^0.5.1",
     "react-native-safe-area-context": "^4.8.2",

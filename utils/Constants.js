@@ -7,6 +7,7 @@ export default {
   MY_REVIEWS: "My review",
   REQUIRED: "Required",
   COMPANY: "Company",
+  COMPANY_LIST: "Company List",
   SELECT_COMPANY: "Select Company",
   DATE: "Date",
   SELECT_DATE: "Select Date",
