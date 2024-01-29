@@ -7,12 +7,13 @@ import fontDimen from "../styles/fontDimen";
 import fontStyle from "../styles/fontStyle";
 import Constants from "../utils/Constants";
 
-const CompanyListBottomSheet = ({onClose, companyList, disabled, onImageSelected}) => {
+const CompanyListBottomSheet = ({onClose, companyList, disabled, onItemSelected}) => {
 
 
     const renderItem = ({item}) => (
         <View>
             <TouchableOpacity
+                onPress={()=>onItemSelected(item)}
                 style={{
                     borderRadius: 10,
                     ...(Platform.OS === 'ios' ? {backgroundColor: 'transparent'} : {backgroundColor: colors.white_bg}),

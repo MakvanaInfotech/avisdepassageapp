@@ -27,6 +27,15 @@ export default {
   ENTER_EMAIL: "Enter email",
   SHOPPING_WEBSITE: "Shopping website",
   ENTER_SHOPPING_WEBSITE: "ex: Amazon, CDiscount, Zalando",
+  CANCEL_CAP: "CANCEL",
+  CANCEL: "Cancel",
+  DONE_CAP: "DONE",
+  TAKE_A_NEW_PHOTO: "Take a new photo",
+  OPEN_GALLERY: "Open Gallery",
+  PLEASE_SELECT_COMPANY_NAME: "Please select company name",
+  PLEASE_ENTER_POSTAL_CODE: "Please enter postal code",
+  PLEASE_ENTER_CITY: "Please enter city",
+
 
 }
 export const ScreenName = {
