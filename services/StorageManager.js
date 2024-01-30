@@ -41,14 +41,14 @@ export const uploadReviewPhoto = async (reviewId, localImagePath, callback) => {
     }
 };
 
-export const getProfilePicture  = async (userId, isLoginUser, callback) => {
+export const getMediaFromStorage  = async (storageName, userId, isLoginUser, callback) => {
     try {
-        const reference = storage().ref(`profilePictures/${userId}`);
+        const reference = storage().ref(`${storageName}/${userId}`);
         let imageUrl = await reference.getDownloadURL();
         if(callback !== undefined && callback !== null){
             callback(imageUrl)
         }
-        if(isLoginUser){
+        if(isLoginUser && storageName === "profilePictures"){
             setProfileUri(imageUrl);
         }
     } catch (error) {

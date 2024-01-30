@@ -4,6 +4,7 @@ export default {
   HOW_WAS_YOUR_LAST_DELIVERY: "How was your last delivery?",
   NOTE_A_DELIVERY: "NOTE A DELIVERY",
   REVIEWS: "Reviews",
+  PROFILE: "Profile",
   MY_REVIEWS: "My review",
   REQUIRED: "Required",
   COMPANY: "Company",
@@ -35,6 +36,15 @@ export default {
   PLEASE_SELECT_COMPANY_NAME: "Please select company name",
   PLEASE_ENTER_POSTAL_CODE: "Please enter postal code",
   PLEASE_ENTER_CITY: "Please enter city",
+  RECENT_REVIEWS: "Recent Reviews",
+  ABOUT_US: "About Us",
+  TERM_CONDITIONS: "Term & Conditions",
+  PRIVACY_POLICY: "Privacy Policy",
+  LOGIN: "Log In",
+  LOGOUT: "Log Out",
+  DELETE_ACCOUNT: "Delete Account",
+  USER_NAME: "User Name",
+  USER_EMAIL: "User Email",
 
 
 }
@@ -42,4 +52,5 @@ export const ScreenName = {
   SPLASH_SCREEN : "SplashScreen",
   MAIN_SCREEN : "MainScreen",
   ADD_REVIEW_SCREEN : "AddReviewScreen",
+  PROFILE_SCREEN : "ProfileScreen",
 }

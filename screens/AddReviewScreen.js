@@ -22,13 +22,14 @@ import {uploadReviewPhoto} from "../services/StorageManager";
 import {createReview} from "../services/ReviewManager";
 import Indicator from "../components/Indicator";
 
-let companyNameStr = "", selectedDateStr = "",
+let companySelectedObj = null, companyNameStr = "", selectedDateStr = "",
     ratingStr = "", postalCodeStr = "", cityStr = "",
     commentStr = "", packageNumberStr = "", shoppingWebSiteStr = "",
     submitComplaintFlag = false, emailStr = "", selectedImageStr = ""
 const AddReviewScreen = ({navigation}) => {
     const [companyList, setCompanyList] = useState([]);
     const [companyName, setCompanyName] = useState(Constants.SELECT_COMPANY + "");
+    const [companySelected, setCompanySelected] = useState(null);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [date, setDate] = useState(moment(new Date()).format('DD MMM YYYY'));
     const [rating, setRating] = useState(3);
@@ -55,6 +56,7 @@ const AddReviewScreen = ({navigation}) => {
     useEffect(() => {
         // Your code here will run after every render when companyName or companyList changes
         // You can include the code to call full components here
+        companySelectedObj = companySelected
         companyNameStr = companyName
         selectedDateStr = date
         ratingStr = rating
@@ -66,7 +68,7 @@ const AddReviewScreen = ({navigation}) => {
         submitComplaintFlag = submitComplaint
         emailStr = email
         selectedImageStr = selectedImage
-    }, [companyName, date, rating, postalCode, city, comment,
+    }, [companySelected, companyName, date, rating, postalCode, city, comment,
         packageNumber, shoppingWebSite, submitComplaint, email, selectedImage]);
 
     const renderTitle = () => {
@@ -144,7 +146,7 @@ const AddReviewScreen = ({navigation}) => {
             alert(Constants.PLEASE_ENTER_CITY)
         } else {
             setLoader(true)
-            await createReview("", "", companyNameStr, selectedDateStr, ratingStr, postalCodeStr, cityStr,
+            await createReview("", "", companySelectedObj, companyNameStr, selectedDateStr, ratingStr, postalCodeStr, cityStr,
                 commentStr, packageNumberStr, shoppingWebSiteStr, submitComplaintFlag, emailStr,
                 selectedImageStr, async (docId) => {
                     if (selectedImageStr !== "") {
@@ -168,6 +170,7 @@ const AddReviewScreen = ({navigation}) => {
     const handleCompanyList = async (item) => {
         setCompanyDropDownVisible(false)
         setCompanyName(item.name)
+        setCompanySelected(item)
         console.log("item.name>>>>> ", item.name)
         console.log("companyName>>>>> ", companyName)
     }

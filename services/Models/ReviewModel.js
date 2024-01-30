@@ -1,6 +1,7 @@
 export default class ReviewModel {
     userId = "";
     userName = "";
+    companySelected = null;
     companyName = "";
     selectedDate = "";
     rating = "";
@@ -15,11 +16,12 @@ export default class ReviewModel {
     createdAt = "";
     updatedAt = "";
 
-    constructor(userId, userName, companyName, selectedDate, rating, postalCode,
+    constructor(userId, userName,companySelected, companyName, selectedDate, rating, postalCode,
                 city, comment, packageNumber, shoppingWebSite, submitComplaint,
                 email, selectedImage, createdAt, updatedAt) {
         this.userId = userId;
         this.userName = userName;
+        this.companySelected = companySelected;
         this.companyName = companyName;
         this.selectedDate = selectedDate;
         this.rating = rating;

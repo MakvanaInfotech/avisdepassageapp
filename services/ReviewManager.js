@@ -6,13 +6,13 @@ import ReviewModel from "./Models/ReviewModel";
 const collection = firestore().collection(FirestoreConstant.REVIEW_TABLE);
 
 export const createReview = async (
-    userId, userName, companyName, selectedDate, rating, postalCode,
+    userId, userName, companySelectedObj, companyName, selectedDate, rating, postalCode,
     city, comment, packageNumber, shoppingWebSite, submitComplaint,
     email, selectedImage, callback) => {
 
     let currentTime = getISOStringFromDate(moment());
     let review = new ReviewModel(
-        userId, userName, companyName, selectedDate, rating, postalCode,
+        userId, userName, companySelectedObj, companyName, selectedDate, rating, postalCode,
         city, comment, packageNumber, shoppingWebSite, submitComplaint,
         email, selectedImage,
         currentTime,
@@ -36,9 +36,9 @@ export const createReview = async (
         });
 };
 
-export const getNotificationHistoryData = async (userId, callback) => {
+
+export const getAllReviewByData = async (userId, callback) => {
     await collection
-        .doc(userId)
         .get()
         .then(documentSnapshot => {
             if (callback) {
@@ -50,15 +50,3 @@ export const getNotificationHistoryData = async (userId, callback) => {
             }
         });
 };
-
-export const deleteAllNotificationHistory = async (userId, callback) => {
-    collection
-        .doc(userId)
-        .delete()
-        .then(() => {
-            console.log('All Notification History deleted!');
-            if (callback) {
-                callback(true)
-            }
-        });
-}

@@ -7,6 +7,7 @@ import MainScreen from "./MainScreen";
 import Constants, {ScreenName} from "../utils/Constants";
 import SplashScreen from "./SplashScreen";
 import AddReviewScreen from "./AddReviewScreen";
+import {ProfileScreen} from "./ProfileScreen";
 const Stack = createNativeStackNavigator();
 
 
@@ -58,6 +59,11 @@ export function NavigationStackScreens({navigation}) {
             <Stack.Screen
                 name={ScreenName.ADD_REVIEW_SCREEN}
                 component={AddReviewScreen}
+                options={{headerShown: true}}
+            />
+            <Stack.Screen
+                name={ScreenName.PROFILE_SCREEN}
+                component={ProfileScreen}
                 options={{headerShown: true}}
             />
             <Stack.Screen
