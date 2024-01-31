@@ -26,6 +26,8 @@ export default {
   SUBMIT_A_COMPLAINT: "Submit a complaint",
   EMAIL: "Email",
   ENTER_EMAIL: "Enter email",
+  ENTER_YOUR_EMAIL: "Enter your email",
+  ENTER_YOUR_PASSWORD: "Enter your password",
   SHOPPING_WEBSITE: "Shopping website",
   ENTER_SHOPPING_WEBSITE: "ex: Amazon, CDiscount, Zalando",
   CANCEL_CAP: "CANCEL",
@@ -45,7 +47,13 @@ export default {
   DELETE_ACCOUNT: "Delete Account",
   USER_NAME: "User Name",
   USER_EMAIL: "User Email",
-
+  SIGN_IN_WITH_EMAIL: "Sign In with email",
+  SIGN_IN: "Sign In",
+  SIGN_UP_WITH_EMAIL: "Sign Up with Email",
+  SIGN_UP: "Sign Up",
+  NEW_USER_REGISTER: "New user? Register",
+  PASSWORD: "Password",
+  CONFIRM_PASSWORD: "Confirm Password",
 
 }
 export const ScreenName = {
@@ -53,4 +61,6 @@ export const ScreenName = {
   MAIN_SCREEN : "MainScreen",
   ADD_REVIEW_SCREEN : "AddReviewScreen",
   PROFILE_SCREEN : "ProfileScreen",
+  SIGN_IN_SCREEN : "SignInScreen",
+  SIGN_UP_SCREEN : "SignUpScreen",
 }

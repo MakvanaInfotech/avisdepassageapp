@@ -8,6 +8,8 @@ import Constants, {ScreenName} from "../utils/Constants";
 import SplashScreen from "./SplashScreen";
 import AddReviewScreen from "./AddReviewScreen";
 import {ProfileScreen} from "./ProfileScreen";
+import {SignInScreen} from "./SignInScreen";
+import {SignUpScreen} from "./SignUpScreen";
 const Stack = createNativeStackNavigator();
 
 
@@ -65,6 +67,16 @@ export function NavigationStackScreens({navigation}) {
                 name={ScreenName.PROFILE_SCREEN}
                 component={ProfileScreen}
                 options={{headerShown: true}}
+            />
+            <Stack.Screen
+                name={ScreenName.SIGN_IN_SCREEN}
+                component={SignInScreen}
+                options={{headerShown: false}}
+            />
+            <Stack.Screen
+                name={ScreenName.SIGN_UP_SCREEN}
+                component={SignUpScreen}
+                options={{headerShown: false}}
             />
             <Stack.Screen
                 name="PhoneSignIn"

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Alert, Image, SafeAreaView, ScrollView, StatusBar, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import colors from "../styles/colors";
 import fontStyle from "../styles/fontStyle";
-import Constants from "../utils/Constants";
+import Constants, {ScreenName} from "../utils/Constants";
 import fontDimen from "../styles/fontDimen";
 import {Rating} from "react-native-ratings";
 import {getUser} from "../services/DataManager";
@@ -298,6 +298,11 @@ export function ProfileScreen({navigation}) {
                 }}>
                     <TouchableOpacity
                         onPress={() => {
+                            if(userData !== undefined && userData !== null){
+
+                            }else{
+                                navigation.navigate(ScreenName.SIGN_IN_SCREEN)
+                            }
                         }}
                         style={{
                             paddingEnd: 10,
