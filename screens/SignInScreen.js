@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
+    Alert,
     Image,
     SafeAreaView,
     StatusBar,
@@ -10,11 +11,13 @@ import {
 } from 'react-native';
 import colors from "../styles/colors";
 import fontStyle from "../styles/fontStyle";
-import Constants, {ScreenName} from "../utils/Constants";
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Constants, {firebaseAnalytic, ScreenName} from "../utils/Constants";
+import {performEmailSignIn} from "../services/AuthService";
+import {signUpHelper} from "../services/NavigationService";
 
 
 export function SignInScreen({navigation}) {
+    const [loader, setLoader] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [hidePassword, setHidePassword] = useState(true);
@@ -22,6 +25,40 @@ export function SignInScreen({navigation}) {
     const togglePasswordVisibility = () => {
         setHidePassword(!hidePassword);
     };
+
+    const handleEmailSignIn = async (navigation) => {
+        try {
+            setLoader(true);
+            await performEmailSignIn(email, password, (error, userCredential) => {
+                if (error) {
+                    setLoader(false);
+                    if (error.code === 'auth/invalid-credential') {
+                        Alert.alert("", Constants.INVALID_VALIDATION_MSG);
+                    } else if (error.code === 'auth/invalid-email') {
+                        Alert.alert("", Constants.EMAIL_INVALID_VALIDATION_MSG);
+                    } else if (error.code === 'auth/too-many-requests') {
+                        Alert.alert(Constants.MANY_REQ_TITLE_MSG, Constants.MANY_REQ_VALIDATION_MSG);
+                    } else {
+                        console.log("Error in sign up process:", error);
+                    }
+                    firebaseAnalytic(Constants.AUTH_EVENT, {
+                        eventName: Constants.SIGN_IN_EMAIL,
+                        Message: "Failed",
+                        Error: JSON.stringify(error)
+                    })
+                } else {
+                    if (!userCredential.user.emailVerified) {
+                        setLoader(false);
+                    }
+                    signUpHelper(navigation, userCredential, true, true, password);
+                }
+            });
+        } catch (error) {
+            setLoader(false);
+            console.log('Error in handleEmailSignUp:', error);
+        }
+    };
+
     return (
         <View style={{
             flex: 1,
@@ -32,13 +69,13 @@ export function SignInScreen({navigation}) {
             <SafeAreaView/>
             <StatusBar translucent backgroundColor={colors.PRIMARY_COLOR}/>
             <TouchableOpacity
-                onPress={()=>{
+                onPress={() => {
                     navigation.goBack()
                 }}
                 style={{
-                    position:'absolute',
-                    top:50,
-                    left:10,
+                    position: 'absolute',
+                    top: 50,
+                    left: 10,
                 }}>
                 <Image
                     resizeMode={'contain'}
@@ -151,7 +188,13 @@ export function SignInScreen({navigation}) {
                 }}>
                     <TouchableOpacity
                         onPress={() => {
-
+                            if (email.trim() === "") {
+                                Alert.alert("", Constants.EMAIL_VALIDATION_MSG);
+                            } else if (password.trim() === "") {
+                                Alert.alert("", Constants.PASSWORD_VALIDATION_MSG);
+                            } else {
+                                handleEmailSignIn(navigation)
+                            }
                         }}
                         style={{
                             width: '100%',
@@ -174,9 +217,7 @@ export function SignInScreen({navigation}) {
                     onPress={() => {
                         navigation.navigate(ScreenName.SIGN_UP_SCREEN)
                     }}
-                    style={{
-
-                    }}>
+                    style={{}}>
                     <Text style={{
                         textAlign: 'center',
                         color: colors.WHITE,

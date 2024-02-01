@@ -57,3 +57,23 @@ export const getMediaFromStorage  = async (storageName, userId, isLoginUser, cal
         }
     }
 };
+
+export const getProfilePicture  = async (userId, isLoginUser, callback) => {
+    try {
+        const reference = storage().ref(`profilePictures/${userId}`);
+        let imageUrl = await reference.getDownloadURL();
+        if(callback !== undefined && callback !== null){
+            callback(imageUrl)
+        }
+        if(isLoginUser){
+            setProfileUri(imageUrl);
+        }
+        return imageUrl
+    } catch (error) {
+        // console.log('Error getting profile picture:', error);
+        if (callback){
+            callback(null)
+        }
+        return null
+    }
+};

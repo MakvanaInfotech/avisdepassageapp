@@ -4,13 +4,32 @@ import colors from "../styles/colors";
 import fontStyle from "../styles/fontStyle";
 import Constants, {ScreenName} from "../utils/Constants";
 import fontDimen from "../styles/fontDimen";
-import {Rating} from "react-native-ratings";
-import {getUser} from "../services/DataManager";
-
+import {getUser, getUserName, setProfileUri, setUser, setUserName} from "../services/DataManager";
+import {authLogout} from "../services/AuthService";
+import {CommonActions} from "@react-navigation/native";
 
 export function ProfileScreen({navigation}) {
     let userData = getUser();
+    const [userName, setName] = useState(false);
+    const [userEmail, setUserEmail] = useState(false);
 
+    useEffect(() => {
+        let userData = getUser();
+        if (userData !== undefined && userData !== null &&
+            userData.name !== undefined && userData.name !== null
+            && userData.name !== "") {
+            setName(userData.name)
+            if (getUserName() === "") {
+                setUserName(userData.name)
+                console.log(getUserName())
+            }
+        }
+        if (userData !== undefined && userData !== null &&
+            userData.email !== undefined && userData.email !== null
+            && userData.email !== "") {
+            setUserEmail(userData.email)
+        }
+    }, [])
     const renderTitle = () => {
         return (
             <View style={{
@@ -76,7 +95,7 @@ export function ProfileScreen({navigation}) {
                                 fontFamily: fontStyle.SFProTextBold,
                                 color: colors.BLACK,
                             }}>
-                            {Constants.USER_NAME}
+                            {userName}
                         </Text>
                         <Text
                             style={{
@@ -86,7 +105,7 @@ export function ProfileScreen({navigation}) {
                                 fontFamily: fontStyle.SFProTextSemiBold,
                                 color: colors.BLACK,
                             }}>
-                            {Constants.USER_EMAIL}
+                            {userEmail}
                         </Text>
                     </View>
                 )}
@@ -298,9 +317,17 @@ export function ProfileScreen({navigation}) {
                 }}>
                     <TouchableOpacity
                         onPress={() => {
-                            if(userData !== undefined && userData !== null){
-
-                            }else{
+                            if (userData !== undefined && userData !== null) {
+                                setUser(null);
+                                setProfileUri(null);
+                                setUserName("")
+                                authLogout()
+                                navigation.dispatch(
+                                    CommonActions.reset({
+                                        index: 1,
+                                        routes: [{name: ScreenName.MAIN_SCREEN}],
+                                    }));
+                            } else {
                                 navigation.navigate(ScreenName.SIGN_IN_SCREEN)
                             }
                         }}

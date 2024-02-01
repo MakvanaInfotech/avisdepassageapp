@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
+    Alert,
     Image,
     SafeAreaView,
     StatusBar,
@@ -10,12 +11,16 @@ import {
 } from 'react-native';
 import colors from "../styles/colors";
 import fontStyle from "../styles/fontStyle";
-import Constants, {ScreenName} from "../utils/Constants";
+import Constants, {firebaseAnalytic, ScreenName} from "../utils/Constants";
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {performEmailSignUp} from "../services/AuthService";
+import {signUpHelper} from "../services/NavigationService";
+import {setUserName} from "../services/DataManager";
 
 
 export function SignUpScreen({navigation}) {
-    const [userName, setUserName] = useState('');
+    const [loader, setLoader] = useState(false);
+    const [userName, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -30,6 +35,41 @@ export function SignUpScreen({navigation}) {
         setHideCofirmPassword(!hideConfirmPassword);
     };
 
+    const handleEmailSignUp = async (navigation) => {
+        try {
+            setLoader(true);
+            await performEmailSignUp(email, password, (error, userCredential) => {
+                if (error) {
+                    setLoader(false);
+                    if (error.code === 'auth/email-already-in-use') {
+                        Alert.alert("", Constants.EMAIL_ALREADY_VALIDATION_MSG);
+                    } else if (error.code === 'auth/invalid-email') {
+                        Alert.alert("", Constants.EMAIL_INVALID_VALIDATION_MSG);
+                    } else {
+                        console.log("Error in sign up process:", error.code);
+                    }
+                    firebaseAnalytic(Constants.AUTH_EVENT, {
+                        eventName: Constants.SIGN_UP_EMAIL,
+                        Message: "Failed",
+                        Error: JSON.stringify(error)
+                    })
+                } else {
+                    if (!userCredential.user.emailVerified) {
+                        setLoader(false);
+                    }
+                    signUpHelper(navigation, userCredential, true, false, password);
+                }
+            });
+        } catch (error) {
+            setLoader(false);
+            console.log('Error in handleEmailSignUp:', error);
+            firebaseAnalytic(Constants.AUTH_EVENT, {
+                eventName: Constants.SIGN_UP_EMAIL,
+                Message: "Failed",
+                Error: JSON.stringify(error)
+            })
+        }
+    };
     return (
         <View style={{
             flex: 1,
@@ -41,13 +81,13 @@ export function SignUpScreen({navigation}) {
             <SafeAreaView/>
             <StatusBar translucent backgroundColor={colors.PRIMARY_COLOR}/>
             <TouchableOpacity
-                onPress={()=>{
+                onPress={() => {
                     navigation.goBack()
                 }}
                 style={{
-                    position:'absolute',
-                    top:50,
-                    left:10,
+                    position: 'absolute',
+                    top: 50,
+                    left: 10,
                 }}>
                 <Image
                     resizeMode={'contain'}
@@ -100,7 +140,7 @@ export function SignUpScreen({navigation}) {
                             fontFamily: fontStyle.SFProTextRegular
                         }}
                         value={userName}
-                        onChangeText={setUserName}
+                        onChangeText={setName}
                         placeholder={Constants.USER_NAME}
                         autoCapitalize="none"
                         keyboardType="email-address"
@@ -221,7 +261,18 @@ export function SignUpScreen({navigation}) {
                 }}>
                     <TouchableOpacity
                         onPress={() => {
-
+                            if (userName.trim() === "") {
+                                Alert.alert("", Constants.USERNAME_VALIDATION_MSG);
+                            } else if (email.trim() === "") {
+                                Alert.alert("", Constants.EMAIL_VALIDATION_MSG);
+                            } else if (password !== confirmPassword) {
+                                Alert.alert("", Constants.PASSWORD_CORRECT_VALIDATION_MSG);
+                            } else if (password.length <= 7 && confirmPassword.length <= 7) {
+                                Alert.alert("", Constants.PASSWORD_LENGTH_VALIDATION_MSG);
+                            } else {
+                                setUserName(userName);
+                                handleEmailSignUp(navigation)
+                            }
                         }}
                         style={{
                             width: '100%',

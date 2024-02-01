@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import type {PropsWithChildren} from 'react';
 import {
     SafeAreaView,
@@ -30,6 +30,9 @@ import {firebase} from "@react-native-firebase/database";
 
 import {MMKV} from 'react-native-mmkv'
 import {DashStack} from "./screens/DashStack";
+import auth from "@react-native-firebase/auth";
+import {validateUser} from "./services/UserServices";
+import {getUser} from "./services/DataManager";
 
 export const storage = new MMKV()
 
@@ -88,6 +91,16 @@ function App(): React.JSX.Element {
     } else {
         app = firebase.app()
     }
+
+    useEffect(() => {
+        const isAuthenticatedUser = auth().currentUser;
+        if (isAuthenticatedUser) {
+            validateUser(auth().currentUser.uid, (callback => {
+                let userData = getUser();
+                console.log("userData", userData)
+            }))
+        }
+    })
 
     return (
         <View

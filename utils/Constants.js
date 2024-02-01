@@ -1,4 +1,6 @@
 
+import analytics from "@react-native-firebase/analytics";
+
 export default {
   APP_TITLE: "Avis de passage",
   HOW_WAS_YOUR_LAST_DELIVERY: "How was your last delivery?",
@@ -54,8 +56,31 @@ export default {
   NEW_USER_REGISTER: "New user? Register",
   PASSWORD: "Password",
   CONFIRM_PASSWORD: "Confirm Password",
-
+  EMAIL_VALIDATION_MSG: "Please enter your email",
+  USERNAME_VALIDATION_MSG: "Please enter user name",
+  PASSWORD_VALIDATION_MSG: "Please enter password",
+  PASSWORD_CORRECT_VALIDATION_MSG: "Please enter correct confirm password",
+  PASSWORD_LENGTH_VALIDATION_MSG: "Password must be at least 8 characters long",
+  AUTH_EVENT: "Auth",
+  SIGN_UP_EMAIL: 'Sign Up with Email',
+  EMAIL_SIGN_UP_TEXT: 'Sign up with Email',
+  EMAIL_SIGN_IN_TEXT: 'Sign in with Email',
+  INVALID_VALIDATION_MSG: "Invalid email/password!",
+  MANY_REQ_TITLE_MSG: "Too many login attempts",
+  MANY_REQ_VALIDATION_MSG: "Please wait a few minutes and try logging in again",
+  SIGN_IN_EMAIL: 'Sign In with Email',
+  EMAIL_ALREADY_VALIDATION_MSG: "Email address is already in use",
+  EMAIL_INVALID_VALIDATION_MSG: "Email address is invalid",
+  ACCOUNT_DELETED: "Account deleted",
+  ACCOUNT_DELETED_MESSAGE: "Your account has been deleted. Please contact support for assistance",
+  BTN_RESEND: "Resend email",
+  BTN_LOGIN: "Login",
+  BTN_PROCEED: "Proceed",
+  VERIFICATION_ALERT_TITLE: "Email verification required",
+  VERIFICATION_MESSAGE: "Please check your email first to confirm your email address, then return to the app and press the proceed button to continue with the sign-up process",
+  EMAIL_VERIFICATION_MSG: "Email is not verified yet, go to your email and verified",
 }
+
 export const ScreenName = {
   SPLASH_SCREEN : "SplashScreen",
   MAIN_SCREEN : "MainScreen",
@@ -63,4 +88,14 @@ export const ScreenName = {
   PROFILE_SCREEN : "ProfileScreen",
   SIGN_IN_SCREEN : "SignInScreen",
   SIGN_UP_SCREEN : "SignUpScreen",
+}
+
+
+export const firebaseAnalytic = (name, parameters) => {
+  try {
+    // analytics().logEvent(name, parameters);
+  } catch (e) {
+    console.log("Firebase analytics error:", e)
+  }
+
 }
