@@ -4,30 +4,45 @@ import colors from "../styles/colors";
 import fontStyle from "../styles/fontStyle";
 import Constants, {ScreenName} from "../utils/Constants";
 import fontDimen from "../styles/fontDimen";
-import {getUser, getUserName, setProfileUri, setUser, setUserName} from "../services/DataManager";
+import {getProfileUri, getUser, getUserName, setProfileUri, setUser, setUserName} from "../services/DataManager";
 import {authLogout} from "../services/AuthService";
 import {CommonActions} from "@react-navigation/native";
+import ProfileBottomSheet from "../components/ProfileBottomSheet";
+import Indicator from "../components/Indicator";
+import {uploadProfilePicture} from "../services/StorageManager";
+import {getLoggedUserId} from "../services/UserServices";
 
 export function ProfileScreen({navigation}) {
     let userData = getUser();
-    const [userName, setName] = useState(false);
-    const [userEmail, setUserEmail] = useState(false);
+    const [userName, setName] = useState("");
+    const [userEmail, setUserEmail] = useState("");
+    const [points, setPoints] = useState("0");
+    const [changeProfile, setChangeProfile] = useState(false);
+    const [isLoader, setLoader] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(getProfileUri());
 
     useEffect(() => {
-        let userData = getUser();
-        if (userData !== undefined && userData !== null &&
-            userData.name !== undefined && userData.name !== null
-            && userData.name !== "") {
-            setName(userData.name)
-            if (getUserName() === "") {
-                setUserName(userData.name)
-                console.log(getUserName())
+        userData = getUser();
+
+        if (userData !== undefined && userData !== null) {
+            if (userData.name !== undefined &&
+                userData.name !== null &&
+                userData.name !== "") {
+                setName(userData.name)
+                if (getUserName() === "") {
+                    setUserName(userData.name)
+                }
             }
-        }
-        if (userData !== undefined && userData !== null &&
-            userData.email !== undefined && userData.email !== null
-            && userData.email !== "") {
-            setUserEmail(userData.email)
+            if (userData.points !== undefined &&
+                userData.points !== null &&
+                userData.points !== "") {
+                setPoints(userData.points)
+            }
+            if (userData.email !== undefined &&
+                userData.email !== null &&
+                userData.email !== "") {
+                setUserEmail(userData.email)
+            }
         }
     }, [])
     const renderTitle = () => {
@@ -66,6 +81,32 @@ export function ProfileScreen({navigation}) {
             )
         });
     }, []);
+
+    const handleImageSelected = async (imageUri) => {
+        setLoader(true);
+        setChangeProfile(false);
+        try {
+            await uploadProfilePicture(getLoggedUserId(), imageUri, callback => {
+                if (callback) {
+                    setLoader(false);
+                    getProfileImage()
+                } else {
+                    setLoader(false);
+                }
+            });
+        } catch (error) {
+            setLoader(false);
+            console.log('Failed to upload profile picture:', error);
+        }
+    };
+
+    const getProfileImage = async () => {
+        let downloadURL = await getProfileUri();
+        if (downloadURL !== undefined && downloadURL !== null) {
+            setSelectedImage(downloadURL);
+        }
+    };
+
     return (
         <View style={{
             flex: 1,
@@ -86,7 +127,8 @@ export function ProfileScreen({navigation}) {
                                 alignSelf: 'center',
                                 borderRadius: 81,
                             }}
-                            source={require('../assets/images/ic_profile_bg.png')}/>
+                            source={selectedImage ? {uri: selectedImage, cache: 'force-cache'}:
+                                require('../assets/images/ic_profile_bg.png')}/>
                         <Text
                             style={{
                                 marginStart: 10,
@@ -107,6 +149,21 @@ export function ProfileScreen({navigation}) {
                             }}>
                             {userEmail}
                         </Text>
+
+                        <Text
+                            style={{
+                                marginTop: 6,
+                                padding: 6,
+                                borderRadius: 4,
+                                backgroundColor: colors.PRIMARY_COLOR,
+                                marginStart: 10,
+                                alignSelf: 'center',
+                                fontSize: 12,
+                                fontFamily: fontStyle.SFProTextBold,
+                                color: colors.WHITE,
+                            }}>
+                            {`${Constants.EARNING_POINTS}: ${points}`}
+                        </Text>
                     </View>
                 )}
 
@@ -120,6 +177,70 @@ export function ProfileScreen({navigation}) {
                     <View style={{
                         flex: 1,
                     }}>
+                        {(
+                            userData !== undefined && userData !== null &&
+                            <View style={{
+                                marginTop: 10,
+                                flexDirection: 'row',
+                                borderRadius: 10,
+                                padding: 13,
+                                marginBottom: 5,
+                                backgroundColor: colors.WHITE
+                            }}>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        setChangeProfile(true)
+                                    }}
+                                    style={{
+                                        paddingEnd: 10,
+                                        width: "100%",
+                                        alignSelf: 'center',
+                                    }}>
+                                    <View
+                                        style={{
+                                            width: '100%',
+                                            flexDirection: 'row',
+                                            alignItems: 'center',
+                                            backgroundColor: colors.WHITE
+                                        }}>
+                                        <Image
+                                            style={{
+                                                width: 24,
+                                                height: 22,
+                                            }}
+                                            source={require('../assets/images/ic_camera_profile.png')}>
+                                        </Image>
+                                        <Text
+                                            style={{
+                                                marginStart: 10,
+                                                fontSize: 16,
+                                                fontWeight: 400,
+                                                fontFamily: fontStyle.SFProTextRegular,
+                                                color: colors.BLACK,
+                                            }}>
+                                            {Constants.CHANGE_PROFILE_PHOTO}
+                                        </Text>
+
+                                        <View style={{
+                                            flex: 1,
+                                            alignItems: 'center',
+                                            justifyContent: 'flex-end',
+                                            flexDirection: 'row'
+                                        }}>
+                                            <Image
+                                                style={{
+                                                    width: 8,
+                                                    height: 14,
+                                                }}
+                                                resizeMode={'contain'}
+                                                source={require('../assets/images/ic_chevron.png')}>
+                                            </Image>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                        )}
+
                         <View style={{
                             marginTop: 10,
                             flexDirection: 'row',
@@ -410,6 +531,13 @@ export function ProfileScreen({navigation}) {
                     {"Version 1.0.0(1)"}
                 </Text>
             </View>
+            <ProfileBottomSheet
+                disabled={changeProfile}
+                onImageSelected={handleImageSelected}
+                onClose={() => {
+                    setChangeProfile(false)
+                }}/>
+            {isLoader && <Indicator/>}
         </View>
     );
 }

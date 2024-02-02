@@ -21,6 +21,8 @@ import ProfileBottomSheet from "../components/ProfileBottomSheet";
 import {uploadReviewPhoto} from "../services/StorageManager";
 import {createReview} from "../services/ReviewManager";
 import Indicator from "../components/Indicator";
+import {updateUser} from "../services/UserServices";
+import {getUser} from "../services/DataManager";
 
 let companySelectedObj = null, companyNameStr = "", selectedDateStr = "",
     ratingStr = "", postalCodeStr = "", cityStr = "",
@@ -149,6 +151,15 @@ const AddReviewScreen = ({navigation}) => {
             await createReview("", "", companySelectedObj, companyNameStr, selectedDateStr, ratingStr, postalCodeStr, cityStr,
                 commentStr, packageNumberStr, shoppingWebSiteStr, submitComplaintFlag, emailStr,
                 selectedImageStr, async (docId) => {
+                    let userData = getUser();
+                    if (userData !== undefined && userData !== null) {
+                        if(userData.points !== undefined && userData.points!== null){
+                            userData.points = userData.points + 1;
+                        }else{
+                            userData.points = 1
+                        }
+                        updateUser(userData);
+                    }
                     if (selectedImageStr !== "") {
                         await uploadReviewPhoto(
                             docId,

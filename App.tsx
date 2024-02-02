@@ -97,7 +97,6 @@ function App(): React.JSX.Element {
         if (isAuthenticatedUser) {
             validateUser(auth().currentUser.uid, (callback => {
                 let userData = getUser();
-                console.log("userData", userData)
             }))
         }
     })

@@ -42,6 +42,7 @@ export default {
   PLEASE_ENTER_CITY: "Please enter city",
   RECENT_REVIEWS: "Recent Reviews",
   ABOUT_US: "About Us",
+  CHANGE_PROFILE_PHOTO: "Change profile photo",
   TERM_CONDITIONS: "Term & Conditions",
   PRIVACY_POLICY: "Privacy Policy",
   LOGIN: "Log In",
@@ -79,6 +80,7 @@ export default {
   VERIFICATION_ALERT_TITLE: "Email verification required",
   VERIFICATION_MESSAGE: "Please check your email first to confirm your email address, then return to the app and press the proceed button to continue with the sign-up process",
   EMAIL_VERIFICATION_MSG: "Email is not verified yet, go to your email and verified",
+  EARNING_POINTS: "Earning Points",
 }
 
 export const ScreenName = {
