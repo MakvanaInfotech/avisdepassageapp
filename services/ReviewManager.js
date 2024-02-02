@@ -2,6 +2,7 @@ import firestore from "@react-native-firebase/firestore";
 import FirestoreConstant, {getISOStringFromDate} from "./FirestoreConstant";
 import moment from "moment";
 import ReviewModel from "./Models/ReviewModel";
+import {setUser} from "./DataManager";
 
 const collection = firestore().collection(FirestoreConstant.REVIEW_TABLE);
 
@@ -22,21 +23,49 @@ export const createReview = async (
     collection
         .add(review)
         .then((snapshot) => {
+            // console.log("snapshot : ", snapshot)
             const docId = snapshot.id; // Get the document ID from the snapshot
-            console.log("snapshot : ",docId)
+            // console.log("snapshot id: ", docId)
             if (callback) {
-                callback(docId)
+                callback(docId, review)
             }
         })
-        .catch((error)=>{
-            console.log("Create review error: ",error)
-            if(callback){
+        .catch((error) => {
+            console.log("Create review error: ", error)
+            if (callback) {
                 callback("")
             }
         });
 };
 
 
+export const updateReview = (docId, reviewObj, callBack) => {
+    collection
+        .doc(docId)
+        .set(reviewObj)
+        .then((response) => {
+            if (callBack !== undefined && callBack !== null) {
+                callBack(true);
+            }
+        }).catch((error) => {
+        callBack(false);
+        console.log("updateUser error", error)
+    });
+};
+
+export const getAllReviewByDocId = async (docId, callback) => {
+    await collection
+        .get(docId)
+        .then(documentSnapshot => {
+            if (callback) {
+                callback(documentSnapshot.exists, documentSnapshot._data)
+            }
+        }).catch((err) => {
+            if (callback) {
+                callback(false)
+            }
+        });
+};
 export const getAllReviewByData = async (userId, callback) => {
     await collection
         .get()

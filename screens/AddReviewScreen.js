@@ -19,7 +19,7 @@ import Modal from 'react-native-modal';
 import moment from 'moment';
 import ProfileBottomSheet from "../components/ProfileBottomSheet";
 import {uploadReviewPhoto} from "../services/StorageManager";
-import {createReview} from "../services/ReviewManager";
+import {createReview, getAllReviewByDocId, updateReview} from "../services/ReviewManager";
 import Indicator from "../components/Indicator";
 import {updateUser} from "../services/UserServices";
 import {getUser} from "../services/DataManager";
@@ -148,14 +148,16 @@ const AddReviewScreen = ({navigation}) => {
             alert(Constants.PLEASE_ENTER_CITY)
         } else {
             setLoader(true)
-            await createReview("", "", companySelectedObj, companyNameStr, selectedDateStr, ratingStr, postalCodeStr, cityStr,
+            await createReview("", "", companySelectedObj, companyNameStr,
+                selectedDateStr, ratingStr, postalCodeStr, cityStr,
                 commentStr, packageNumberStr, shoppingWebSiteStr, submitComplaintFlag, emailStr,
-                selectedImageStr, async (docId) => {
+                "", async (docId, review) => {
+                    // console.log("review: ", review)
                     let userData = getUser();
                     if (userData !== undefined && userData !== null) {
-                        if(userData.points !== undefined && userData.points!== null){
+                        if (userData.points !== undefined && userData.points !== null) {
                             userData.points = userData.points + 1;
-                        }else{
+                        } else {
                             userData.points = 1
                         }
                         updateUser(userData);
@@ -165,12 +167,17 @@ const AddReviewScreen = ({navigation}) => {
                             docId,
                             selectedImageStr,
                             callback => {
-                                // console.log("Image URI", callback)
-                                clearAll()
-                                setLoader(false)
-                                navigation.goBack()
+                                review = {
+                                    ...review,
+                                    selectedImage: callback,
+                                }
+                                updateReview(docId, review, ()=>{
+                                    clearAll()
+                                    setLoader(false)
+                                    navigation.goBack()
+                                })
                             })
-                    }else{
+                    } else {
                         clearAll()
                         setLoader(false)
                         navigation.goBack()

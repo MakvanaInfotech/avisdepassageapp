@@ -20,6 +20,7 @@ export default {
   CITY: "City",
   ENTER_CITY: "Enter city",
   COMMENT: "Comment",
+  DELIVERY_PHOTO: "Delivery photo",
   ENTER_COMMENT: "Enter comment",
   CHOOSE_AN_IMAGE: "Cheese an image",
   ADDITIONAL_PHOTO: "Additional photo",
@@ -81,6 +82,7 @@ export default {
   VERIFICATION_MESSAGE: "Please check your email first to confirm your email address, then return to the app and press the proceed button to continue with the sign-up process",
   EMAIL_VERIFICATION_MSG: "Email is not verified yet, go to your email and verified",
   EARNING_POINTS: "Earning Points",
+  DESCRIPTION: "Description",
 }
 
 export const ScreenName = {
@@ -90,6 +92,7 @@ export const ScreenName = {
   PROFILE_SCREEN : "ProfileScreen",
   SIGN_IN_SCREEN : "SignInScreen",
   SIGN_UP_SCREEN : "SignUpScreen",
+  REVIEW_DETAILS_SCREEN : "ReviewDetailsScreen",
 }
 
 

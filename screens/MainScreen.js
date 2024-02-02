@@ -113,72 +113,75 @@ const MainScreen = ({navigation}) => {
 
 
     const renderReviewList = ({item, index}) => (
-        <View style={{
-            // backgroundColor:'red',
-        }}>
-            <View
-                style={{
-                    width: '100%',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    paddingStart: 10,
-                    paddingEnd: 20,
+        <View>
+            <TouchableOpacity
+                onPress={() => {
+                    navigation.navigate(ScreenName.REVIEW_DETAILS_SCREEN,{
+                        item : item
+                    })
                 }}>
-                <Image
+                <View
                     style={{
-                        marginStart: 10,
-                        // backgroundColor:'red',
-                        marginTop: 5,
-                        marginBottom: 5,
-                        width: 50,
-                        height: 50,
-                        // backgroundColor:'red',
-                    }}
-                    resizeMode={item.companySelected.id === "HMeHpTjKctnJpYJKEsWA" ? 'cover' : 'contain'}
-                    source={item.companySelected.image !== undefined &&
-                    item.companySelected.image !== null && item.companySelected.image !== "" ?
-                        {uri: item.companySelected.image} :
-                        require('../assets/images/ic_profile.png')
-                    }>
-                </Image>
-                <Text
-                    style={{
-                        marginStart: 5,
-                        fontSize: 16,
-                        fontWeight: 400,
-                        fontFamily: fontStyle.SFProTextRegular,
-                        color: colors.BLACK,
+                        width: '100%',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        paddingStart: 10,
+                        paddingEnd: 20,
                     }}>
-                    {item.city}
-                </Text>
-
-                <View style={{
-                    flex: 1,
-                    alignItems: 'center',
-                    justifyContent: 'flex-end',
-                    flexDirection: 'row'
-                }}>
-                    <Rating
-                        readonly
-                        startingValue={item.rating}
-                        ratingColor={colors.PRIMARY_COLOR}
-                        imageSize={20}
-                        style={{
-                            paddingVertical: 10,
-                            marginEnd: 10,
-                        }}/>
                     <Image
                         style={{
-                            width: 8,
-                            height: 14,
+                            marginStart: 10,
+                            // backgroundColor:'red',
+                            marginTop: 5,
+                            marginBottom: 5,
+                            width: 50,
+                            height: 50,
+                            // backgroundColor:'red',
                         }}
-                        resizeMode={'contain'}
-                        source={require('../assets/images/ic_chevron.png')}>
+                        resizeMode={item.companySelected.id === "HMeHpTjKctnJpYJKEsWA" ? 'cover' : 'contain'}
+                        source={item.companySelected.image !== undefined &&
+                        item.companySelected.image !== null && item.companySelected.image !== "" ?
+                            {uri: item.companySelected.image} :
+                            require('../assets/images/ic_profile.png')
+                        }>
                     </Image>
+                    <Text
+                        style={{
+                            marginStart: 5,
+                            fontSize: 16,
+                            fontWeight: 400,
+                            fontFamily: fontStyle.SFProTextRegular,
+                            color: colors.BLACK,
+                        }}>
+                        {item.city}
+                    </Text>
+
+                    <View style={{
+                        flex: 1,
+                        alignItems: 'center',
+                        justifyContent: 'flex-end',
+                        flexDirection: 'row'
+                    }}>
+                        <Rating
+                            readonly
+                            startingValue={item.rating}
+                            ratingColor={colors.PRIMARY_COLOR}
+                            imageSize={20}
+                            style={{
+                                paddingVertical: 10,
+                                marginEnd: 10,
+                            }}/>
+                        <Image
+                            style={{
+                                width: 8,
+                                height: 14,
+                            }}
+                            resizeMode={'contain'}
+                            source={require('../assets/images/ic_chevron.png')}>
+                        </Image>
+                    </View>
                 </View>
-
-
-            </View>
+            </TouchableOpacity>
             {(
                 // index !== reviewList.length - 1 &&
                 <View style={{

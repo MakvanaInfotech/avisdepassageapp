@@ -10,6 +10,7 @@ import AddReviewScreen from "./AddReviewScreen";
 import {ProfileScreen} from "./ProfileScreen";
 import {SignInScreen} from "./SignInScreen";
 import {SignUpScreen} from "./SignUpScreen";
+import ReviewDetailsScreen from "./ReviewDetailsScreen";
 const Stack = createNativeStackNavigator();
 
 
@@ -74,13 +75,8 @@ export function NavigationStackScreens({navigation}) {
                 options={{headerShown: false}}
             />
             <Stack.Screen
-                name={ScreenName.SIGN_UP_SCREEN}
-                component={SignUpScreen}
-                options={{headerShown: false}}
-            />
-            <Stack.Screen
-                name="PhoneSignIn"
-                component={PhoneSignIn}
+                name={ScreenName.REVIEW_DETAILS_SCREEN}
+                component={ReviewDetailsScreen}
                 options={{headerShown: false}}
             />
         </Stack.Navigator>
