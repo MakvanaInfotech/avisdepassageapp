@@ -17,7 +17,7 @@ import fontDimen from "../styles/fontDimen";
 import FirestoreConstant from "../services/FirestoreConstant";
 import {Rating} from "react-native-ratings";
 
-const MainScreen = ({navigation}) => {
+const SearchScreen = ({navigation}) => {
 
     const [reviewList, setReviewList] = useState([]);
 
@@ -31,9 +31,7 @@ const MainScreen = ({navigation}) => {
                     reviews.push(data);
                 });
                 reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
                 setReviewList(reviews)
-                //console.log("All review data:", reviews);
             })
     }, [])
 
@@ -51,7 +49,7 @@ const MainScreen = ({navigation}) => {
                         fontFamily: fontStyle.SFProTextBold,
                         overflow: 'hidden',
                         textAlign: "center"
-                    }}>{Constants.REVIEWS}</Text>
+                    }}>{Constants.EXPLORE}</Text>
             </View>
         );
     };
@@ -68,46 +66,6 @@ const MainScreen = ({navigation}) => {
             headerTintColor: colors.WHITE,
             color: colors.WHITE,
             headerTitle: () => renderTitle(),
-            headerRight: () => (
-                <View style={{
-                    flexDirection: 'row',
-                }}>
-                    <TouchableOpacity
-                        onPress={() => {
-                            navigation.navigate(ScreenName.SEARCH_SCREEN)
-                        }}>
-                        <Image
-                            source={
-                                require('../assets/images/ic_search.png')
-                            }
-                            tintColor={colors.WHITE}
-                            style={{
-                                width: 24,
-                                height: 24,
-                                marginEnd: 10,
-                                borderRadius: 12
-                            }}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => {
-                            navigation.navigate(ScreenName.PROFILE_SCREEN)
-                        }}>
-                        <Image
-                            source={
-                                require('../assets/images/ic_profile.png')
-                            }
-                            tintColor={colors.WHITE}
-                            style={{
-                                width: 24,
-                                height: 24,
-                                borderRadius: 12
-                            }}
-                        />
-                    </TouchableOpacity>
-
-                </View>
-            )
         });
     }, []);
 
@@ -125,18 +83,14 @@ const MainScreen = ({navigation}) => {
                         width: '100%',
                         flexDirection: 'row',
                         alignItems: 'center',
-                        paddingStart: 10,
                         paddingEnd: 20,
                     }}>
                     <Image
                         style={{
-                            marginStart: 10,
-                            // backgroundColor:'red',
                             marginTop: 5,
                             marginBottom: 5,
                             width: 50,
                             height: 50,
-                            // backgroundColor:'red',
                         }}
                         resizeMode={item.companySelected.id === "HMeHpTjKctnJpYJKEsWA" ? 'cover' : 'contain'}
                         source={item.companySelected.image !== undefined &&
@@ -183,13 +137,8 @@ const MainScreen = ({navigation}) => {
                 </View>
             </TouchableOpacity>
             {(
-                // index !== reviewList.length - 1 &&
                 <View style={{
-                    // marginTop: 10,
-                    marginStart: 20,
                     marginEnd: 20,
-
-                    // marginStart: "18%",
                     borderBottomWidth: 1,
                     borderBottomColor: '#ddd',
                 }}/>
@@ -199,6 +148,7 @@ const MainScreen = ({navigation}) => {
     return (
         <View style={{
             flex: 1,
+            paddingStart:20,
             backgroundColor: colors.WHITE,
         }}>
             <SafeAreaView/>
@@ -212,15 +162,22 @@ const MainScreen = ({navigation}) => {
                     fontSize: fontDimen.font_14,
                     fontFamily: fontStyle.SFProTextRegular,
                     overflow: 'hidden',
-                    textAlign: "center"
-                }}>{Constants.HOW_WAS_YOUR_LAST_DELIVERY}</Text>
-
+                }}>{Constants.THE_OPINIONS}</Text>
+            <View
+                style={{
+                    height: 1,
+                    marginTop:10,
+                    marginEnd: 20,
+                    backgroundColor: colors.BLACK_TRANS_66,
+                }}
+            />
             <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate(ScreenName.ADD_REVIEW_SCREEN)
+                    navigation.navigate(ScreenName.SEARCH_BY_COMPANY_SCREEN)
                 }}
                 style={{
-                    margin: 20,
+                    marginEnd: 20,
+                    marginTop: 20,
                     backgroundColor: colors.PRIMARY_COLOR_LIGHT,
                     borderRadius: 8,
                     alignItems: 'center'
@@ -232,24 +189,47 @@ const MainScreen = ({navigation}) => {
                     fontWeight: 500,
                     fontSize: 16
                 }}>
-                    {Constants.NOTE_A_DELIVERY}
+                    {Constants.BY_COMPANY}
+                </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => {
+                    navigation.navigate(ScreenName.ADD_REVIEW_SCREEN)
+                }}
+                style={{
+                    marginEnd: 20,
+                    marginTop: 10,
+                    marginBottom: 20,
+                    backgroundColor: colors.PRIMARY_COLOR_LIGHT,
+                    borderRadius: 8,
+                    alignItems: 'center'
+                }}>
+                <Text style={{
+                    color: colors.WHITE,
+                    padding: 18,
+                    fontFamily: fontStyle.SFProTextRegular,
+                    fontWeight: 500,
+                    fontSize: 16
+                }}>
+                    {Constants.BY_CITY}
                 </Text>
             </TouchableOpacity>
             <View
                 style={{
                     height: 1,
-                    marginStart: 20,
                     marginEnd: 20,
                     backgroundColor: colors.BLACK_TRANS_66,
                 }}
             />
             <Text style={{
                 color: colors.BLACK,
-                padding: 18,
+                paddingEnd: 18,
+                paddingTop: 18,
+                paddingBottom: 18,
                 fontFamily: fontStyle.SFProTextMedium,
                 fontSize: 24
             }}>
-                {Constants.RECENT_REVIEWS}
+                {Constants.ALL_REVIEWS}
             </Text>
 
 
@@ -292,4 +272,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default MainScreen;
+export default SearchScreen;

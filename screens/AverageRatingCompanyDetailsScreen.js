@@ -16,27 +16,20 @@ import {storage} from "../App";
 import fontDimen from "../styles/fontDimen";
 import FirestoreConstant from "../services/FirestoreConstant";
 import {Rating} from "react-native-ratings";
+import {getCompanyList} from "../services/CompanyManager";
 
-const MainScreen = ({navigation}) => {
+const AverageRatingCompanyDetailsScreen = ({navigation, route}) => {
+    const [company] = useState(route?.params?.company || "")
+    const [reviews] = useState(route?.params?.reviews || "")
+    const [averageRating, setAverageRating] = useState(0)
 
-    const [reviewList, setReviewList] = useState([]);
+    const [reviewList, setReviewList] = useState(route?.params?.reviews || "")
 
-    useEffect(() => {
-        const subscribeReview = firestore()
-            .collection(FirestoreConstant.REVIEW_TABLE)
-            .onSnapshot(documentSnapshot => {
-                const reviews = [];
-                documentSnapshot.forEach((documentSnapshot) => {
-                    const data = documentSnapshot.data();
-                    reviews.push(data);
-                });
-                reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-                setReviewList(reviews)
-                //console.log("All review data:", reviews);
-            })
-    }, [])
-
+    useEffect(()=>{
+        const totalRating = reviewList.reduce((sum, item) => sum + item.rating, 0);
+        const averageRating = totalRating / reviewList.length;
+        setAverageRating(averageRating)
+    },[])
     const renderTitle = () => {
         return (
             <View style={{
@@ -51,7 +44,7 @@ const MainScreen = ({navigation}) => {
                         fontFamily: fontStyle.SFProTextBold,
                         overflow: 'hidden',
                         textAlign: "center"
-                    }}>{Constants.REVIEWS}</Text>
+                    }}>{company.name}</Text>
             </View>
         );
     };
@@ -63,51 +56,10 @@ const MainScreen = ({navigation}) => {
                 flex: 1
             },
             headerTitleAlign: 'center',
-            // headerBackTitle: Constants.BACK,
             headerShadowVisible: false,
             headerTintColor: colors.WHITE,
             color: colors.WHITE,
             headerTitle: () => renderTitle(),
-            headerRight: () => (
-                <View style={{
-                    flexDirection: 'row',
-                }}>
-                    <TouchableOpacity
-                        onPress={() => {
-                            navigation.navigate(ScreenName.SEARCH_SCREEN)
-                        }}>
-                        <Image
-                            source={
-                                require('../assets/images/ic_search.png')
-                            }
-                            tintColor={colors.WHITE}
-                            style={{
-                                width: 24,
-                                height: 24,
-                                marginEnd: 10,
-                                borderRadius: 12
-                            }}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => {
-                            navigation.navigate(ScreenName.PROFILE_SCREEN)
-                        }}>
-                        <Image
-                            source={
-                                require('../assets/images/ic_profile.png')
-                            }
-                            tintColor={colors.WHITE}
-                            style={{
-                                width: 24,
-                                height: 24,
-                                borderRadius: 12
-                            }}
-                        />
-                    </TouchableOpacity>
-
-                </View>
-            )
         });
     }, []);
 
@@ -199,59 +151,43 @@ const MainScreen = ({navigation}) => {
     return (
         <View style={{
             flex: 1,
+            paddingStart:10,
+            paddingEnd:10,
             backgroundColor: colors.WHITE,
         }}>
             <SafeAreaView/>
             <StatusBar translucent backgroundColor={colors.PRIMARY_COLOR}/>
-            <Text
-                numberOfLines={1}
-                ellipsizeMode="tail"
-                style={{
-                    marginTop: 40,
-                    color: colors.BLACK,
-                    fontSize: fontDimen.font_14,
-                    fontFamily: fontStyle.SFProTextRegular,
-                    overflow: 'hidden',
-                    textAlign: "center"
-                }}>{Constants.HOW_WAS_YOUR_LAST_DELIVERY}</Text>
-
-            <TouchableOpacity
-                onPress={() => {
-                    navigation.navigate(ScreenName.ADD_REVIEW_SCREEN)
-                }}
-                style={{
-                    margin: 20,
-                    backgroundColor: colors.PRIMARY_COLOR_LIGHT,
-                    borderRadius: 8,
-                    alignItems: 'center'
-                }}>
-                <Text style={{
-                    color: colors.WHITE,
-                    padding: 18,
-                    fontFamily: fontStyle.SFProTextRegular,
-                    fontWeight: 500,
-                    fontSize: 16
-                }}>
-                    {Constants.NOTE_A_DELIVERY}
-                </Text>
-            </TouchableOpacity>
-            <View
-                style={{
-                    height: 1,
-                    marginStart: 20,
-                    marginEnd: 20,
-                    backgroundColor: colors.BLACK_TRANS_66,
-                }}
-            />
-            <Text style={{
-                color: colors.BLACK,
-                padding: 18,
-                fontFamily: fontStyle.SFProTextMedium,
-                fontSize: 24
+            <View style={{
+                // backgroundColor:'red',
+                alignItems:'center',
             }}>
-                {Constants.RECENT_REVIEWS}
-            </Text>
-
+                <Text
+                    numberOfLines={1}
+                    ellipsizeMode="tail"
+                    style={{
+                        marginTop: 40,
+                        color: colors.BLACK,
+                        fontSize: fontDimen.font_14,
+                        fontFamily: fontStyle.SFProTextBold,
+                        overflow: 'hidden',
+                    }}>{Constants.OVERALL_RATING}</Text>
+                <Rating
+                    readonly
+                    startingValue={averageRating}
+                    ratingColor={colors.PRIMARY_COLOR}
+                    imageSize={20}
+                    style={{
+                        paddingVertical: 10,
+                        marginEnd: 10,
+                    }}/>
+            </View>
+            <View style={{
+                marginTop: 10,
+                marginStart: 20,
+                marginEnd: 20,
+                borderBottomWidth: 1,
+                borderBottomColor: '#ddd',
+            }}/>
 
             <FlatList
                 data={reviewList}
@@ -266,30 +202,4 @@ const MainScreen = ({navigation}) => {
     );
 }
 
-const styles = StyleSheet.create({
-    cityName: {
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        fontSize: 16,
-    },
-    separator: {
-        borderBottomWidth: 1,
-        borderBottomColor: '#CCCCCC',
-    },
-    container: {
-        flex: 1,
-        backgroundColor: colors.BG_COLOR,
-    },
-    item: {
-        backgroundColor: '#ffffff',
-        padding: 12,
-        marginVertical: 8,
-        marginHorizontal: 16,
-        borderRadius: 8,
-    },
-    itemText: {
-        fontSize: 16,
-    },
-});
-
-export default MainScreen;
+export default AverageRatingCompanyDetailsScreen;

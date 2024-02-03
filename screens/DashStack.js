@@ -11,6 +11,9 @@ import {ProfileScreen} from "./ProfileScreen";
 import {SignInScreen} from "./SignInScreen";
 import {SignUpScreen} from "./SignUpScreen";
 import ReviewDetailsScreen from "./ReviewDetailsScreen";
+import SearchScreen from "./SearchScreen";
+import SearchByCompanyScreen from "./SearchByCompanyScreen";
+import AverageRatingCompanyDetailsScreen from "./AverageRatingCompanyDetailsScreen";
 const Stack = createNativeStackNavigator();
 
 
@@ -77,6 +80,21 @@ export function NavigationStackScreens({navigation}) {
             <Stack.Screen
                 name={ScreenName.REVIEW_DETAILS_SCREEN}
                 component={ReviewDetailsScreen}
+                options={{headerShown: false}}
+            />
+            <Stack.Screen
+                name={ScreenName.SEARCH_SCREEN}
+                component={SearchScreen}
+                options={{headerShown: false}}
+            />
+            <Stack.Screen
+                name={ScreenName.SEARCH_BY_COMPANY_SCREEN}
+                component={SearchByCompanyScreen}
+                options={{headerShown: false}}
+            />
+            <Stack.Screen
+                name={ScreenName.AVERAGE_RATING_COMPANY_DETAILS_SCREEN}
+                component={AverageRatingCompanyDetailsScreen}
                 options={{headerShown: false}}
             />
         </Stack.Navigator>

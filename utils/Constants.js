@@ -4,8 +4,14 @@ import analytics from "@react-native-firebase/analytics";
 export default {
   APP_TITLE: "Avis de passage",
   HOW_WAS_YOUR_LAST_DELIVERY: "How was your last delivery?",
+  OVERALL_RATING: "Overall Rating",
+  THE_OPINIONS: "The Opinions",
   NOTE_A_DELIVERY: "NOTE A DELIVERY",
+  BY_COMPANY: "By Company",
+  BY_CITY: "By City",
   REVIEWS: "Reviews",
+  EXPLORE: "Explore",
+  AVERAGE_GRADES: "Average Grades",
   PROFILE: "Profile",
   MY_REVIEWS: "My review",
   REQUIRED: "Required",
@@ -42,6 +48,7 @@ export default {
   PLEASE_ENTER_POSTAL_CODE: "Please enter postal code",
   PLEASE_ENTER_CITY: "Please enter city",
   RECENT_REVIEWS: "Recent Reviews",
+  ALL_REVIEWS: "All Reviews",
   ABOUT_US: "About Us",
   CHANGE_PROFILE_PHOTO: "Change profile photo",
   TERM_CONDITIONS: "Term & Conditions",
@@ -93,6 +100,9 @@ export const ScreenName = {
   SIGN_IN_SCREEN : "SignInScreen",
   SIGN_UP_SCREEN : "SignUpScreen",
   REVIEW_DETAILS_SCREEN : "ReviewDetailsScreen",
+  SEARCH_SCREEN : "SearchScreen",
+  SEARCH_BY_COMPANY_SCREEN : "SearchByCompanyScreen",
+  AVERAGE_RATING_COMPANY_DETAILS_SCREEN : "AverageRatingCompanyDetailsScreen",
 }
 
 
