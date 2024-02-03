@@ -40,11 +40,14 @@ export default {
   SHOPPING_WEBSITE: "Shopping website",
   ENTER_SHOPPING_WEBSITE: "ex: Amazon, CDiscount, Zalando",
   CANCEL_CAP: "CANCEL",
+  OK: "Ok",
   CANCEL: "Cancel",
   DONE_CAP: "DONE",
   TAKE_A_NEW_PHOTO: "Take a new photo",
   OPEN_GALLERY: "Open Gallery",
   PLEASE_SELECT_COMPANY_NAME: "Please select company name",
+  PLEASE_FROM_EMAIL: "Please enter from email address",
+  PLEASE_MESSAGE: "Please enter message",
   PLEASE_ENTER_POSTAL_CODE: "Please enter postal code",
   PLEASE_ENTER_CITY: "Please enter city",
   RECENT_REVIEWS: "Recent Reviews",
@@ -87,9 +90,19 @@ export default {
   BTN_PROCEED: "Proceed",
   VERIFICATION_ALERT_TITLE: "Email verification required",
   VERIFICATION_MESSAGE: "Please check your email first to confirm your email address, then return to the app and press the proceed button to continue with the sign-up process",
+  YOUR_FEEDBACK_SENT: "Your feedback sent",
   EMAIL_VERIFICATION_MSG: "Email is not verified yet, go to your email and verified",
   EARNING_POINTS: "Earning Points",
   DESCRIPTION: "Description",
+  AUTHOR: "Author",
+  BEN: "Ben",
+  SHARE: "Author",
+  SHARE_TXT: "Play store link",
+  SUPPORT: "Support",
+  SEND_FEEDBACK: "Send Feedback",
+  SEND_FEEDBACK_: "Send Feedback > ",
+  FROM: "From",
+  MESSAGE: "Message",
 }
 
 export const ScreenName = {
@@ -103,6 +116,10 @@ export const ScreenName = {
   SEARCH_SCREEN : "SearchScreen",
   SEARCH_BY_COMPANY_SCREEN : "SearchByCompanyScreen",
   AVERAGE_RATING_COMPANY_DETAILS_SCREEN : "AverageRatingCompanyDetailsScreen",
+  ABOUT_US_SCREEN : "AboutUsScreen",
+  PRIVACY_POLICY_SCREEN : "PrivacyPolicyScreen",
+  TERM_CONDITIONS_SCREEN : "TermConditionScreen",
+  SEND_FEEDBACK_SCREEN : "SendFeedbackScreen",
 }
 
 

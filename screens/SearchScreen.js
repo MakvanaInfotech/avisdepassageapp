@@ -194,7 +194,7 @@ const SearchScreen = ({navigation}) => {
             </TouchableOpacity>
             <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate(ScreenName.ADD_REVIEW_SCREEN)
+                    // navigation.navigate(ScreenName.ADD_REVIEW_SCREEN)
                 }}
                 style={{
                     marginEnd: 20,

@@ -251,6 +251,7 @@ export function ProfileScreen({navigation}) {
                         }}>
                             <TouchableOpacity
                                 onPress={() => {
+                                    navigation.navigate(ScreenName.ABOUT_US_SCREEN)
                                 }}
                                 style={{
                                     paddingEnd: 10,
@@ -309,6 +310,7 @@ export function ProfileScreen({navigation}) {
                         }}>
                             <TouchableOpacity
                                 onPress={() => {
+                                    navigation.navigate(ScreenName.TERM_CONDITIONS_SCREEN)
                                 }}
                                 style={{
                                     paddingEnd: 10,
@@ -366,6 +368,7 @@ export function ProfileScreen({navigation}) {
                         }}>
                             <TouchableOpacity
                                 onPress={() => {
+                                    navigation.navigate(ScreenName.PRIVACY_POLICY_SCREEN)
                                 }}
                                 style={{
                                     paddingEnd: 10,

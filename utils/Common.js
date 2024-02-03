@@ -9,6 +9,7 @@ export const showAlertWithButtons = (title, message, btn1, btn2, callback) => {
         buttons[0] = {
             text: btn1,
             onPress: () => {
+                console.log("callback",callback)
                 if (callback) {
                     callback(true)
                 }

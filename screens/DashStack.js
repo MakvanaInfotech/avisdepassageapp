@@ -14,6 +14,10 @@ import ReviewDetailsScreen from "./ReviewDetailsScreen";
 import SearchScreen from "./SearchScreen";
 import SearchByCompanyScreen from "./SearchByCompanyScreen";
 import AverageRatingCompanyDetailsScreen from "./AverageRatingCompanyDetailsScreen";
+import AboutUsScreen from "./AboutUsScreen";
+import PrivacyPolicyScreen from "./PrivacyPolicyScreen";
+import TermConditionScreen from "./TermConditionScreen";
+import SendFeedbackScreen from "./SendFeedbackScreen";
 const Stack = createNativeStackNavigator();
 
 
@@ -95,6 +99,26 @@ export function NavigationStackScreens({navigation}) {
             <Stack.Screen
                 name={ScreenName.AVERAGE_RATING_COMPANY_DETAILS_SCREEN}
                 component={AverageRatingCompanyDetailsScreen}
+                options={{headerShown: false}}
+            />
+            <Stack.Screen
+                name={ScreenName.ABOUT_US_SCREEN}
+                component={AboutUsScreen}
+                options={{headerShown: false}}
+            />
+            <Stack.Screen
+                name={ScreenName.PRIVACY_POLICY_SCREEN}
+                component={PrivacyPolicyScreen}
+                options={{headerShown: false}}
+            />
+            <Stack.Screen
+                name={ScreenName.TERM_CONDITIONS_SCREEN}
+                component={TermConditionScreen}
+                options={{headerShown: false}}
+            />
+            <Stack.Screen
+                name={ScreenName.SEND_FEEDBACK_SCREEN}
+                component={SendFeedbackScreen}
                 options={{headerShown: false}}
             />
         </Stack.Navigator>
