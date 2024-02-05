@@ -26,9 +26,11 @@ const AverageRatingCompanyDetailsScreen = ({navigation, route}) => {
     const [reviewList, setReviewList] = useState(route?.params?.reviews || "")
 
     useEffect(()=>{
-        const totalRating = reviewList.reduce((sum, item) => sum + item.rating, 0);
-        const averageRating = totalRating / reviewList.length;
-        setAverageRating(averageRating)
+        if(reviewList.length > 0 ){
+            const totalRating = reviewList.reduce((sum, item) => sum + item.rating, 0);
+            const averageRating = totalRating / reviewList.length;
+            setAverageRating(averageRating)
+        }
     },[])
     const renderTitle = () => {
         return (
@@ -188,7 +190,20 @@ const AverageRatingCompanyDetailsScreen = ({navigation, route}) => {
                 borderBottomWidth: 1,
                 borderBottomColor: '#ddd',
             }}/>
-
+            {(
+                reviewList.length <=0 &&
+                <Text
+                    numberOfLines={1}
+                    ellipsizeMode="tail"
+                    style={{
+                        alignSelf:'center',
+                        marginTop: 40,
+                        color: colors.BLACK,
+                        fontSize: fontDimen.font_14,
+                        fontFamily: fontStyle.SFProTextBold,
+                        overflow: 'hidden',
+                    }}>{Constants.NO_REVIEW_FOUND}</Text>
+            )}
             <FlatList
                 data={reviewList}
                 bounces={false}

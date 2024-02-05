@@ -99,7 +99,7 @@ const SearchByCompanyScreen = ({navigation}) => {
                             width: "50%",
                             height: 200,
                         }}
-                        resizeMode={'cover'}
+                        resizeMode={'contain'}
                         source={item.image !== undefined &&
                         item.image !== null && item.image !== "" ?
                             {uri: item.image} :

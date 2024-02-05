@@ -24,6 +24,7 @@ export default {
     DARK_GREEN: '#029649',
     LIGHT_GREEN: '#34C759',
     SOS_GREEN: '#00b80f',
+    GREEN: '#00FF00',
     LIGHT_GREY: '#B9B9B9',
     TEXT_DARK_GRAY: '#6A6A6A',
     GRAY_COLOR: '#868686',

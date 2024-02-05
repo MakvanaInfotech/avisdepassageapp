@@ -50,6 +50,7 @@ export default {
   PLEASE_MESSAGE: "Please enter message",
   PLEASE_ENTER_POSTAL_CODE: "Please enter postal code",
   PLEASE_ENTER_CITY: "Please enter city",
+  PLEASE_ENTER_YOUR_EMAIL: "Please enter your email",
   RECENT_REVIEWS: "Recent Reviews",
   ALL_REVIEWS: "All Reviews",
   ABOUT_US: "About Us",
@@ -103,6 +104,7 @@ export default {
   SEND_FEEDBACK_: "Send Feedback > ",
   FROM: "From",
   MESSAGE: "Message",
+  NO_REVIEW_FOUND: "No review found",
 }
 
 export const ScreenName = {

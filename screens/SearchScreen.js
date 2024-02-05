@@ -178,7 +178,7 @@ const SearchScreen = ({navigation}) => {
                 style={{
                     marginEnd: 20,
                     marginTop: 20,
-                    backgroundColor: colors.PRIMARY_COLOR_LIGHT,
+                    backgroundColor: colors.PRIMARY_COLOR,
                     borderRadius: 8,
                     alignItems: 'center'
                 }}>
@@ -200,7 +200,7 @@ const SearchScreen = ({navigation}) => {
                     marginEnd: 20,
                     marginTop: 10,
                     marginBottom: 20,
-                    backgroundColor: colors.PRIMARY_COLOR_LIGHT,
+                    backgroundColor: colors.PRIMARY_COLOR,
                     borderRadius: 8,
                     alignItems: 'center'
                 }}>

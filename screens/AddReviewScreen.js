@@ -146,6 +146,8 @@ const AddReviewScreen = ({navigation}) => {
             alert(Constants.PLEASE_ENTER_POSTAL_CODE)
         } else if (cityStr === "") {
             alert(Constants.PLEASE_ENTER_CITY)
+        } else if (emailStr === "") {
+            alert(Constants.PLEASE_ENTER_YOUR_EMAIL)
         } else {
             setLoader(true)
             await createReview("", "", companySelectedObj, companyNameStr,
@@ -680,7 +682,7 @@ const AddReviewScreen = ({navigation}) => {
                                 onChangeText={setPackageNumber}
                                 placeholder={Constants.ENTER_PACKAGE_NUMBER}
                                 autoCapitalize="none"
-                                keyboardType="numeric"
+                                keyboardType="default"
                             />
                         </View>
                     </View>
@@ -769,7 +771,7 @@ const AddReviewScreen = ({navigation}) => {
                                 marginStart: 5,
                                 flex: 1,
                             }}>
-                                {Constants.EMAIL}
+                                {Constants.EMAIL + "*"}
                             </Text>
                         </View>
                         <View style={{

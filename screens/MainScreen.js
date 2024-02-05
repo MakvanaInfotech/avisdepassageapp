@@ -221,7 +221,7 @@ const MainScreen = ({navigation}) => {
                 }}
                 style={{
                     margin: 20,
-                    backgroundColor: colors.PRIMARY_COLOR_LIGHT,
+                    backgroundColor: colors.PRIMARY_COLOR,
                     borderRadius: 8,
                     alignItems: 'center'
                 }}>
