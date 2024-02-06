@@ -6,20 +6,22 @@ import {
     Text,
     TouchableOpacity,
     View,
-    StyleSheet, TextInput, Image
+    TextInput, Image
 } from 'react-native';
 import colors from "../styles/colors";
 import fontStyle from "../styles/fontStyle";
 import Constants, {ScreenName} from "../utils/Constants";
 import firestore from '@react-native-firebase/firestore';
-import {storage} from "../App";
 import fontDimen from "../styles/fontDimen";
 import FirestoreConstant from "../services/FirestoreConstant";
 import {Rating} from "react-native-ratings";
-
-const SearchScreen = ({navigation}) => {
+const SearchByCityScreen = ({navigation}) => {
 
     const [reviewList, setReviewList] = useState([]);
+    const [filterReviewList, setFilterReviewList] = useState([]);
+    const [search, setSearch] = useState('');
+    const [isMapStatus, setMapStatus] = useState(true);
+
 
     useEffect(() => {
         const subscribeReview = firestore()
@@ -35,6 +37,45 @@ const SearchScreen = ({navigation}) => {
             })
     }, [])
 
+    const setHeader = () => {
+        navigation.setOptions({
+            headerShown: true,
+            headerStyle: {
+                backgroundColor: colors.PRIMARY_COLOR,
+                flex: 1
+            },
+            headerTitleAlign: 'center',
+            headerShadowVisible: false,
+            headerTintColor: colors.WHITE,
+            color: colors.WHITE,
+            headerTitle: () => renderTitle(),
+            headerRight: () => (
+                <View style={{
+                    flexDirection: 'row',
+                }}>
+                    <TouchableOpacity
+                        onPress={() => {
+                            setMapStatus(prevState => !prevState);
+                        }}>
+                        <Image
+                            source={
+                                !isMapStatus?
+                                    require('../assets/images/ic_map.png'):
+                                    require('../assets/images/ic_search.png')
+                            }
+                            tintColor={colors.WHITE}
+                            style={{
+                                width: 24,
+                                height: 24,
+                                marginEnd: 10
+                            }}
+                            resizeMode={"contain"}
+                        />
+                    </TouchableOpacity>
+                </View>
+            )
+        });
+    }
     const renderTitle = () => {
         return (
             <View style={{
@@ -49,33 +90,30 @@ const SearchScreen = ({navigation}) => {
                         fontFamily: fontStyle.SFProTextBold,
                         overflow: 'hidden',
                         textAlign: "center"
-                    }}>{Constants.EXPLORE}</Text>
+                    }}>{Constants.REVIEWS_BY_CITY}</Text>
             </View>
         );
     };
     useEffect(() => {
-        navigation.setOptions({
-            headerShown: true,
-            headerStyle: {
-                backgroundColor: colors.PRIMARY_COLOR,
-                flex: 1
-            },
-            headerTitleAlign: 'center',
-            // headerBackTitle: Constants.BACK,
-            headerShadowVisible: false,
-            headerTintColor: colors.WHITE,
-            color: colors.WHITE,
-            headerTitle: () => renderTitle(),
-        });
-    }, []);
+        setHeader()
+    }, [isMapStatus]);
 
+    // Function to filter cities based on search input
+    const filterCities = (input) => {
+        if(reviewList.length> 0 ){
+            const filtered = reviewList.filter(item =>
+                item.city.toLowerCase().includes(input.toLowerCase())
+            );
+            setFilterReviewList(filtered);
+        }
+    };
 
     const renderReviewList = ({item, index}) => (
         <View>
             <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate(ScreenName.REVIEW_DETAILS_SCREEN,{
-                        item : item
+                    navigation.navigate(ScreenName.REVIEW_DETAILS_SCREEN, {
+                        item: item
                     })
                 }}>
                 <View
@@ -83,14 +121,18 @@ const SearchScreen = ({navigation}) => {
                         width: '100%',
                         flexDirection: 'row',
                         alignItems: 'center',
+                        paddingStart: 10,
                         paddingEnd: 20,
                     }}>
                     <Image
                         style={{
+                            marginStart: 10,
+                            // backgroundColor:'red',
                             marginTop: 5,
                             marginBottom: 5,
                             width: 50,
                             height: 50,
+                            // backgroundColor:'red',
                         }}
                         resizeMode={item.companySelected.id === "HMeHpTjKctnJpYJKEsWA" ? 'cover' : 'contain'}
                         source={item.companySelected.image !== undefined &&
@@ -137,8 +179,13 @@ const SearchScreen = ({navigation}) => {
                 </View>
             </TouchableOpacity>
             {(
+                // index !== reviewList.length - 1 &&
                 <View style={{
+                    // marginTop: 10,
+                    marginStart: 20,
                     marginEnd: 20,
+
+                    // marginStart: "18%",
                     borderBottomWidth: 1,
                     borderBottomColor: '#ddd',
                 }}/>
@@ -148,128 +195,66 @@ const SearchScreen = ({navigation}) => {
     return (
         <View style={{
             flex: 1,
-            paddingStart:20,
             backgroundColor: colors.WHITE,
         }}>
             <SafeAreaView/>
             <StatusBar translucent backgroundColor={colors.PRIMARY_COLOR}/>
-            <Text
-                numberOfLines={1}
-                ellipsizeMode="tail"
-                style={{
-                    marginTop: 40,
-                    color: colors.BLACK,
-                    fontSize: fontDimen.font_14,
-                    fontFamily: fontStyle.SFProTextRegular,
-                    overflow: 'hidden',
-                }}>{Constants.THE_OPINIONS}</Text>
-            <View
-                style={{
-                    height: 1,
-                    marginTop:10,
-                    marginEnd: 20,
-                    backgroundColor: colors.BLACK_TRANS_66,
-                }}
-            />
-            <TouchableOpacity
-                onPress={() => {
-                    navigation.navigate(ScreenName.SEARCH_BY_COMPANY_SCREEN)
-                }}
-                style={{
-                    marginEnd: 20,
-                    marginTop: 20,
-                    backgroundColor: colors.PRIMARY_COLOR,
-                    borderRadius: 8,
-                    alignItems: 'center'
-                }}>
-                <Text style={{
-                    color: colors.WHITE,
-                    padding: 18,
-                    fontFamily: fontStyle.SFProTextRegular,
-                    fontWeight: 500,
-                    fontSize: 16
-                }}>
-                    {Constants.BY_COMPANY}
-                </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                onPress={() => {
-                    navigation.navigate(ScreenName.SEARCH_BY_CITY_SCREEN)
-                }}
-                style={{
-                    marginEnd: 20,
-                    marginTop: 10,
-                    marginBottom: 20,
-                    backgroundColor: colors.PRIMARY_COLOR,
-                    borderRadius: 8,
-                    alignItems: 'center'
-                }}>
-                <Text style={{
-                    color: colors.WHITE,
-                    padding: 18,
-                    fontFamily: fontStyle.SFProTextRegular,
-                    fontWeight: 500,
-                    fontSize: 16
-                }}>
-                    {Constants.BY_CITY}
-                </Text>
-            </TouchableOpacity>
-            <View
-                style={{
-                    height: 1,
-                    marginEnd: 20,
-                    backgroundColor: colors.BLACK_TRANS_66,
-                }}
-            />
-            <Text style={{
-                color: colors.BLACK,
-                paddingEnd: 18,
-                paddingTop: 18,
-                paddingBottom: 18,
-                fontFamily: fontStyle.SFProTextMedium,
-                fontSize: 24
-            }}>
-                {Constants.ALL_REVIEWS}
-            </Text>
+            {(
+                !isMapStatus &&
+                <View>
+                    <View style={{
+                        flexDirection: 'row',
+                        borderRadius: 10,
+                        paddingStart: 10,
+                        marginStart:20,
+                        marginEnd:20,
+                        marginTop:10,
+                        marginBottom: 15,
+                        backgroundColor: colors.BG_TEXT_INPUT_COLOR
+                    }}>
+                        <TextInput
+                            style={{
+                                flex: 1,
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                fontSize: 16,
+                                textAlign: 'left',
+                                color: colors.BLACK,
+                                fontFamily: fontStyle.SFProTextRegular
+                            }}
+                            value={search}
+                            onChangeText={(text) => {
+                                setSearch(text);
+                                filterCities(text);
+                            }}
+                            placeholder={Constants.ENTER_CITY}
+                            autoCapitalize="none"
+                            keyboardType="default"
+                        />
+                    </View>
+                    <View
+                    style={{
+                        height:1,
+                        backgroundColor:colors.GRAY_F4_COLOR
+                    }}>
+
+                    </View>
+                    <FlatList
+                        data={filterReviewList}
+                        bounces={false}
+                        containerStyle={{flexGrow: 1}}
+                        showsVerticalScrollIndicator={false}
+                        renderItem={renderReviewList}
+                        keyExtractor={(item, index) => item + index} // Use item + index as the key
+                    />
+                </View>
+
+            )}
 
 
-            <FlatList
-                data={reviewList}
-                bounces={false}
-                containerStyle={{flexGrow: 1}}
-                showsVerticalScrollIndicator={false}
-                renderItem={renderReviewList}
-                keyExtractor={(item, index) => item + index} // Use item + index as the key
-            />
 
         </View>
     );
 }
 
-const styles = StyleSheet.create({
-    cityName: {
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        fontSize: 16,
-    },
-    separator: {
-        borderBottomWidth: 1,
-        borderBottomColor: '#CCCCCC',
-    },
-    container: {
-        flex: 1,
-        backgroundColor: colors.BG_COLOR,
-    },
-    item: {
-        backgroundColor: '#ffffff',
-        padding: 12,
-        marginVertical: 8,
-        marginHorizontal: 16,
-        borderRadius: 8,
-    },
-    itemText: {
-        fontSize: 16,
-    },
-});
-
-export default SearchScreen;
+export default SearchByCityScreen;

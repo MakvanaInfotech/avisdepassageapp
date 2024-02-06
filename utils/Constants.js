@@ -12,6 +12,7 @@ export default {
   REVIEWS: "Reviews",
   EXPLORE: "Explore",
   AVERAGE_GRADES: "Average Grades",
+  REVIEWS_BY_CITY: "Reviews by city",
   PROFILE: "Profile",
   MY_REVIEWS: "My review",
   REQUIRED: "Required",
@@ -122,6 +123,7 @@ export const ScreenName = {
   PRIVACY_POLICY_SCREEN : "PrivacyPolicyScreen",
   TERM_CONDITIONS_SCREEN : "TermConditionScreen",
   SEND_FEEDBACK_SCREEN : "SendFeedbackScreen",
+  SEARCH_BY_CITY_SCREEN : "SearchByCityScreen",
 }
 
 

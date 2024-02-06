@@ -18,6 +18,7 @@ import AboutUsScreen from "./AboutUsScreen";
 import PrivacyPolicyScreen from "./PrivacyPolicyScreen";
 import TermConditionScreen from "./TermConditionScreen";
 import SendFeedbackScreen from "./SendFeedbackScreen";
+import SearchByCityScreen from "./SearchByCityScreen";
 const Stack = createNativeStackNavigator();
 
 
@@ -94,6 +95,11 @@ export function NavigationStackScreens({navigation}) {
             <Stack.Screen
                 name={ScreenName.SEARCH_BY_COMPANY_SCREEN}
                 component={SearchByCompanyScreen}
+                options={{headerShown: false}}
+            />
+            <Stack.Screen
+                name={ScreenName.SEARCH_BY_CITY_SCREEN}
+                component={SearchByCityScreen}
                 options={{headerShown: false}}
             />
             <Stack.Screen
