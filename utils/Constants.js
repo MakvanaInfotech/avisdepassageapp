@@ -1,3 +1,6 @@
+
+import analytics from "@react-native-firebase/analytics";
+
 export default {
   APP_TITLE: "Avis de passage",
   HOW_WAS_YOUR_LAST_DELIVERY: "How was your last delivery?",
@@ -102,7 +105,10 @@ export default {
   SEND_FEEDBACK_: "Send Feedback > ",
   FROM: "From",
   MESSAGE: "Message",
-  NO_REVIEW_FOUND: "Aucun avis trouvé",
+  NO_REVIEW_FOUND: "No review found",
+  DELETE_MESSAGE: "Are you sure you want to proceed with deleting your account?",
+  BUTTON_YES: "Yes",
+  BUTTON_NO: "No",
 }
 
 export const ScreenName = {

@@ -101,5 +101,8 @@ export default {
     SEND_FEEDBACK_: "Feedback envoyé >",
     FROM: "De",
     MESSAGE: "Message",
-    NO_REVIEW_FOUND: "Message",
+    NO_REVIEW_FOUND: "Aucun avis trouvé",
+    DELETE_MESSAGE: "Êtes-vous sûr de vouloir procéder à la suppression de votre compte ?",
+    BUTTON_YES: "Oui",
+    BUTTON_NO: "Non",
 }

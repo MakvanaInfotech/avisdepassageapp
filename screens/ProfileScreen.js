@@ -10,8 +10,9 @@ import {CommonActions} from "@react-navigation/native";
 import ProfileBottomSheet from "../components/ProfileBottomSheet";
 import Indicator from "../components/Indicator";
 import {uploadProfilePicture} from "../services/StorageManager";
-import {getLoggedUserId} from "../services/UserServices";
+import {deleteData, getLoggedUserId} from "../services/UserServices";
 import ConstantsFR from "../utils/ConstantsFR";
+import {showAlertWithButtons} from "../utils/Common";
 
 export function ProfileScreen({navigation}) {
     let userData = getUser();
@@ -493,6 +494,26 @@ export function ProfileScreen({navigation}) {
                     }}>
                         <TouchableOpacity
                             onPress={() => {
+                                showAlertWithButtons(
+                                    "",
+                                    ConstantsFR.DELETE_MESSAGE,
+                                    ConstantsFR.BUTTON_NO,
+                                    ConstantsFR.BUTTON_YES,
+                                    callback => {
+                                        if (!callback) {
+                                            setLoader(true);
+                                            deleteData(getLoggedUserId(), callback)
+                                            setProfileUri(null);
+                                            setUserName("")
+                                            setUser(null);
+                                            setLoader(false)
+                                            navigation.dispatch(
+                                                CommonActions.reset({
+                                                    index: 1,
+                                                    routes: [{name: ScreenName.MAIN_SCREEN}],
+                                                }));
+                                        }
+                                    })
                             }}
                             style={{
                                 paddingEnd: 10,
