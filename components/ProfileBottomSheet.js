@@ -7,6 +7,7 @@ import fontDimen from "../styles/fontDimen";
 import fontStyle from "../styles/fontStyle";
 import colors from "../styles/colors";
 import Constants from "../utils/Constants";
+import ConstantsFR from "../utils/ConstantsFR";
 
 const ProfileBottomSheet = ({onClose, onPress, disabled, onImageSelected}) => {
     const [selectedImage, setSelectedImage] = useState(null);
@@ -128,7 +129,7 @@ const ProfileBottomSheet = ({onClose, onPress, disabled, onImageSelected}) => {
                                 handleCameraPress
                             }
                             style={styles.buttonBG}>
-                            <Text style={styles.buttonText}>{Constants.TAKE_A_NEW_PHOTO}</Text>
+                            <Text style={styles.buttonText}>{ConstantsFR.TAKE_A_NEW_PHOTO}</Text>
                         </TouchableOpacity>
                         <View style={styles.divider}/>
                         <TouchableOpacity
@@ -136,7 +137,7 @@ const ProfileBottomSheet = ({onClose, onPress, disabled, onImageSelected}) => {
                                 handleLibraryPress
                             }
                             style={styles.buttonBG}>
-                            <Text style={styles.buttonText}>{Constants.OPEN_GALLERY}</Text>
+                            <Text style={styles.buttonText}>{ConstantsFR.OPEN_GALLERY}</Text>
                         </TouchableOpacity>
                         <View style={styles.divider}/>
                     </View>
@@ -148,7 +149,7 @@ const ProfileBottomSheet = ({onClose, onPress, disabled, onImageSelected}) => {
                         }]}
                         onPress={onClose}>
                         <Text
-                            style={[styles.buttonText, {fontFamily: fontStyle.SFProTextBold}]}>{Constants.CANCEL}</Text>
+                            style={[styles.buttonText, {fontFamily: fontStyle.SFProTextBold}]}>{ConstantsFR.CANCEL}</Text>
                     </TouchableOpacity>
                 </View>
             </View>

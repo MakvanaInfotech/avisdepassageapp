@@ -6,7 +6,11 @@ import {
     Text,
     TouchableOpacity,
     View,
-    TextInput, Image
+    TextInput,
+    Image,
+    Platform,
+    Dimensions,
+    StyleSheet,
 } from 'react-native';
 import colors from "../styles/colors";
 import fontStyle from "../styles/fontStyle";
@@ -15,13 +19,75 @@ import firestore from '@react-native-firebase/firestore';
 import fontDimen from "../styles/fontDimen";
 import FirestoreConstant from "../services/FirestoreConstant";
 import {Rating} from "react-native-ratings";
+import MapView, {Marker, AnimatedRegion} from 'react-native-maps';
+import Geocoder from 'react-native-geocoding';
+import ConstantsFR from "../utils/ConstantsFR";
+
+const {width, height} = Dimensions.get('window');
+
+const IOS = Platform.OS === 'ios';
+const ANDROID = Platform.OS === 'android';
+
+const ASPECT_RATIO = width / height;
+const LATITUDE = 37.78825;
+const LONGITUDE = -122.4324;
+const LATITUDE_DELTA = 100;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+
+const SAMPLE_REGION = {
+    latitude: LATITUDE,
+    longitude: LONGITUDE,
+    latitudeDelta: LATITUDE_DELTA,
+    longitudeDelta: LONGITUDE_DELTA,
+};
+
+Geocoder.init('AIzaSyDXbCNFWNBdcO2vp4jsqHx71l4wDXv5P5w');
+
+
 const SearchByCityScreen = ({navigation}) => {
 
     const [reviewList, setReviewList] = useState([]);
     const [filterReviewList, setFilterReviewList] = useState([]);
     const [search, setSearch] = useState('');
-    const [isMapStatus, setMapStatus] = useState(true);
+    const [isMapStatus, setMapStatus] = useState(false);
 
+    const [markers, setMarkers] = useState([]);
+    const [currentLocation, setCurrentLocation] = useState(SAMPLE_REGION);
+
+    const fetchMarkers = async (reviews) => {
+        const markerList = [];
+
+        for (const item of reviews) {
+            try {
+                if(item !== undefined && item.city !== undefined){
+                    const response = await Geocoder.from(item.city);
+                    const { lat, lng } = response.results[0].geometry.location;
+
+                    markerList.push({
+                        item: item,
+                        coordinates: {
+                            latitude: lat,
+                            longitude: lng,
+                        },
+                    });
+                }
+            } catch (error) {
+                // console.log(`Error geocoding ${item.city}:`, error);
+            }
+        }
+        setMarkers(markerList);
+        if(markerList.length > 0 && markerList[0].coordinates !== undefined){
+            let coordinate = markerList[0].coordinates
+            console.log("",coordinate)
+            setCurrentLocation({
+                latitude: coordinate.latitude, // Initial latitude
+                longitude: coordinate.longitude, // Initial longitude
+                latitudeDelta: 0.0922,
+                longitudeDelta:  LATITUDE_DELTA * ASPECT_RATIO
+            })
+        }
+
+    };
 
     useEffect(() => {
         const subscribeReview = firestore()
@@ -34,6 +100,8 @@ const SearchByCityScreen = ({navigation}) => {
                 });
                 reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
                 setReviewList(reviews)
+                fetchMarkers(reviews)
+                setFilterReviewList(reviews)
             })
     }, [])
 
@@ -59,8 +127,8 @@ const SearchByCityScreen = ({navigation}) => {
                         }}>
                         <Image
                             source={
-                                !isMapStatus?
-                                    require('../assets/images/ic_map.png'):
+                                !isMapStatus ?
+                                    require('../assets/images/ic_map.png') :
                                     require('../assets/images/ic_search.png')
                             }
                             tintColor={colors.WHITE}
@@ -90,7 +158,7 @@ const SearchByCityScreen = ({navigation}) => {
                         fontFamily: fontStyle.SFProTextBold,
                         overflow: 'hidden',
                         textAlign: "center"
-                    }}>{Constants.REVIEWS_BY_CITY}</Text>
+                    }}>{ConstantsFR.REVIEWS_BY_CITY}</Text>
             </View>
         );
     };
@@ -100,7 +168,7 @@ const SearchByCityScreen = ({navigation}) => {
 
     // Function to filter cities based on search input
     const filterCities = (input) => {
-        if(reviewList.length> 0 ){
+        if (reviewList.length > 0) {
             const filtered = reviewList.filter(item =>
                 item.city.toLowerCase().includes(input.toLowerCase())
             );
@@ -179,13 +247,9 @@ const SearchByCityScreen = ({navigation}) => {
                 </View>
             </TouchableOpacity>
             {(
-                // index !== reviewList.length - 1 &&
                 <View style={{
-                    // marginTop: 10,
                     marginStart: 20,
                     marginEnd: 20,
-
-                    // marginStart: "18%",
                     borderBottomWidth: 1,
                     borderBottomColor: '#ddd',
                 }}/>
@@ -206,9 +270,9 @@ const SearchByCityScreen = ({navigation}) => {
                         flexDirection: 'row',
                         borderRadius: 10,
                         paddingStart: 10,
-                        marginStart:20,
-                        marginEnd:20,
-                        marginTop:10,
+                        marginStart: 20,
+                        marginEnd: 20,
+                        marginTop: 10,
                         marginBottom: 15,
                         backgroundColor: colors.BG_TEXT_INPUT_COLOR
                     }}>
@@ -227,16 +291,16 @@ const SearchByCityScreen = ({navigation}) => {
                                 setSearch(text);
                                 filterCities(text);
                             }}
-                            placeholder={Constants.ENTER_CITY}
+                            placeholder={ConstantsFR.ENTER_CITY}
                             autoCapitalize="none"
                             keyboardType="default"
                         />
                     </View>
                     <View
-                    style={{
-                        height:1,
-                        backgroundColor:colors.GRAY_F4_COLOR
-                    }}>
+                        style={{
+                            height: 1,
+                            backgroundColor: colors.GRAY_F4_COLOR
+                        }}>
 
                     </View>
                     <FlatList
@@ -251,10 +315,37 @@ const SearchByCityScreen = ({navigation}) => {
 
             )}
 
+            {(
+                isMapStatus &&
+                <MapView
+                    style={{ flex: 1 }}
+                    initialRegion={currentLocation}
+                >
+                    {markers.map((marker, index) => (
+                        <Marker
+                            key={index}
+                            coordinate={marker.coordinates}
+                            title={marker.item.title}
+                        />
+                    ))}
+
+                </MapView>
+            )}
 
 
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        ...StyleSheet.absoluteFillObject,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+    },
+    map: {
+        ...StyleSheet.absoluteFillObject,
+    },
+})
 
 export default SearchByCityScreen;

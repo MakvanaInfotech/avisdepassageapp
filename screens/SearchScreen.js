@@ -16,6 +16,7 @@ import {storage} from "../App";
 import fontDimen from "../styles/fontDimen";
 import FirestoreConstant from "../services/FirestoreConstant";
 import {Rating} from "react-native-ratings";
+import ConstantsFR from "../utils/ConstantsFR";
 
 const SearchScreen = ({navigation}) => {
 
@@ -49,7 +50,7 @@ const SearchScreen = ({navigation}) => {
                         fontFamily: fontStyle.SFProTextBold,
                         overflow: 'hidden',
                         textAlign: "center"
-                    }}>{Constants.EXPLORE}</Text>
+                    }}>{ConstantsFR.EXPLORE}</Text>
             </View>
         );
     };
@@ -61,7 +62,7 @@ const SearchScreen = ({navigation}) => {
                 flex: 1
             },
             headerTitleAlign: 'center',
-            // headerBackTitle: Constants.BACK,
+            // headerBackTitle: ConstantsFR.BACK,
             headerShadowVisible: false,
             headerTintColor: colors.WHITE,
             color: colors.WHITE,
@@ -162,7 +163,7 @@ const SearchScreen = ({navigation}) => {
                     fontSize: fontDimen.font_14,
                     fontFamily: fontStyle.SFProTextRegular,
                     overflow: 'hidden',
-                }}>{Constants.THE_OPINIONS}</Text>
+                }}>{ConstantsFR.THE_OPINIONS}</Text>
             <View
                 style={{
                     height: 1,
@@ -189,7 +190,7 @@ const SearchScreen = ({navigation}) => {
                     fontWeight: 500,
                     fontSize: 16
                 }}>
-                    {Constants.BY_COMPANY}
+                    {ConstantsFR.BY_COMPANY}
                 </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -211,7 +212,7 @@ const SearchScreen = ({navigation}) => {
                     fontWeight: 500,
                     fontSize: 16
                 }}>
-                    {Constants.BY_CITY}
+                    {ConstantsFR.BY_CITY}
                 </Text>
             </TouchableOpacity>
             <View
@@ -229,7 +230,7 @@ const SearchScreen = ({navigation}) => {
                 fontFamily: fontStyle.SFProTextMedium,
                 fontSize: 24
             }}>
-                {Constants.ALL_REVIEWS}
+                {ConstantsFR.ALL_REVIEWS}
             </Text>
 
 

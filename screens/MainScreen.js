@@ -16,6 +16,7 @@ import {storage} from "../App";
 import fontDimen from "../styles/fontDimen";
 import FirestoreConstant from "../services/FirestoreConstant";
 import {Rating} from "react-native-ratings";
+import ConstantsFR from "../utils/ConstantsFR";
 
 const MainScreen = ({navigation}) => {
 
@@ -51,7 +52,7 @@ const MainScreen = ({navigation}) => {
                         fontFamily: fontStyle.SFProTextBold,
                         overflow: 'hidden',
                         textAlign: "center"
-                    }}>{Constants.REVIEWS}</Text>
+                    }}>{ConstantsFR.REVIEWS}</Text>
             </View>
         );
     };
@@ -63,7 +64,7 @@ const MainScreen = ({navigation}) => {
                 flex: 1
             },
             headerTitleAlign: 'center',
-            // headerBackTitle: Constants.BACK,
+            // headerBackTitle: ConstantsFR.BACK,
             headerShadowVisible: false,
             headerTintColor: colors.WHITE,
             color: colors.WHITE,
@@ -213,7 +214,7 @@ const MainScreen = ({navigation}) => {
                     fontFamily: fontStyle.SFProTextRegular,
                     overflow: 'hidden',
                     textAlign: "center"
-                }}>{Constants.HOW_WAS_YOUR_LAST_DELIVERY}</Text>
+                }}>{ConstantsFR.HOW_WAS_YOUR_LAST_DELIVERY}</Text>
 
             <TouchableOpacity
                 onPress={() => {
@@ -232,7 +233,7 @@ const MainScreen = ({navigation}) => {
                     fontWeight: 500,
                     fontSize: 16
                 }}>
-                    {Constants.NOTE_A_DELIVERY}
+                    {ConstantsFR.NOTE_A_DELIVERY}
                 </Text>
             </TouchableOpacity>
             <View
@@ -249,7 +250,7 @@ const MainScreen = ({navigation}) => {
                 fontFamily: fontStyle.SFProTextMedium,
                 fontSize: 24
             }}>
-                {Constants.RECENT_REVIEWS}
+                {ConstantsFR.RECENT_REVIEWS}
             </Text>
 
 

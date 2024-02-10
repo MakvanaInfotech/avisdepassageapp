@@ -10,6 +10,7 @@ import colors from "../styles/colors";
 import fontStyle from "../styles/fontStyle";
 import Constants, {ScreenName} from "../utils/Constants";
 import fontDimen from "../styles/fontDimen";
+import ConstantsFR from "../utils/ConstantsFR";
 
 const TermConditionScreen = ({navigation}) => {
     const renderTitle = () => {
@@ -26,7 +27,7 @@ const TermConditionScreen = ({navigation}) => {
                         fontFamily: fontStyle.SFProTextBold,
                         overflow: 'hidden',
                         textAlign: "center"
-                    }}>{Constants.TERM_CONDITIONS}</Text>
+                    }}>{ConstantsFR.TERM_CONDITIONS}</Text>
             </View>
         );
     };

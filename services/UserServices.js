@@ -10,6 +10,7 @@ import {getProfilePicture} from "./StorageManager";
 import {Platform} from "react-native";
 import moment from "moment";
 import Constants, {firebaseAnalytic} from "../utils/Constants";
+import ConstantsFR from "../utils/ConstantsFR";
 
 const usersCollection = firestore().collection(FirestoreConstant.USER_TABLE);
 let friendUserId = null;
@@ -114,8 +115,8 @@ export function deleteData(userId, callback) {
             if (callback) {
                 callback(true)
             }
-            firebaseAnalytic(Constants.AUTH_EVENT, {
-                eventName: Constants.DELETE_ACCOUNT,
+            firebaseAnalytic(ConstantsFR.AUTH_EVENT, {
+                eventName: ConstantsFR.DELETE_ACCOUNT,
                 Message: "Success",
             })
         });

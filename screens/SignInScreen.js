@@ -14,6 +14,7 @@ import fontStyle from "../styles/fontStyle";
 import Constants, {firebaseAnalytic, ScreenName} from "../utils/Constants";
 import {performEmailSignIn} from "../services/AuthService";
 import {signUpHelper} from "../services/NavigationService";
+import ConstantsFR from "../utils/ConstantsFR";
 
 
 export function SignInScreen({navigation}) {
@@ -33,16 +34,16 @@ export function SignInScreen({navigation}) {
                 if (error) {
                     setLoader(false);
                     if (error.code === 'auth/invalid-credential') {
-                        Alert.alert("", Constants.INVALID_VALIDATION_MSG);
+                        Alert.alert("", ConstantsFR.INVALID_VALIDATION_MSG);
                     } else if (error.code === 'auth/invalid-email') {
-                        Alert.alert("", Constants.EMAIL_INVALID_VALIDATION_MSG);
+                        Alert.alert("", ConstantsFR.EMAIL_INVALID_VALIDATION_MSG);
                     } else if (error.code === 'auth/too-many-requests') {
-                        Alert.alert(Constants.MANY_REQ_TITLE_MSG, Constants.MANY_REQ_VALIDATION_MSG);
+                        Alert.alert(ConstantsFR.MANY_REQ_TITLE_MSG, ConstantsFR.MANY_REQ_VALIDATION_MSG);
                     } else {
                         console.log("Error in sign up process:", error);
                     }
-                    firebaseAnalytic(Constants.AUTH_EVENT, {
-                        eventName: Constants.SIGN_IN_EMAIL,
+                    firebaseAnalytic(ConstantsFR.AUTH_EVENT, {
+                        eventName: ConstantsFR.SIGN_IN_EMAIL,
                         Message: "Failed",
                         Error: JSON.stringify(error)
                     })
@@ -109,7 +110,7 @@ export function SignInScreen({navigation}) {
                         fontFamily: fontStyle.SFProTextRegular,
                         color: colors.WHITE,
                     }}>
-                    {Constants.SIGN_IN_WITH_EMAIL}
+                    {ConstantsFR.SIGN_IN_WITH_EMAIL}
                 </Text>
                 <View style={{
                     marginTop: 20,
@@ -131,7 +132,7 @@ export function SignInScreen({navigation}) {
                         }}
                         value={email}
                         onChangeText={setEmail}
-                        placeholder={Constants.ENTER_YOUR_EMAIL}
+                        placeholder={ConstantsFR.ENTER_YOUR_EMAIL}
                         autoCapitalize="none"
                         keyboardType="email-address"
                     />
@@ -156,7 +157,7 @@ export function SignInScreen({navigation}) {
                         }}
                         value={password}
                         onChangeText={setPassword}
-                        placeholder={Constants.ENTER_YOUR_PASSWORD}
+                        placeholder={ConstantsFR.ENTER_YOUR_PASSWORD}
                         autoCapitalize="none"
                         secureTextEntry={hidePassword}
                     />
@@ -189,9 +190,9 @@ export function SignInScreen({navigation}) {
                     <TouchableOpacity
                         onPress={() => {
                             if (email.trim() === "") {
-                                Alert.alert("", Constants.EMAIL_VALIDATION_MSG);
+                                Alert.alert("", ConstantsFR.EMAIL_VALIDATION_MSG);
                             } else if (password.trim() === "") {
-                                Alert.alert("", Constants.PASSWORD_VALIDATION_MSG);
+                                Alert.alert("", ConstantsFR.PASSWORD_VALIDATION_MSG);
                             } else {
                                 handleEmailSignIn(navigation)
                             }
@@ -209,7 +210,7 @@ export function SignInScreen({navigation}) {
                             fontWeight: 500,
                             fontSize: 20
                         }}>
-                            {Constants.SIGN_IN}
+                            {ConstantsFR.SIGN_IN}
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -225,7 +226,7 @@ export function SignInScreen({navigation}) {
                         fontWeight: 500,
                         fontSize: 16
                     }}>
-                        {Constants.NEW_USER_REGISTER}
+                        {ConstantsFR.NEW_USER_REGISTER}
                     </Text>
                 </TouchableOpacity>
 

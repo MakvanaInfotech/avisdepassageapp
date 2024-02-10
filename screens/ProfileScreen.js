@@ -11,6 +11,7 @@ import ProfileBottomSheet from "../components/ProfileBottomSheet";
 import Indicator from "../components/Indicator";
 import {uploadProfilePicture} from "../services/StorageManager";
 import {getLoggedUserId} from "../services/UserServices";
+import ConstantsFR from "../utils/ConstantsFR";
 
 export function ProfileScreen({navigation}) {
     let userData = getUser();
@@ -59,7 +60,7 @@ export function ProfileScreen({navigation}) {
                         fontFamily: fontStyle.SFProTextBold,
                         overflow: 'hidden',
                         textAlign: "center"
-                    }}>{Constants.PROFILE}</Text>
+                    }}>{ConstantsFR.PROFILE}</Text>
             </View>
         );
     };
@@ -71,7 +72,7 @@ export function ProfileScreen({navigation}) {
                 flex: 1
             },
             headerTitleAlign: 'center',
-            // headerBackTitle: Constants.BACK,
+            // headerBackTitle: ConstantsFR.BACK,
             headerShadowVisible: false,
             headerTintColor: colors.WHITE,
             color: colors.WHITE,
@@ -162,7 +163,7 @@ export function ProfileScreen({navigation}) {
                                 fontFamily: fontStyle.SFProTextBold,
                                 color: colors.WHITE,
                             }}>
-                            {`${Constants.EARNING_POINTS}: ${points}`}
+                            {`${ConstantsFR.EARNING_POINTS}: ${points}`}
                         </Text>
                     </View>
                 )}
@@ -218,7 +219,7 @@ export function ProfileScreen({navigation}) {
                                                 fontFamily: fontStyle.SFProTextRegular,
                                                 color: colors.BLACK,
                                             }}>
-                                            {Constants.CHANGE_PROFILE_PHOTO}
+                                            {ConstantsFR.CHANGE_PROFILE_PHOTO}
                                         </Text>
 
                                         <View style={{
@@ -280,7 +281,7 @@ export function ProfileScreen({navigation}) {
                                             fontFamily: fontStyle.SFProTextRegular,
                                             color: colors.BLACK,
                                         }}>
-                                        {Constants.ABOUT_US}
+                                        {ConstantsFR.ABOUT_US}
                                     </Text>
 
                                     <View style={{
@@ -339,7 +340,7 @@ export function ProfileScreen({navigation}) {
                                             fontFamily: fontStyle.SFProTextRegular,
                                             color: colors.BLACK,
                                         }}>
-                                        {Constants.TERM_CONDITIONS}
+                                        {ConstantsFR.TERM_CONDITIONS}
                                     </Text>
 
                                     <View style={{
@@ -397,7 +398,7 @@ export function ProfileScreen({navigation}) {
                                             fontFamily: fontStyle.SFProTextRegular,
                                             color: colors.BLACK,
                                         }}>
-                                        {Constants.PRIVACY_POLICY}
+                                        {ConstantsFR.PRIVACY_POLICY}
                                     </Text>
 
                                     <View style={{
@@ -476,7 +477,7 @@ export function ProfileScreen({navigation}) {
                                     fontFamily: fontStyle.SFProTextBold,
                                     color: colors.RED_COLOR,
                                 }}>
-                                {userData !== undefined && userData !== null ? Constants.LOGOUT : Constants.LOGIN}
+                                {userData !== undefined && userData !== null ? ConstantsFR.LOGOUT : ConstantsFR.LOGIN}
                             </Text>
                         </View>
                     </TouchableOpacity>
@@ -514,7 +515,7 @@ export function ProfileScreen({navigation}) {
                                         fontFamily: fontStyle.SFProTextBold,
                                         color: colors.RED_COLOR,
                                     }}>
-                                    {Constants.DELETE_ACCOUNT}
+                                    {ConstantsFR.DELETE_ACCOUNT}
                                 </Text>
                             </View>
                         </TouchableOpacity>

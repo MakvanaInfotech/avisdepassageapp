@@ -6,6 +6,7 @@ import colors from "../styles/colors";
 import fontDimen from "../styles/fontDimen";
 import fontStyle from "../styles/fontStyle";
 import Constants from "../utils/Constants";
+import ConstantsFR from "../utils/ConstantsFR";
 
 const CompanyListBottomSheet = ({onClose, companyList, disabled, onItemSelected}) => {
 
@@ -97,7 +98,7 @@ const CompanyListBottomSheet = ({onClose, companyList, disabled, onItemSelected}
                                 // paddingTop: 10,
                                 // paddingBottom: 10,
                                 fontFamily: fontStyle.SFProTextBold,
-                            }}>{Constants.COMPANY_LIST}</Text>
+                            }}>{ConstantsFR.COMPANY_LIST}</Text>
                             <TouchableOpacity
                                 style={{
                                 }}

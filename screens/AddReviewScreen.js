@@ -23,6 +23,7 @@ import {createReview, getAllReviewByDocId, updateReview} from "../services/Revie
 import Indicator from "../components/Indicator";
 import {updateUser} from "../services/UserServices";
 import {getUser} from "../services/DataManager";
+import ConstantsFR from "../utils/ConstantsFR";
 
 let companySelectedObj = null, companyNameStr = "", selectedDateStr = "",
     ratingStr = "", postalCodeStr = "", cityStr = "",
@@ -30,7 +31,7 @@ let companySelectedObj = null, companyNameStr = "", selectedDateStr = "",
     submitComplaintFlag = false, emailStr = "", selectedImageStr = ""
 const AddReviewScreen = ({navigation}) => {
     const [companyList, setCompanyList] = useState([]);
-    const [companyName, setCompanyName] = useState(Constants.SELECT_COMPANY + "");
+    const [companyName, setCompanyName] = useState(ConstantsFR.SELECT_COMPANY + "");
     const [companySelected, setCompanySelected] = useState(null);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [date, setDate] = useState(moment(new Date()).format('DD MMM YYYY'));
@@ -87,7 +88,7 @@ const AddReviewScreen = ({navigation}) => {
                         fontFamily: fontStyle.SFProTextBold,
                         overflow: 'hidden',
                         textAlign: "center"
-                    }}>{Constants.MY_REVIEWS}</Text>
+                    }}>{ConstantsFR.MY_REVIEWS}</Text>
             </View>
         );
     };
@@ -100,7 +101,7 @@ const AddReviewScreen = ({navigation}) => {
                 flex: 1
             },
             headerTitleAlign: 'center',
-            headerBackTitle: Constants.BACK,
+            headerBackTitle: ConstantsFR.BACK,
             headerShadowVisible: false,
             headerTintColor: colors.WHITE,
             color: colors.WHITE,
@@ -140,14 +141,14 @@ const AddReviewScreen = ({navigation}) => {
         selectedImageStr = "";
     }
     const submit = async () => {
-        if (companyNameStr === "" || companyNameStr === Constants.SELECT_COMPANY) {
-            alert(Constants.PLEASE_SELECT_COMPANY_NAME)
+        if (companyNameStr === "" || companyNameStr === ConstantsFR.SELECT_COMPANY) {
+            alert(ConstantsFR.PLEASE_SELECT_COMPANY_NAME)
         } else if (postalCodeStr === "") {
-            alert(Constants.PLEASE_ENTER_POSTAL_CODE)
+            alert(ConstantsFR.PLEASE_ENTER_POSTAL_CODE)
         } else if (cityStr === "") {
-            alert(Constants.PLEASE_ENTER_CITY)
+            alert(ConstantsFR.PLEASE_ENTER_CITY)
         } else if (emailStr === "") {
-            alert(Constants.PLEASE_ENTER_YOUR_EMAIL)
+            alert(ConstantsFR.PLEASE_ENTER_YOUR_EMAIL)
         } else {
             setLoader(true)
             await createReview("", "", companySelectedObj, companyNameStr,
@@ -245,7 +246,7 @@ const AddReviewScreen = ({navigation}) => {
                             <Text style={{
                                 fontFamily: fontStyle.SFProTextBold,
                                 fontSize: 18,
-                            }}>{Constants.CANCEL_CAP}</Text>
+                            }}>{ConstantsFR.CANCEL_CAP}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => {
                             handleDate(true)
@@ -253,7 +254,7 @@ const AddReviewScreen = ({navigation}) => {
                             <Text style={{
                                 fontFamily: fontStyle.SFProTextBold,
                                 fontSize: 18,
-                            }}>{Constants.DONE_CAP}</Text>
+                            }}>{ConstantsFR.DONE_CAP}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -288,7 +289,7 @@ const AddReviewScreen = ({navigation}) => {
                                 flex: 1,
                                 marginStart: 5,
                             }}>
-                                {Constants.COMPANY + "*"}
+                                {ConstantsFR.COMPANY + "*"}
                             </Text>
                             <Text style={{
                                 color: colors.GRAY_99_COLOR,
@@ -297,7 +298,7 @@ const AddReviewScreen = ({navigation}) => {
                                 marginEnd: 10,
                                 fontSize: 12
                             }}>
-                                {Constants.REQUIRED}
+                                {ConstantsFR.REQUIRED}
                             </Text>
                         </View>
                         <TouchableOpacity
@@ -349,7 +350,7 @@ const AddReviewScreen = ({navigation}) => {
                                 marginStart: 5,
                                 flex: 1,
                             }}>
-                                {Constants.DATE + "*"}
+                                {ConstantsFR.DATE + "*"}
                             </Text>
                             <Text style={{
                                 color: colors.GRAY_99_COLOR,
@@ -358,7 +359,7 @@ const AddReviewScreen = ({navigation}) => {
                                 marginEnd: 10,
                                 fontSize: 12
                             }}>
-                                {Constants.REQUIRED}
+                                {ConstantsFR.REQUIRED}
                             </Text>
                         </View>
                         <TouchableOpacity
@@ -410,7 +411,7 @@ const AddReviewScreen = ({navigation}) => {
                                 marginStart: 7,
                                 flex: 1,
                             }}>
-                                {Constants.NOTE + "*"}
+                                {ConstantsFR.NOTE + "*"}
                             </Text>
                         </View>
                         <View style={{
@@ -453,7 +454,7 @@ const AddReviewScreen = ({navigation}) => {
                                 marginStart: 5,
                                 flex: 1,
                             }}>
-                                {Constants.POSTAL_CODE + "*"}
+                                {ConstantsFR.POSTAL_CODE + "*"}
                             </Text>
                             <Text style={{
                                 color: colors.GRAY_99_COLOR,
@@ -462,7 +463,7 @@ const AddReviewScreen = ({navigation}) => {
                                 marginEnd: 10,
                                 fontSize: 12
                             }}>
-                                {Constants.REQUIRED}
+                                {ConstantsFR.REQUIRED}
                             </Text>
                         </View>
                         <View style={{
@@ -485,7 +486,7 @@ const AddReviewScreen = ({navigation}) => {
                                 }}
                                 value={postalCode}
                                 onChangeText={setPostalCode}
-                                placeholder={Constants.ENTER_POSTAL_CODE}
+                                placeholder={ConstantsFR.ENTER_POSTAL_CODE}
                                 autoCapitalize="none"
                                 keyboardType="numeric"
                             />
@@ -504,7 +505,7 @@ const AddReviewScreen = ({navigation}) => {
                                 marginStart: 5,
                                 flex: 1,
                             }}>
-                                {Constants.CITY + "*"}
+                                {ConstantsFR.CITY + "*"}
                             </Text>
                             <Text style={{
                                 color: colors.GRAY_99_COLOR,
@@ -513,7 +514,7 @@ const AddReviewScreen = ({navigation}) => {
                                 marginEnd: 10,
                                 fontSize: 12
                             }}>
-                                {Constants.REQUIRED}
+                                {ConstantsFR.REQUIRED}
                             </Text>
                         </View>
                         <View style={{
@@ -536,7 +537,7 @@ const AddReviewScreen = ({navigation}) => {
                                 }}
                                 value={city}
                                 onChangeText={setCity}
-                                placeholder={Constants.ENTER_CITY}
+                                placeholder={ConstantsFR.ENTER_CITY}
                                 autoCapitalize="none"
                                 keyboardType="default"
                             />
@@ -555,7 +556,7 @@ const AddReviewScreen = ({navigation}) => {
                                 marginStart: 5,
                                 flex: 1,
                             }}>
-                                {Constants.COMMENT}
+                                {ConstantsFR.COMMENT}
                             </Text>
                         </View>
                         <View style={{
@@ -578,7 +579,7 @@ const AddReviewScreen = ({navigation}) => {
                                 }}
                                 value={comment}
                                 onChangeText={setComment}
-                                placeholder={Constants.ENTER_COMMENT}
+                                placeholder={ConstantsFR.ENTER_COMMENT}
                                 autoCapitalize="none"
                                 keyboardType="default"
                             />
@@ -598,7 +599,7 @@ const AddReviewScreen = ({navigation}) => {
                                 marginStart: 5,
                                 flex: 1,
                             }}>
-                                {Constants.ADDITIONAL_PHOTO}
+                                {ConstantsFR.ADDITIONAL_PHOTO}
                             </Text>
                         </View>
                         <TouchableOpacity
@@ -637,7 +638,7 @@ const AddReviewScreen = ({navigation}) => {
                                         fontSize: 16,
                                         flex: 1,
                                     }}>
-                                        {Constants.CHOOSE_AN_IMAGE}
+                                        {ConstantsFR.CHOOSE_AN_IMAGE}
                                     </Text>
                                 )}
 
@@ -657,7 +658,7 @@ const AddReviewScreen = ({navigation}) => {
                                 marginStart: 5,
                                 flex: 1,
                             }}>
-                                {Constants.PACKAGE_NUMBER}
+                                {ConstantsFR.PACKAGE_NUMBER}
                             </Text>
                         </View>
                         <View style={{
@@ -680,7 +681,7 @@ const AddReviewScreen = ({navigation}) => {
                                 }}
                                 value={packageNumber}
                                 onChangeText={setPackageNumber}
-                                placeholder={Constants.ENTER_PACKAGE_NUMBER}
+                                placeholder={ConstantsFR.ENTER_PACKAGE_NUMBER}
                                 autoCapitalize="none"
                                 keyboardType="default"
                             />
@@ -699,7 +700,7 @@ const AddReviewScreen = ({navigation}) => {
                                 marginStart: 5,
                                 flex: 1,
                             }}>
-                                {Constants.SHOPPING_WEBSITE}
+                                {ConstantsFR.SHOPPING_WEBSITE}
                             </Text>
                         </View>
                         <View style={{
@@ -722,7 +723,7 @@ const AddReviewScreen = ({navigation}) => {
                                 }}
                                 value={shoppingWebSite}
                                 onChangeText={setShoppingWebsite}
-                                placeholder={Constants.ENTER_SHOPPING_WEBSITE}
+                                placeholder={ConstantsFR.ENTER_SHOPPING_WEBSITE}
                                 autoCapitalize="none"
                                 keyboardType="default"
                             />
@@ -747,7 +748,7 @@ const AddReviewScreen = ({navigation}) => {
                                 marginStart: 7,
                                 flex: 1,
                             }}>
-                                {Constants.SUBMIT_A_COMPLAINT}
+                                {ConstantsFR.SUBMIT_A_COMPLAINT}
                             </Text>
                         </View>
                         <Switch
@@ -771,7 +772,7 @@ const AddReviewScreen = ({navigation}) => {
                                 marginStart: 5,
                                 flex: 1,
                             }}>
-                                {Constants.EMAIL + "*"}
+                                {ConstantsFR.EMAIL + "*"}
                             </Text>
                         </View>
                         <View style={{
@@ -793,7 +794,7 @@ const AddReviewScreen = ({navigation}) => {
                                 }}
                                 value={email}
                                 onChangeText={setEmail}
-                                placeholder={Constants.ENTER_EMAIL}
+                                placeholder={ConstantsFR.ENTER_EMAIL}
                                 autoCapitalize="none"
                                 keyboardType="email-address"
                             />

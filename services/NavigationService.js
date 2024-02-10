@@ -6,6 +6,7 @@ import {authLogout, performEmailSignIn} from "./AuthService";
 import {showAlertWithButtons} from "../utils/Common";
 import {Alert} from "react-native";
 import Constants, {firebaseAnalytic, ScreenName} from "../utils/Constants";
+import ConstantsFR from "../utils/ConstantsFR";
 
 export async function signUpHelper(navigation, result, signWithEmail, isLogin, pass = "") {
 
@@ -52,11 +53,11 @@ export async function signUpHelper(navigation, result, signWithEmail, isLogin, p
                 if (userData !== undefined && userData !== null && userData.isDeleted) {
                     await authLogout();
                     Alert.alert(
-                        Constants.ACCOUNT_DELETED,
-                        Constants.ACCOUNT_DELETED_MESSAGE,
+                        ConstantsFR.ACCOUNT_DELETED,
+                        ConstantsFR.ACCOUNT_DELETED_MESSAGE,
                         [
                             {
-                                text: Constants.OK,
+                                text: ConstantsFR.OK,
                                 onPress: () => {
                                     setUser(null);
 
@@ -72,8 +73,8 @@ export async function signUpHelper(navigation, result, signWithEmail, isLogin, p
                         {cancelable: false}
                     );
                 } else if (userData !== undefined && userData.isVerified) {
-                    firebaseAnalytic(Constants.AUTH_EVENT, {
-                        eventName: Constants.SIGN_IN,
+                    firebaseAnalytic(ConstantsFR.AUTH_EVENT, {
+                        eventName: ConstantsFR.SIGN_IN,
                         Message: "Successful SIGN IN User",
                         User: userId
                     })
@@ -91,12 +92,12 @@ export async function signUpHelper(navigation, result, signWithEmail, isLogin, p
                     if (emailVerified) {
                         updateEmailVerifiedData()
                     } else {
-                        console.log("Constants.VERIFICATION_ALERT_TITLE",Constants.VERIFICATION_ALERT_TITLE)
-                        console.log("Constants.VERIFICATION_MESSAGE",Constants.VERIFICATION_MESSAGE)
-                        showAlertWithButtons(Constants.VERIFICATION_ALERT_TITLE,
-                            Constants.VERIFICATION_MESSAGE,
-                            Constants.BTN_RESEND,
-                            Constants.BTN_PROCEED, async (isBtn1Pressed) => {
+                        console.log("ConstantsFR.VERIFICATION_ALERT_TITLE",ConstantsFR.VERIFICATION_ALERT_TITLE)
+                        console.log("ConstantsFR.VERIFICATION_MESSAGE",ConstantsFR.VERIFICATION_MESSAGE)
+                        showAlertWithButtons(ConstantsFR.VERIFICATION_ALERT_TITLE,
+                            ConstantsFR.VERIFICATION_MESSAGE,
+                            ConstantsFR.BTN_RESEND,
+                            ConstantsFR.BTN_PROCEED, async (isBtn1Pressed) => {
 
                                 if (isBtn1Pressed) {
                                     await auth().currentUser.sendEmailVerification();
@@ -109,21 +110,21 @@ export async function signUpHelper(navigation, result, signWithEmail, isLogin, p
             } else {
                 if (emailVerified) {
                     await signUpUser(userId, displayName, userEmail, signWithEmail, emailVerified);
-                    firebaseAnalytic(Constants.AUTH_EVENT, {
-                        eventName: Constants.SIGN_IN_EMAIL,
+                    firebaseAnalytic(ConstantsFR.AUTH_EVENT, {
+                        eventName: ConstantsFR.SIGN_IN_EMAIL,
                         Message: "Successful Email SIGN UP user",
                         User: userId
                     })
                     navigation.navigate(ScreenName.MAIN_SCREEN)
                 } else {
                     console.log("emailVerified>>> ",emailVerified)
-                    console.log("Constants.VERIFICATION_ALERT_TITLE>>> ",Constants.VERIFICATION_ALERT_TITLE)
+                    console.log("ConstantsFR.VERIFICATION_ALERT_TITLE>>> ",ConstantsFR.VERIFICATION_ALERT_TITLE)
                     await signUpUser(userId, displayName, userEmail, signWithEmail, false);
 
-                    showAlertWithButtons(Constants.VERIFICATION_ALERT_TITLE,
-                        Constants.VERIFICATION_MESSAGE,
-                        Constants.BTN_LOGIN,
-                        Constants.BTN_PROCEED, async (isBtn1Pressed) => {
+                    showAlertWithButtons(ConstantsFR.VERIFICATION_ALERT_TITLE,
+                        ConstantsFR.VERIFICATION_MESSAGE,
+                        ConstantsFR.BTN_LOGIN,
+                        ConstantsFR.BTN_PROCEED, async (isBtn1Pressed) => {
                             if (isBtn1Pressed) {
                                 authLogout();
                                 navigation.navigate(ScreenName.MAIN_SCREEN)
@@ -147,12 +148,12 @@ export async function signUpHelper(navigation, result, signWithEmail, isLogin, p
             async (error, userCredential) => {
                 if (error) {
                     if (error.code === 'auth/invalid-credential') {
-                        Alert.alert("", Constants.INVALID_VALIDATION_MSG);
+                        Alert.alert("", ConstantsFR.INVALID_VALIDATION_MSG);
                     } else {
                         console.log("Error in sign up process:", error.code);
                     }
-                    firebaseAnalytic(Constants.AUTH_EVENT, {
-                        eventName: Constants.EMAIL_SIGN_IN_TEXT,
+                    firebaseAnalytic(ConstantsFR.AUTH_EVENT, {
+                        eventName: ConstantsFR.EMAIL_SIGN_IN_TEXT,
                         Message: "Failed",
                         Error: JSON.stringify(error)
                     })
@@ -164,11 +165,11 @@ export async function signUpHelper(navigation, result, signWithEmail, isLogin, p
                     if (emailVerified) {
                         updateEmailVerifiedData()
                     } else {
-                        console.log("Constants.VERIFICATION_ALERT_TITLE",Constants.VERIFICATION_ALERT_TITLE)
-                        console.log("Constants.VERIFICATION_MESSAGE",Constants.EMAIL_VERIFICATION_MSG)
+                        console.log("ConstantsFR.VERIFICATION_ALERT_TITLE",ConstantsFR.VERIFICATION_ALERT_TITLE)
+                        console.log("ConstantsFR.VERIFICATION_MESSAGE",ConstantsFR.EMAIL_VERIFICATION_MSG)
 
-                        showAlertWithButtons(Constants.VERIFICATION_ALERT_TITLE,
-                            Constants.EMAIL_VERIFICATION_MSG, Constants.OK);
+                        showAlertWithButtons(ConstantsFR.VERIFICATION_ALERT_TITLE,
+                            ConstantsFR.EMAIL_VERIFICATION_MSG, ConstantsFR.OK);
                     }
                 }
             });
@@ -179,8 +180,8 @@ export async function signUpHelper(navigation, result, signWithEmail, isLogin, p
         if (userData !== undefined && userData !== null) {
             userData.isVerified = true;
             updateUser(userData);
-            firebaseAnalytic(Constants.AUTH_EVENT, {
-                eventName: Constants.SIGN_UP_EMAIL,
+            firebaseAnalytic(ConstantsFR.AUTH_EVENT, {
+                eventName: ConstantsFR.SIGN_UP_EMAIL,
                 Message: "Successful Email Verified user",
                 User: userData
             })

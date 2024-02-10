@@ -1,6 +1,7 @@
 import auth from '@react-native-firebase/auth';
 import 'react-native-get-random-values'
 import Constants, {firebaseAnalytic} from "../utils/Constants";
+import ConstantsFR from "../utils/ConstantsFR";
 
 export const checkAuthStatus = async (callback) => {
     const user = auth().currentUser;
@@ -44,8 +45,8 @@ export const performEmailSignUp = async (email, password, callback) => {
             if (callback) {
                 callback(error, null);
             }
-        firebaseAnalytic(Constants.AUTH_EVENT, {
-            eventName: Constants.EMAIL_SIGN_UP_TEXT,
+        firebaseAnalytic(ConstantsFR.AUTH_EVENT, {
+            eventName: ConstantsFR.EMAIL_SIGN_UP_TEXT,
             Message: "Failed",
             Error: JSON.stringify(error)
         })
@@ -69,8 +70,8 @@ export const performEmailSignIn = async (email, password, callback) => {
         if (callback) {
             callback(error, null);
         }
-        firebaseAnalytic(Constants.AUTH_EVENT, {
-            eventName: Constants.EMAIL_SIGN_IN_TEXT,
+        firebaseAnalytic(ConstantsFR.AUTH_EVENT, {
+            eventName: ConstantsFR.EMAIL_SIGN_IN_TEXT,
             Message: "Failed",
             Error: JSON.stringify(error)
         })

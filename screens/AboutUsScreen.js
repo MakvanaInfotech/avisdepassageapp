@@ -11,6 +11,7 @@ import colors from "../styles/colors";
 import fontStyle from "../styles/fontStyle";
 import Constants, {ScreenName} from "../utils/Constants";
 import fontDimen from "../styles/fontDimen";
+import ConstantsFR from "../utils/ConstantsFR";
 
 const AboutUsScreen = ({navigation}) => {
     const renderTitle = () => {
@@ -27,7 +28,7 @@ const AboutUsScreen = ({navigation}) => {
                         fontFamily: fontStyle.SFProTextBold,
                         overflow: 'hidden',
                         textAlign: "center"
-                    }}>{Constants.ABOUT_US}</Text>
+                    }}>{ConstantsFR.ABOUT_US}</Text>
             </View>
         );
     };
@@ -85,7 +86,7 @@ const AboutUsScreen = ({navigation}) => {
                     fontFamily: fontStyle.SFProTextSemiBold,
                     overflow: 'hidden',
                     textAlign: "center"
-                }}>{Constants.APP_TITLE}</Text>
+                }}>{ConstantsFR.APP_TITLE}</Text>
             <View style={{
                 flexDirection: 'row',
                 marginTop: 20,
@@ -100,7 +101,7 @@ const AboutUsScreen = ({navigation}) => {
                         fontSize: 14,
                         fontFamily: fontStyle.SFProTextSemiBold,
                         overflow: 'hidden',
-                    }}>{Constants.AUTHOR}</Text>
+                    }}>{ConstantsFR.AUTHOR}</Text>
                 <Text
                     numberOfLines={1}
                     ellipsizeMode="tail"
@@ -110,7 +111,7 @@ const AboutUsScreen = ({navigation}) => {
                         fontSize: 14,
                         fontFamily: fontStyle.SFProTextSemiBold,
                         overflow: 'hidden',
-                    }}>{Constants.BEN}</Text>
+                    }}>{ConstantsFR.BEN}</Text>
             </View>
             <View style={{
                 marginTop: 10,
@@ -132,7 +133,7 @@ const AboutUsScreen = ({navigation}) => {
                         fontSize: 14,
                         fontFamily: fontStyle.SFProTextSemiBold,
                         overflow: 'hidden',
-                    }}>{Constants.SHARE}</Text>
+                    }}>{ConstantsFR.SHARE}</Text>
                 <TouchableOpacity
                     onPress={() => {
                         Share.share({message: "https://play.google.com/store/apps/details?id=com.com.avisdepassage"})
@@ -148,7 +149,7 @@ const AboutUsScreen = ({navigation}) => {
                             fontSize: 14,
                             fontFamily: fontStyle.SFProTextSemiBold,
                             overflow: 'hidden',
-                        }}>{Constants.SHARE_TXT}</Text>
+                        }}>{ConstantsFR.SHARE_TXT}</Text>
                 </TouchableOpacity>
 
             </View>
@@ -172,7 +173,7 @@ const AboutUsScreen = ({navigation}) => {
                         fontSize: 14,
                         fontFamily: fontStyle.SFProTextSemiBold,
                         overflow: 'hidden',
-                    }}>{Constants.SUPPORT}</Text>
+                    }}>{ConstantsFR.SUPPORT}</Text>
                 <TouchableOpacity
                     onPress={() => {
                         navigation.navigate(ScreenName.SEND_FEEDBACK_SCREEN)
@@ -186,7 +187,7 @@ const AboutUsScreen = ({navigation}) => {
                             fontSize: 14,
                             fontFamily: fontStyle.SFProTextSemiBold,
                             overflow: 'hidden',
-                        }}>{Constants.SEND_FEEDBACK_}</Text>
+                        }}>{ConstantsFR.SEND_FEEDBACK_}</Text>
                 </TouchableOpacity>
 
             </View>

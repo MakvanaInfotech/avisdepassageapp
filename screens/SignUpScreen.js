@@ -16,6 +16,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {performEmailSignUp} from "../services/AuthService";
 import {signUpHelper} from "../services/NavigationService";
 import {setUserName} from "../services/DataManager";
+import ConstantsFR from "../utils/ConstantsFR";
 
 
 export function SignUpScreen({navigation}) {
@@ -42,14 +43,14 @@ export function SignUpScreen({navigation}) {
                 if (error) {
                     setLoader(false);
                     if (error.code === 'auth/email-already-in-use') {
-                        Alert.alert("", Constants.EMAIL_ALREADY_VALIDATION_MSG);
+                        Alert.alert("", ConstantsFR.EMAIL_ALREADY_VALIDATION_MSG);
                     } else if (error.code === 'auth/invalid-email') {
-                        Alert.alert("", Constants.EMAIL_INVALID_VALIDATION_MSG);
+                        Alert.alert("", ConstantsFR.EMAIL_INVALID_VALIDATION_MSG);
                     } else {
                         console.log("Error in sign up process:", error.code);
                     }
-                    firebaseAnalytic(Constants.AUTH_EVENT, {
-                        eventName: Constants.SIGN_UP_EMAIL,
+                    firebaseAnalytic(ConstantsFR.AUTH_EVENT, {
+                        eventName: ConstantsFR.SIGN_UP_EMAIL,
                         Message: "Failed",
                         Error: JSON.stringify(error)
                     })
@@ -63,8 +64,8 @@ export function SignUpScreen({navigation}) {
         } catch (error) {
             setLoader(false);
             console.log('Error in handleEmailSignUp:', error);
-            firebaseAnalytic(Constants.AUTH_EVENT, {
-                eventName: Constants.SIGN_UP_EMAIL,
+            firebaseAnalytic(ConstantsFR.AUTH_EVENT, {
+                eventName: ConstantsFR.SIGN_UP_EMAIL,
                 Message: "Failed",
                 Error: JSON.stringify(error)
             })
@@ -119,7 +120,7 @@ export function SignUpScreen({navigation}) {
                         fontFamily: fontStyle.SFProTextRegular,
                         color: colors.WHITE,
                     }}>
-                    {Constants.SIGN_UP_WITH_EMAIL}
+                    {ConstantsFR.SIGN_UP_WITH_EMAIL}
                 </Text>
                 <View style={{
                     marginTop: 20,
@@ -141,7 +142,7 @@ export function SignUpScreen({navigation}) {
                         }}
                         value={userName}
                         onChangeText={setName}
-                        placeholder={Constants.USER_NAME}
+                        placeholder={ConstantsFR.USER_NAME}
                         autoCapitalize="none"
                         keyboardType="email-address"
                     />
@@ -165,7 +166,7 @@ export function SignUpScreen({navigation}) {
                         }}
                         value={email}
                         onChangeText={setEmail}
-                        placeholder={Constants.ENTER_YOUR_EMAIL}
+                        placeholder={ConstantsFR.ENTER_YOUR_EMAIL}
                         autoCapitalize="none"
                         keyboardType="email-address"
                     />
@@ -190,7 +191,7 @@ export function SignUpScreen({navigation}) {
                         }}
                         value={password}
                         onChangeText={setPassword}
-                        placeholder={Constants.PASSWORD}
+                        placeholder={ConstantsFR.PASSWORD}
                         autoCapitalize="none"
                         secureTextEntry={hidePassword}
                     />
@@ -229,7 +230,7 @@ export function SignUpScreen({navigation}) {
                         }}
                         value={confirmPassword}
                         onChangeText={setConfirmPassword}
-                        placeholder={Constants.CONFIRM_PASSWORD}
+                        placeholder={ConstantsFR.CONFIRM_PASSWORD}
                         autoCapitalize="none"
                         secureTextEntry={hideConfirmPassword}
                     />
@@ -262,13 +263,13 @@ export function SignUpScreen({navigation}) {
                     <TouchableOpacity
                         onPress={() => {
                             if (userName.trim() === "") {
-                                Alert.alert("", Constants.USERNAME_VALIDATION_MSG);
+                                Alert.alert("", ConstantsFR.USERNAME_VALIDATION_MSG);
                             } else if (email.trim() === "") {
-                                Alert.alert("", Constants.EMAIL_VALIDATION_MSG);
+                                Alert.alert("", ConstantsFR.EMAIL_VALIDATION_MSG);
                             } else if (password !== confirmPassword) {
-                                Alert.alert("", Constants.PASSWORD_CORRECT_VALIDATION_MSG);
+                                Alert.alert("", ConstantsFR.PASSWORD_CORRECT_VALIDATION_MSG);
                             } else if (password.length <= 7 && confirmPassword.length <= 7) {
-                                Alert.alert("", Constants.PASSWORD_LENGTH_VALIDATION_MSG);
+                                Alert.alert("", ConstantsFR.PASSWORD_LENGTH_VALIDATION_MSG);
                             } else {
                                 setUserName(userName);
                                 handleEmailSignUp(navigation)
@@ -287,7 +288,7 @@ export function SignUpScreen({navigation}) {
                             fontWeight: 500,
                             fontSize: 20
                         }}>
-                            {Constants.SIGN_IN}
+                            {ConstantsFR.SIGN_IN}
                         </Text>
                     </TouchableOpacity>
                 </View>

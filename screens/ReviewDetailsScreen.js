@@ -22,6 +22,7 @@ import {CommonActions} from "@react-navigation/native";
 import ProfileBottomSheet from "../components/ProfileBottomSheet";
 import Indicator from "../components/Indicator";
 import moment from "moment";
+import ConstantsFR from "../utils/ConstantsFR";
 
 const ReviewDetailsScreen = ({navigation, route}) => {
     const [item] = useState(route?.params?.item || "")
@@ -101,7 +102,7 @@ const ReviewDetailsScreen = ({navigation, route}) => {
                                     fontFamily: fontStyle.SFProTextSemiBold,
                                     color: colors.BLACK,
                                 }}>
-                                {Constants.DESCRIPTION}
+                                {ConstantsFR.DESCRIPTION}
                             </Text>
 
                             <View style={{
@@ -116,7 +117,7 @@ const ReviewDetailsScreen = ({navigation, route}) => {
                                         fontFamily: fontStyle.SFProTextRegular,
                                         color: colors.BLACK,
                                     }}>
-                                    {Constants.CITY}
+                                    {ConstantsFR.CITY}
                                 </Text>
                                 <Text
                                     style={{
@@ -145,7 +146,7 @@ const ReviewDetailsScreen = ({navigation, route}) => {
                                         fontFamily: fontStyle.SFProTextRegular,
                                         color: colors.BLACK,
                                     }}>
-                                    {Constants.COMPANY}
+                                    {ConstantsFR.COMPANY}
                                 </Text>
                                 <Text
                                     style={{
@@ -174,7 +175,7 @@ const ReviewDetailsScreen = ({navigation, route}) => {
                                         fontFamily: fontStyle.SFProTextRegular,
                                         color: colors.BLACK,
                                     }}>
-                                    {Constants.NOTE}
+                                    {ConstantsFR.NOTE}
                                 </Text>
                                 <Rating
                                     readonly
@@ -201,7 +202,7 @@ const ReviewDetailsScreen = ({navigation, route}) => {
                                         fontFamily: fontStyle.SFProTextRegular,
                                         color: colors.BLACK,
                                     }}>
-                                    {Constants.DATE}
+                                    {ConstantsFR.DATE}
                                 </Text>
                                 <Text
                                     style={{
@@ -230,7 +231,7 @@ const ReviewDetailsScreen = ({navigation, route}) => {
                                         fontFamily: fontStyle.SFProTextRegular,
                                         color: colors.BLACK,
                                     }}>
-                                    {Constants.SHOPPING_WEBSITE}
+                                    {ConstantsFR.SHOPPING_WEBSITE}
                                 </Text>
                                 <Text
                                     style={{
@@ -260,7 +261,7 @@ const ReviewDetailsScreen = ({navigation, route}) => {
                                         fontFamily: fontStyle.SFProTextRegular,
                                         color: colors.BLACK,
                                     }}>
-                                    {Constants.PACKAGE_NUMBER}
+                                    {ConstantsFR.PACKAGE_NUMBER}
                                 </Text>
                                 <Text
                                     style={{
@@ -284,7 +285,7 @@ const ReviewDetailsScreen = ({navigation, route}) => {
                                     fontFamily: fontStyle.SFProTextRegular,
                                     color: colors.BLACK,
                                 }}>
-                                {Constants.COMMENT +":"}
+                                {ConstantsFR.COMMENT +":"}
                             </Text>
 
                             <Text
@@ -307,7 +308,7 @@ const ReviewDetailsScreen = ({navigation, route}) => {
                                     fontFamily: fontStyle.SFProTextBold,
                                     color: colors.BLACK,
                                 }}>
-                                {Constants.DELIVERY_PHOTO}
+                                {ConstantsFR.DELIVERY_PHOTO}
                             </Text>
                             <Image
                                 style={{

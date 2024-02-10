@@ -17,6 +17,7 @@ import fontDimen from "../styles/fontDimen";
 import FirestoreConstant from "../services/FirestoreConstant";
 import {Rating} from "react-native-ratings";
 import {getCompanyList} from "../services/CompanyManager";
+import ConstantsFR from "../utils/ConstantsFR";
 
 const AverageRatingCompanyDetailsScreen = ({navigation, route}) => {
     const [company] = useState(route?.params?.company || "")
@@ -172,7 +173,7 @@ const AverageRatingCompanyDetailsScreen = ({navigation, route}) => {
                         fontSize: fontDimen.font_14,
                         fontFamily: fontStyle.SFProTextBold,
                         overflow: 'hidden',
-                    }}>{Constants.OVERALL_RATING}</Text>
+                    }}>{ConstantsFR.OVERALL_RATING}</Text>
                 <Rating
                     readonly
                     startingValue={averageRating}
@@ -202,7 +203,7 @@ const AverageRatingCompanyDetailsScreen = ({navigation, route}) => {
                         fontSize: fontDimen.font_14,
                         fontFamily: fontStyle.SFProTextBold,
                         overflow: 'hidden',
-                    }}>{Constants.NO_REVIEW_FOUND}</Text>
+                    }}>{ConstantsFR.NO_REVIEW_FOUND}</Text>
             )}
             <FlatList
                 data={reviewList}

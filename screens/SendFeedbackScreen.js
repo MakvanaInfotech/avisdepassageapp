@@ -13,6 +13,7 @@ import Constants, {ScreenName} from "../utils/Constants";
 import fontDimen from "../styles/fontDimen";
 import {showAlertWithButtons} from "../utils/Common";
 import auth from "@react-native-firebase/auth";
+import ConstantsFR from "../utils/ConstantsFR";
 
 let fromStr = "", messageStr;
 
@@ -44,7 +45,7 @@ const SendFeedbackScreen = ({navigation}) => {
                         fontFamily: fontStyle.SFProTextBold,
                         overflow: 'hidden',
                         textAlign: "center"
-                    }}>{Constants.SEND_FEEDBACK}</Text>
+                    }}>{ConstantsFR.SEND_FEEDBACK}</Text>
             </View>
         );
     };
@@ -83,13 +84,13 @@ const SendFeedbackScreen = ({navigation}) => {
     const submit = async () => {
         console.log("", fromStr)
         if (fromStr.trim() === "") {
-            alert(Constants.PLEASE_FROM_EMAIL)
+            alert(ConstantsFR.PLEASE_FROM_EMAIL)
         } else if (messageStr === "") {
-            alert(Constants.PLEASE_MESSAGE)
+            alert(ConstantsFR.PLEASE_MESSAGE)
         } else {
             showAlertWithButtons("",
-                Constants.YOUR_FEEDBACK_SENT,
-                Constants.OK,
+                ConstantsFR.YOUR_FEEDBACK_SENT,
+                ConstantsFR.OK,
                 "",  (isBtn1Pressed) => {
                 console.log("isBtn1Pressed",isBtn1Pressed)
                     if (isBtn1Pressed) {
@@ -120,7 +121,7 @@ const SendFeedbackScreen = ({navigation}) => {
                         marginStart: 5,
                         flex: 1,
                     }}>
-                        {Constants.FROM}
+                        {ConstantsFR.FROM}
                     </Text>
                     <Text style={{
                         color: colors.GRAY_99_COLOR,
@@ -129,7 +130,7 @@ const SendFeedbackScreen = ({navigation}) => {
                         marginEnd: 10,
                         fontSize: 12
                     }}>
-                        {Constants.REQUIRED}
+                        {ConstantsFR.REQUIRED}
                     </Text>
                 </View>
                 <View style={{
@@ -171,7 +172,7 @@ const SendFeedbackScreen = ({navigation}) => {
                         marginStart: 5,
                         flex: 1,
                     }}>
-                        {Constants.MESSAGE}
+                        {ConstantsFR.MESSAGE}
                     </Text>
                     <Text style={{
                         color: colors.GRAY_99_COLOR,
@@ -180,7 +181,7 @@ const SendFeedbackScreen = ({navigation}) => {
                         marginEnd: 10,
                         fontSize: 12
                     }}>
-                        {Constants.REQUIRED}
+                        {ConstantsFR.REQUIRED}
                     </Text>
                 </View>
                 <View style={{

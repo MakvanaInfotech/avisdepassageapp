@@ -17,6 +17,7 @@ import fontDimen from "../styles/fontDimen";
 import FirestoreConstant from "../services/FirestoreConstant";
 import {Rating} from "react-native-ratings";
 import {getCompanyList} from "../services/CompanyManager";
+import ConstantsFR from "../utils/ConstantsFR";
 
 const SearchByCompanyScreen = ({navigation}) => {
 
@@ -54,7 +55,7 @@ const SearchByCompanyScreen = ({navigation}) => {
                         fontFamily: fontStyle.SFProTextBold,
                         overflow: 'hidden',
                         textAlign: "center"
-                    }}>{Constants.AVERAGE_GRADES}</Text>
+                    }}>{ConstantsFR.AVERAGE_GRADES}</Text>
             </View>
         );
     };
