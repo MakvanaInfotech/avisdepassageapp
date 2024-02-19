@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "968907835431",
+    "project_id": "avis-de-passage",
+    "storage_bucket": "avis-de-passage.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968907835431:android:514ddd9187b9b88ab86602",
+        "android_client_info": {
+          "package_name": "com.avisdepassage"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_Dl2JOiIINC9vEKWFcpjixbMP6dvF6ZA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
