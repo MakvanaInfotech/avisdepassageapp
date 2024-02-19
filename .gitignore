@@ -40,6 +40,7 @@ render.experimental.xml
 /android/app/src/main/res/drawable-xhdpi/
 /android/app/src/main/res/drawable-xxhdpi/
 /android/app/src/main/res/drawable-xxxhdpi/
+android/app/release/
 
 # Ruby / CocoaPods
 /vendor/bundle/
