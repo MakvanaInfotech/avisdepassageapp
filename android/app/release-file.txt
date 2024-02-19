@@ -1,0 +1,5 @@
+Keystore password : android
+alisas name : avisdepassage
+First last name: Avis De Passage
+
+Master Password : android

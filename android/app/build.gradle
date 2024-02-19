@@ -90,9 +90,9 @@ android {
             keyPassword 'android'
         }
         release {
-            storeFile file('debug.keystore')
+            storeFile file('avisdepassage.jks')
             storePassword 'android'
-            keyAlias 'androiddebugkey'
+            keyAlias 'avisdepassage'
             keyPassword 'android'
         }
     }
