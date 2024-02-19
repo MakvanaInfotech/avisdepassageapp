@@ -1,10 +1,8 @@
 import React from "react";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import {PhoneSignIn} from "./PhoneSignIn";
 
-import {storage} from "../App";
 import MainScreen from "./MainScreen";
-import Constants, {ScreenName} from "../utils/Constants";
+import {ScreenName} from "../utils/Constants";
 import SplashScreen from "./SplashScreen";
 import AddReviewScreen from "./AddReviewScreen";
 import {ProfileScreen} from "./ProfileScreen";
@@ -19,49 +17,18 @@ import PrivacyPolicyScreen from "./PrivacyPolicyScreen";
 import TermConditionScreen from "./TermConditionScreen";
 import SendFeedbackScreen from "./SendFeedbackScreen";
 import SearchByCityScreen from "./SearchByCityScreen";
+
 const Stack = createNativeStackNavigator();
 
 
 export function NavigationStackScreens({navigation}) {
     return (
         <Stack.Navigator>
-            {/*{(*/}
-            {/*    !storage.getBoolean("isLogin") ?*/}
-            {/*        <Stack.Screen*/}
-            {/*            name="PhoneSignIn"*/}
-            {/*            component={PhoneSignIn}*/}
-            {/*            options={{headerShown: false}}*/}
-            {/*        />*/}
-            {/*        :*/}
-            {/*        <Stack.Screen*/}
-            {/*            name="MainScreen"*/}
-            {/*            component={MainScreen}*/}
-            {/*            options={{headerShown: false}}*/}
-            {/*        />*/}
-
-            {/*)}*/}
-            {/*{(*/}
-            {/*    storage.getBoolean("isLogin") ?*/}
-            {/*        <Stack.Screen*/}
-            {/*            name="PhoneSignIn"*/}
-            {/*            component={PhoneSignIn}*/}
-            {/*            options={{headerShown: false}}*/}
-            {/*        />*/}
-            {/*        :*/}
-            {/*        <Stack.Screen*/}
-            {/*            name="MainScreen"*/}
-            {/*            component={MainScreen}*/}
-            {/*            options={{headerShown: false}}*/}
-            {/*        />*/}
-
-            {/*)}*/}
-
             <Stack.Screen
                 name={ScreenName.SPLASH_SCREEN}
                 component={SplashScreen}
                 options={{headerShown: false}}
             />
-
             <Stack.Screen
                 name={ScreenName.MAIN_SCREEN}
                 component={MainScreen}
@@ -80,6 +47,11 @@ export function NavigationStackScreens({navigation}) {
             <Stack.Screen
                 name={ScreenName.SIGN_IN_SCREEN}
                 component={SignInScreen}
+                options={{headerShown: false}}
+            />
+            <Stack.Screen
+                name={ScreenName.SIGN_UP_SCREEN}
+                component={SignUpScreen}
                 options={{headerShown: false}}
             />
             <Stack.Screen
@@ -143,5 +115,3 @@ export function DashStack() {
         </Stack.Navigator>
     );
 }
-
-
