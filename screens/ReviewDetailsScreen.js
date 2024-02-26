@@ -23,6 +23,7 @@ import ProfileBottomSheet from "../components/ProfileBottomSheet";
 import Indicator from "../components/Indicator";
 import moment from "moment";
 import ConstantsFR from "../utils/ConstantsFR";
+import DisplayNumbers from "../components/DisplayNumbers";
 
 const ReviewDetailsScreen = ({navigation, route}) => {
     const [item] = useState(route?.params?.item || "")
@@ -263,14 +264,21 @@ const ReviewDetailsScreen = ({navigation, route}) => {
                                     }}>
                                     {ConstantsFR.PACKAGE_NUMBER}
                                 </Text>
-                                <Text
+                                <DisplayNumbers
                                     style={{
                                         fontSize: 14,
                                         fontFamily: fontStyle.SFProTextRegular,
                                         color: colors.BLACK,
-                                    }}>
-                                    {item.packageNumber}
-                                </Text>
+                                    }}
+                                    number={item.packageNumber} />
+                                {/*<Text*/}
+                                {/*    style={{*/}
+                                {/*        fontSize: 14,*/}
+                                {/*        fontFamily: fontStyle.SFProTextRegular,*/}
+                                {/*        color: colors.BLACK,*/}
+                                {/*    }}>*/}
+                                {/*    {item.packageNumber}*/}
+                                {/*</Text>*/}
                             </View>
                             <View style={{
                                 marginTop: 10,

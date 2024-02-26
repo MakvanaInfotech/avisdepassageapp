@@ -1,6 +1,8 @@
 import {Alert} from "react-native";
 
+export const sendEmail = (title, message, btn1, btn2, callback) => {
 
+}
 export const showAlertWithButtons = (title, message, btn1, btn2, callback) => {
     console.log("title>>>>> ",title)
     console.log("message>>>>> ",message)
