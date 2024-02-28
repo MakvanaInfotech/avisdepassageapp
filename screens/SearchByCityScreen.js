@@ -260,6 +260,8 @@ const SearchByCityScreen = ({navigation}) => {
     return (
         <View style={{
             flex: 1,
+            flexGrow: 1,
+            paddingBottom:20,
             backgroundColor: colors.WHITE,
         }}>
             <SafeAreaView/>
@@ -308,7 +310,7 @@ const SearchByCityScreen = ({navigation}) => {
                     </View>
                     <FlatList
                         data={filterReviewList}
-                        bounces={false}
+                        // bounces={false}
                         containerStyle={{flexGrow: 1}}
                         showsVerticalScrollIndicator={false}
                         renderItem={renderReviewList}
@@ -335,7 +337,7 @@ const SearchByCityScreen = ({navigation}) => {
 
                 </MapView>
             )}
-            <SafeAreaView/>
+
 
         </View>
     );
