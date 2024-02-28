@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {
     Alert,
-    Image,
+    Image, Platform,
     SafeAreaView,
     StatusBar,
     Text,
@@ -136,6 +136,8 @@ export function SignUpScreen({navigation}) {
                             alignItems: 'center',
                             justifyContent: 'center',
                             fontSize: 16,
+                            paddingTop: Platform.OS === "ios" ? 15 : 10,
+                            paddingBottom: Platform.OS === "ios" ? 15 : 10,
                             textAlign: 'left',
                             color: colors.BLACK,
                             fontFamily: fontStyle.SFProTextRegular
@@ -160,6 +162,8 @@ export function SignUpScreen({navigation}) {
                             alignItems: 'center',
                             justifyContent: 'center',
                             fontSize: 16,
+                            paddingTop: Platform.OS === "ios" ? 15 : 10,
+                            paddingBottom: Platform.OS === "ios" ? 15 : 10,
                             textAlign: 'left',
                             color: colors.BLACK,
                             fontFamily: fontStyle.SFProTextRegular
@@ -185,6 +189,8 @@ export function SignUpScreen({navigation}) {
                             alignItems: 'center',
                             justifyContent: 'center',
                             fontSize: 16,
+                            paddingTop: Platform.OS === "ios" ? 15 : 10,
+                            paddingBottom: Platform.OS === "ios" ? 15 : 10,
                             textAlign: 'left',
                             color: colors.BLACK,
                             fontFamily: fontStyle.SFProTextRegular
@@ -224,6 +230,8 @@ export function SignUpScreen({navigation}) {
                             alignItems: 'center',
                             justifyContent: 'center',
                             fontSize: 16,
+                            paddingTop: Platform.OS === "ios" ? 15 : 10,
+                            paddingBottom: Platform.OS === "ios" ? 15 : 10,
                             textAlign: 'left',
                             color: colors.BLACK,
                             fontFamily: fontStyle.SFProTextRegular

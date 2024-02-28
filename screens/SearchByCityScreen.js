@@ -114,6 +114,7 @@ const SearchByCityScreen = ({navigation}) => {
             },
             headerTitleAlign: 'center',
             headerShadowVisible: false,
+            headerBackTitle: ConstantsFR.BACK,
             headerTintColor: colors.WHITE,
             color: colors.WHITE,
             headerTitle: () => renderTitle(),
@@ -282,6 +283,8 @@ const SearchByCityScreen = ({navigation}) => {
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 fontSize: 16,
+                                paddingTop: Platform.OS === "ios" ? 15 : 10,
+                                paddingBottom: Platform.OS === "ios" ? 15 : 10,
                                 textAlign: 'left',
                                 color: colors.BLACK,
                                 fontFamily: fontStyle.SFProTextRegular

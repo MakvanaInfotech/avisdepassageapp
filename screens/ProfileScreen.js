@@ -73,7 +73,7 @@ export function ProfileScreen({navigation}) {
                 flex: 1
             },
             headerTitleAlign: 'center',
-            // headerBackTitle: ConstantsFR.BACK,
+            headerBackTitle: ConstantsFR.BACK,
             headerShadowVisible: false,
             headerTintColor: colors.WHITE,
             color: colors.WHITE,
@@ -556,6 +556,7 @@ export function ProfileScreen({navigation}) {
                     {"Version 1.0.0(1)"}
                 </Text>
             </View>
+            <SafeAreaView/>
             <ProfileBottomSheet
                 disabled={changeProfile}
                 onImageSelected={handleImageSelected}

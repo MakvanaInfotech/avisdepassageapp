@@ -108,4 +108,5 @@ export default {
     DELETE_MESSAGE: language === "en" ? "Are you sure you want to proceed with deleting your account?" : "Êtes-vous sûr de vouloir procéder à la suppression de votre compte?",
     BUTTON_YES: language === "en" ? "Yes" : "Oui",
     BUTTON_NO: language === "en" ? "No" : "Non",
+    BACK: language === "en" ? "Back" : "Back",
 }

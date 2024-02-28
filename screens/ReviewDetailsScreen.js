@@ -59,6 +59,7 @@ const ReviewDetailsScreen = ({navigation, route}) => {
             },
             headerTitleAlign: 'center',
             headerShadowVisible: false,
+            headerBackTitle: ConstantsFR.BACK,
             headerTintColor: colors.WHITE,
             color: colors.WHITE,
             headerTitle: () => renderTitle()
@@ -337,6 +338,7 @@ const ReviewDetailsScreen = ({navigation, route}) => {
                     </View>
                 )}
             </ScrollView>
+            <SafeAreaView/>
         </View>
     );
 }

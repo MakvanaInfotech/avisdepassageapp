@@ -35,7 +35,7 @@ import {validateUser} from "./services/UserServices";
 import {getUser} from "./services/DataManager";
 
 export const storage = new MMKV()
-export const language = "fr"
+export const language = "en"
 
 type SectionProps = PropsWithChildren<{
     title: string;

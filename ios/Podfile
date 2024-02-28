@@ -1,3 +1,5 @@
+
+
 # Resolve react_native_pods.rb with node to allow for hoisting
 require Pod::Executable.execute_command('node', ['-p',
   'require.resolve(
@@ -19,26 +21,45 @@ prepare_react_native_project!
 # ```
 flipper_config = ENV['NO_FLIPPER'] == "1" ? FlipperConfiguration.disabled : FlipperConfiguration.enabled
 
-linkage = ENV['USE_FRAMEWORKS']
-if linkage != nil
-  Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
-  use_frameworks! :linkage => linkage.to_sym
-end
+ linkage = ENV['USE_FRAMEWORKS']
+ if linkage != nil
+   Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
+   use_frameworks! :linkage => linkage.to_sym
+ end
 
 target 'Avisdepassage' do
+
+  use_frameworks! :linkage => :static
+  # use_frameworks!
   config = use_native_modules!
+
+  # $RNFirebaseAsStaticFramework = true
 
   use_react_native!(
     :path => config[:reactNativePath],
+    :hermes_enabled => false,
     # Enables Flipper.
     #
     # Note that if you have use_frameworks! enabled, Flipper will not work and
     # you should disable the next line.
-    :flipper_configuration => flipper_config,
+    # :flipper_configuration => flipper_config,
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
-    use_modular_headers!
+    # use_modular_headers!
+
+
+  # pod 'FirebaseCoreInternal', :modular_headers => true
+  # pod 'GoogleUtilities', :modular_headers => true
+  # pod 'FirebaseCore', :modular_headers => true
+  # # pod 'FirebaseFunctions', :modular_headers => true
+  # # pod 'FirebaseStorage', :modular_headers => true
+  # pod 'FirebaseAppCheckInterop', :modular_headers => true
+  # pod 'FirebaseAuthInterop', :modular_headers => true
+  # pod 'FirebaseCoreExtension', :modular_headers => true
+  # pod 'GTMSessionFetcher', :modular_headers => true
+  # pod 'FirebaseMessagingInterop', :modular_headers => true
+  
 
   target 'AvisdepassageTests' do
     inherit! :complete

@@ -68,6 +68,7 @@ const SearchByCompanyScreen = ({navigation}) => {
             },
             headerTitleAlign: 'center',
             headerShadowVisible: false,
+            headerBackTitle: ConstantsFR.BACK,
             headerTintColor: colors.WHITE,
             color: colors.WHITE,
             headerTitle: () => renderTitle(),

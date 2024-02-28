@@ -5,7 +5,7 @@ import {
     Text,
     TouchableOpacity,
     View,
-    StyleSheet, TextInput, Image, ScrollView, Switch
+    StyleSheet, TextInput, Image, ScrollView, Switch, Platform
 } from 'react-native';
 import colors from "../styles/colors";
 import fontStyle from "../styles/fontStyle";
@@ -174,7 +174,7 @@ const AddReviewScreen = ({navigation}) => {
                                     ...review,
                                     selectedImage: callback,
                                 }
-                                updateReview(docId, review, ()=>{
+                                updateReview(docId, review, () => {
                                     clearAll()
                                     setLoader(false)
                                     navigation.goBack()
@@ -480,6 +480,8 @@ const AddReviewScreen = ({navigation}) => {
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                     fontSize: 16,
+                                    paddingTop: Platform.OS === "ios" ? 15 : 10,
+                                    paddingBottom: Platform.OS === "ios" ? 15 : 10,
                                     textAlign: 'left',
                                     color: colors.BLACK,
                                     fontFamily: fontStyle.SFProTextRegular
@@ -531,6 +533,8 @@ const AddReviewScreen = ({navigation}) => {
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                     fontSize: 16,
+                                    paddingTop: Platform.OS === "ios" ? 15 : 10,
+                                    paddingBottom: Platform.OS === "ios" ? 15 : 10,
                                     textAlign: 'left',
                                     color: colors.BLACK,
                                     fontFamily: fontStyle.SFProTextRegular
@@ -573,6 +577,8 @@ const AddReviewScreen = ({navigation}) => {
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                     fontSize: 16,
+                                    paddingTop: Platform.OS === "ios" ? 15 : 10,
+                                    paddingBottom: Platform.OS === "ios" ? 15 : 10,
                                     textAlign: 'left',
                                     color: colors.BLACK,
                                     fontFamily: fontStyle.SFProTextRegular
@@ -675,6 +681,8 @@ const AddReviewScreen = ({navigation}) => {
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                     fontSize: 16,
+                                    paddingTop: Platform.OS === "ios" ? 15 : 10,
+                                    paddingBottom: Platform.OS === "ios" ? 15 : 10,
                                     textAlign: 'left',
                                     color: colors.BLACK,
                                     fontFamily: fontStyle.SFProTextRegular
@@ -717,6 +725,8 @@ const AddReviewScreen = ({navigation}) => {
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                     fontSize: 16,
+                                    paddingTop: Platform.OS === "ios" ? 15 : 10,
+                                    paddingBottom: Platform.OS === "ios" ? 15 : 10,
                                     textAlign: 'left',
                                     color: colors.BLACK,
                                     fontFamily: fontStyle.SFProTextRegular
@@ -788,6 +798,8 @@ const AddReviewScreen = ({navigation}) => {
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                     fontSize: 16,
+                                    paddingTop: Platform.OS === "ios" ? 15 : 10,
+                                    paddingBottom: Platform.OS === "ios" ? 15 : 10,
                                     textAlign: 'left',
                                     color: colors.BLACK,
                                     fontFamily: fontStyle.SFProTextRegular
@@ -804,7 +816,7 @@ const AddReviewScreen = ({navigation}) => {
                 </View>
 
             </ScrollView>
-
+            <SafeAreaView/>
             {renderCompanyListBottomSheet()}
 
             {renderPicker()}

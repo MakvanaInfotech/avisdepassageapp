@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
-    Image,
+    Image, Platform,
     SafeAreaView,
     StatusBar,
     Text, TextInput,
@@ -59,6 +59,7 @@ const SendFeedbackScreen = ({navigation}) => {
             },
             headerTitleAlign: 'center',
             headerShadowVisible: false,
+            headerBackTitle: ConstantsFR.BACK,
             headerTintColor: colors.WHITE,
             color: colors.WHITE,
             headerTitle: () => renderTitle(),
@@ -148,6 +149,8 @@ const SendFeedbackScreen = ({navigation}) => {
                             justifyContent: 'center',
                             fontSize: 16,
                             textAlign: 'left',
+                            paddingTop: Platform.OS === "ios" ? 15 : 10,
+                            paddingBottom: Platform.OS === "ios" ? 15 : 10,
                             color: colors.BLACK,
                             fontFamily: fontStyle.SFProTextRegular
                         }}
@@ -200,6 +203,8 @@ const SendFeedbackScreen = ({navigation}) => {
                             textAlign: 'left', // for iOS
                             textAlignVertical: 'top', // for Android
                             color: 'black',
+                            paddingTop: Platform.OS === "ios" ? 15 : 10,
+                            paddingBottom: Platform.OS === "ios" ? 15 : 10,
                             fontFamily: 'YourFontFamily', // specify your font family
                         }}
                         numberOfLines={6}

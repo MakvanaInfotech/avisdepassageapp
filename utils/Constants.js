@@ -109,6 +109,7 @@ export default {
   DELETE_MESSAGE: "Are you sure you want to proceed with deleting your account?",
   BUTTON_YES: "Yes",
   BUTTON_NO: "No",
+  BACK: "Back",
 }
 
 export const ScreenName = {

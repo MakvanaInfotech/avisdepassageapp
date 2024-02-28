@@ -60,6 +60,7 @@ const AverageRatingCompanyDetailsScreen = ({navigation, route}) => {
             },
             headerTitleAlign: 'center',
             headerShadowVisible: false,
+            headerBackTitle: ConstantsFR.BACK,
             headerTintColor: colors.WHITE,
             color: colors.WHITE,
             headerTitle: () => renderTitle(),

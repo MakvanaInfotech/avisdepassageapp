@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {
     Alert,
-    Image,
+    Image, Platform,
     SafeAreaView,
     StatusBar,
     Text,
@@ -128,6 +128,8 @@ export function SignInScreen({navigation}) {
                             fontSize: 16,
                             textAlign: 'left',
                             color: colors.BLACK,
+                            paddingTop: Platform.OS === "ios" ? 15 : 10,
+                            paddingBottom: Platform.OS === "ios" ? 15 : 10,
                             fontFamily: fontStyle.SFProTextRegular
                         }}
                         value={email}
@@ -153,6 +155,8 @@ export function SignInScreen({navigation}) {
                             fontSize: 16,
                             textAlign: 'left',
                             color: colors.BLACK,
+                            paddingTop: Platform.OS === "ios" ? 15 : 10,
+                            paddingBottom: Platform.OS === "ios" ? 15 : 10,
                             fontFamily: fontStyle.SFProTextRegular
                         }}
                         value={password}

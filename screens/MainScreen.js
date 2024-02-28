@@ -64,7 +64,7 @@ const MainScreen = ({navigation}) => {
                 flex: 1
             },
             headerTitleAlign: 'center',
-            // headerBackTitle: ConstantsFR.BACK,
+            headerBackTitle: ConstantsFR.BACK,
             headerShadowVisible: false,
             headerTintColor: colors.WHITE,
             color: colors.WHITE,
