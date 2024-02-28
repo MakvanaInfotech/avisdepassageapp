@@ -314,6 +314,7 @@ const SearchByCityScreen = ({navigation}) => {
                         renderItem={renderReviewList}
                         keyExtractor={(item, index) => item + index} // Use item + index as the key
                     />
+                    <SafeAreaView/>
                 </View>
 
             )}
@@ -334,7 +335,7 @@ const SearchByCityScreen = ({navigation}) => {
 
                 </MapView>
             )}
-
+            <SafeAreaView/>
 
         </View>
     );

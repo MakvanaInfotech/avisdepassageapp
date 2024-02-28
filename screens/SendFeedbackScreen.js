@@ -216,6 +216,7 @@ const SendFeedbackScreen = ({navigation}) => {
                     />
                 </View>
             </View>
+            <SafeAreaView/>
         </View>
     );
 }

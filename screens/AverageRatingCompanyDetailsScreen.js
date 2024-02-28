@@ -214,7 +214,7 @@ const AverageRatingCompanyDetailsScreen = ({navigation, route}) => {
                 renderItem={renderReviewList}
                 keyExtractor={(item, index) => item + index} // Use item + index as the key
             />
-
+            <SafeAreaView/>
         </View>
     );
 }
