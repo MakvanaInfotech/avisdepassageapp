@@ -13,6 +13,7 @@ import {uploadProfilePicture} from "../services/StorageManager";
 import {deleteData, getLoggedUserId} from "../services/UserServices";
 import ConstantsFR from "../utils/ConstantsFR";
 import {showAlertWithButtons} from "../utils/Common";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 export function ProfileScreen({navigation}) {
     let userData = getUser();
@@ -303,6 +304,73 @@ export function ProfileScreen({navigation}) {
                                 </View>
                             </TouchableOpacity>
                         </View>
+
+                        {(
+                            false &&
+                            <View style={{
+                                flexDirection: 'row',
+                                borderRadius: 10,
+                                padding: 13,
+                                marginBottom: 15,
+                                backgroundColor: colors.WHITE
+                            }}>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        navigation.navigate(ScreenName.LANGUAGE_SCREEN)
+                                    }}
+                                    style={{
+                                        paddingEnd: 10,
+                                        width: "100%",
+                                        alignSelf: 'center',
+                                    }}>
+                                    <View
+                                        style={{
+                                            width: '100%',
+                                            flexDirection: 'row',
+                                            alignItems: 'center',
+                                            backgroundColor: colors.WHITE
+                                        }}>
+                                        <Image
+                                            style={{
+                                                width: 24,
+                                                height: 22,
+                                            }}
+                                            tintColor={
+                                                colors.PRIMARY_COLOR
+                                            }
+                                            source={require('../assets/images/ic_language.webp')}>
+                                        </Image>
+                                        <Text
+                                            style={{
+                                                marginStart: 10,
+                                                fontSize: 16,
+                                                fontWeight: 400,
+                                                fontFamily: fontStyle.SFProTextRegular,
+                                                color: colors.BLACK,
+                                            }}>
+                                            {ConstantsFR.LANGUAGE}
+                                        </Text>
+
+                                        <View style={{
+                                            flex: 1,
+                                            alignItems: 'center',
+                                            justifyContent: 'flex-end',
+                                            flexDirection: 'row'
+                                        }}>
+                                            <Image
+                                                style={{
+                                                    width: 8,
+                                                    height: 14,
+                                                }}
+                                                resizeMode={'contain'}
+                                                source={require('../assets/images/ic_chevron.png')}>
+                                            </Image>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                        )}
+
                         <View style={{
                             flexDirection: 'row',
                             borderRadius: 10,

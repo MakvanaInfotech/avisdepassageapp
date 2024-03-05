@@ -55,6 +55,7 @@ export default {
     ABOUT_US: language === "en" ? "About Us" : "À propos",
     CHANGE_PROFILE_PHOTO: language === "en" ? "Change profile photo" : "Changer la photo de profil",
     TERM_CONDITIONS: language === "en" ? "Term & Conditions" : "Termes & Conditions",
+    LANGUAGE: language === "en" ? "Change Language" : "Changer de langue",
     PRIVACY_POLICY: language === "en" ? "Privacy Policy" : "Politique de confidentialité",
     LOGIN: language === "en" ? "Log In" : "Se connecter",
     LOGOUT: language === "en" ? "Log Out" : "Se déconnecter",
@@ -109,4 +110,6 @@ export default {
     BUTTON_YES: language === "en" ? "Yes" : "Oui",
     BUTTON_NO: language === "en" ? "No" : "Non",
     BACK: language === "en" ? "Back" : "Back",
+    FRENCH: language === "en" ? "French" : "Français",
+    ENGLISH: language === "en" ? "English" : "Anglaise",
 }

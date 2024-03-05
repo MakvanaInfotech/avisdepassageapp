@@ -128,6 +128,8 @@ export const ScreenName = {
   TERM_CONDITIONS_SCREEN : "TermConditionScreen",
   SEND_FEEDBACK_SCREEN : "SendFeedbackScreen",
   SEARCH_BY_CITY_SCREEN : "SearchByCityScreen",
+  LANGUAGE_SCREEN : "LanguageScreen",
+  DASH_STACK : "DashStack",
 }
 
 

@@ -8,6 +8,7 @@
 import React, {useEffect} from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+    NativeModules,
     SafeAreaView,
     ScrollView,
     StatusBar,
@@ -24,7 +25,7 @@ import {
     LearnMoreLinks,
     ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import {NavigationContainer} from '@react-navigation/native';
+import {CommonActions, NavigationContainer} from '@react-navigation/native';
 
 import {firebase} from "@react-native-firebase/database";
 
@@ -33,38 +34,24 @@ import {DashStack} from "./screens/DashStack";
 import auth from "@react-native-firebase/auth";
 import {validateUser} from "./services/UserServices";
 import {getUser} from "./services/DataManager";
+import {ScreenName} from "./utils/Constants";
 
 export const storage = new MMKV()
-export const language = "en"
 
-type SectionProps = PropsWithChildren<{
-    title: string;
-}>;
+export let language = storage.getString('language');
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-    const isDarkMode = useColorScheme() === 'dark';
-    return (
-        <View style={styles.sectionContainer}>
-            <Text
-                style={[
-                    styles.sectionTitle,
-                    {
-                        color: isDarkMode ? Colors.white : Colors.black,
-                    },
-                ]}>
-                {title}
-            </Text>
-            <Text
-                style={[
-                    styles.sectionDescription,
-                    {
-                        color: isDarkMode ? Colors.light : Colors.dark,
-                    },
-                ]}>
-                {children}
-            </Text>
-        </View>
-    );
+if (language === undefined) {
+    language = "fr"
+    storage.set('language', language)
+}
+export function changeLanguage( lang, navigation ) {
+    storage.set('language', lang)
+    language = lang
+    navigation.dispatch(
+        CommonActions.reset({
+            index: 0,
+            routes: [{name: ScreenName.MAIN_SCREEN}],
+        }));
 }
 
 function App(): React.JSX.Element {

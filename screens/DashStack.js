@@ -17,6 +17,7 @@ import PrivacyPolicyScreen from "./PrivacyPolicyScreen";
 import TermConditionScreen from "./TermConditionScreen";
 import SendFeedbackScreen from "./SendFeedbackScreen";
 import SearchByCityScreen from "./SearchByCityScreen";
+import LanguageScreen from "./LanguageScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -97,6 +98,11 @@ export function NavigationStackScreens({navigation}) {
             <Stack.Screen
                 name={ScreenName.SEND_FEEDBACK_SCREEN}
                 component={SendFeedbackScreen}
+                options={{headerShown: false}}
+            />
+            <Stack.Screen
+                name={ScreenName.LANGUAGE_SCREEN}
+                component={LanguageScreen}
                 options={{headerShown: false}}
             />
         </Stack.Navigator>
