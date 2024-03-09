@@ -3,6 +3,7 @@ import FirestoreConstant, {getISOStringFromDate} from "./FirestoreConstant";
 import moment from "moment";
 import ReviewModel from "./Models/ReviewModel";
 import {setUser} from "./DataManager";
+import Geocoder from "react-native-geocoding";
 
 const collection = firestore().collection(FirestoreConstant.REVIEW_TABLE);
 
@@ -10,15 +11,26 @@ export const createReview = async (
     userId, userName, companySelectedObj, companyName, selectedDate, rating, postalCode,
     city, comment, packageNumber, shoppingWebSite, submitComplaint,
     email, selectedImage, callback) => {
+    let coordinates = null
+    try {
+        const response = await Geocoder.from(city);
+        const {lat, lng} = response.results[0].geometry.location;
+        coordinates = {
+            latitude: lat,
+            longitude: lng,
+        }
+    } catch (e) {
+    }
 
     let currentTime = getISOStringFromDate(moment());
     let review = new ReviewModel(
         userId, userName, companySelectedObj, companyName, selectedDate, rating, postalCode,
-        city, comment, packageNumber, shoppingWebSite, submitComplaint,
+        city, coordinates, comment, packageNumber, shoppingWebSite, submitComplaint,
         email, selectedImage,
         currentTime,
         currentTime,
     );
+    console.log("asdadasdada")
 
     collection
         .add(review)

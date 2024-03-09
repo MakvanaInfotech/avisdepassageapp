@@ -41,8 +41,7 @@ const SAMPLE_REGION = {
     longitudeDelta: LONGITUDE_DELTA,
 };
 
-Geocoder.init('AIzaSyDXbCNFWNBdcO2vp4jsqHx71l4wDXv5P5w');
-
+Geocoder.init('key ');
 
 const SearchByCityScreen = ({navigation}) => {
 
@@ -56,29 +55,31 @@ const SearchByCityScreen = ({navigation}) => {
 
     const fetchMarkers = async (reviews) => {
         const markerList = [];
-
+        let count = 0
         for (const item of reviews) {
             try {
                 if(item !== undefined && item.city !== undefined){
                     const response = await Geocoder.from(item.city);
                     const { lat, lng } = response.results[0].geometry.location;
-
+                    console.log("item.city>>> ",item.city + " lat: "+ lat +" lng: "+ lng)
                     markerList.push({
+                        id: count,
                         item: item,
                         coordinates: {
                             latitude: lat,
                             longitude: lng,
                         },
                     });
+                    count++
                 }
             } catch (error) {
                 // console.log(`Error geocoding ${item.city}:`, error);
             }
         }
-        setMarkers(markerList);
+
         if(markerList.length > 0 && markerList[0].coordinates !== undefined){
             let coordinate = markerList[0].coordinates
-            console.log("",coordinate)
+            // console.log("",coordinate)
             setCurrentLocation({
                 latitude: coordinate.latitude, // Initial latitude
                 longitude: coordinate.longitude, // Initial longitude
@@ -86,6 +87,7 @@ const SearchByCityScreen = ({navigation}) => {
                 longitudeDelta:  LATITUDE_DELTA * ASPECT_RATIO
             })
         }
+        setMarkers(markerList);
 
     };
 
@@ -100,7 +102,17 @@ const SearchByCityScreen = ({navigation}) => {
                 });
                 reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
                 setReviewList(reviews)
-                fetchMarkers(reviews)
+                let markerList = reviews.filter(item => item.coordinates !== undefined && item.coordinates !== null)
+                setMarkers(markerList);
+                if(markerList.length > 0 && markerList[0].coordinates !== undefined){
+                    let coordinate = markerList[0].coordinates
+                    setCurrentLocation({
+                        latitude: coordinate.latitude, // Initial latitude
+                        longitude: coordinate.longitude, // Initial longitude
+                        latitudeDelta: 0.0822,
+                        longitudeDelta:  LATITUDE_DELTA * ASPECT_RATIO
+                    })
+                }
                 setFilterReviewList(reviews)
             })
     }, [])
@@ -331,7 +343,7 @@ const SearchByCityScreen = ({navigation}) => {
                         <Marker
                             key={index}
                             coordinate={marker.coordinates}
-                            title={marker.item.title}
+                            title={marker.city}
                         />
                     ))}
 

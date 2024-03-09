@@ -486,6 +486,7 @@ const AddReviewScreen = ({navigation}) => {
                                     color: colors.BLACK,
                                     fontFamily: fontStyle.SFProTextRegular
                                 }}
+                                maxLength={5}
                                 value={postalCode}
                                 onChangeText={setPostalCode}
                                 placeholder={ConstantsFR.ENTER_POSTAL_CODE}

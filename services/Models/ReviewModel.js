@@ -13,11 +13,13 @@ export default class ReviewModel {
     submitComplaint = false;
     email = "";
     selectedImage = "";
+    coordinates = null;
     createdAt = "";
     updatedAt = "";
 
+
     constructor(userId, userName,companySelected, companyName, selectedDate, rating, postalCode,
-                city, comment, packageNumber, shoppingWebSite, submitComplaint,
+                city, coordinates, comment, packageNumber, shoppingWebSite, submitComplaint,
                 email, selectedImage, createdAt, updatedAt) {
         this.userId = userId;
         this.userName = userName;
@@ -27,6 +29,7 @@ export default class ReviewModel {
         this.rating = rating;
         this.postalCode = postalCode;
         this.city = city;
+        this.coordinates = coordinates;
         this.comment = comment;
         this.packageNumber = packageNumber;
         this.shoppingWebSite = shoppingWebSite;
