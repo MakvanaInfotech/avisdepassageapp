@@ -229,7 +229,7 @@ const AddReviewScreen = ({navigation}) => {
                         mode="date"
                         date={selectedDate}
                         textColor={'#3C3C43'}
-                        minuteInterval={5}
+                        // minuteInterval={5}
                         onDateChange={(date) => {
                             setSelectedDate(date)
                         }}

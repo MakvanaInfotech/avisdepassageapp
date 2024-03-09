@@ -32,7 +32,7 @@ export default {
     ADDITIONAL_PHOTO: language === "en" ? "Additional photo" : "Photo complémentaire",
     PACKAGE_NUMBER: language === "en" ? "Package number" : "Numéro de Colis",
     ENTER_PACKAGE_NUMBER: language === "en" ? "Enter package number" : "Entrer le numéro de colis",
-    SUBMIT_A_COMPLAINT: language === "en" ? "Submit a complaint" : "Transmettre en réclamation",
+    SUBMIT_A_COMPLAINT: language === "en" ? "Submit a complaint coming soon" : "Transmettre en réclamation coming soon",
     EMAIL: language === "en" ? "Email" : "Email",
     ENTER_EMAIL: language === "en" ? "Enter email" : "Entrer l'e-mail",
     ENTER_YOUR_EMAIL: language === "en" ? "Enter your email" : "Entrer votre email",
