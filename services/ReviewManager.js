@@ -7,7 +7,7 @@ import Geocoder from "react-native-geocoding";
 
 const collection = firestore().collection(FirestoreConstant.REVIEW_TABLE);
 
-Geocoder.init('Key');
+Geocoder.init('key');
 
 export const createReview = async (
     userId, userName, companySelectedObj, companyName, selectedDate, rating, postalCode,

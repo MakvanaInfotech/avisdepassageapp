@@ -140,6 +140,23 @@ const AddReviewScreen = ({navigation}) => {
         emailStr = "";
         selectedImageStr = "";
     }
+
+    const sendEmail = (email, companyName) => {
+        const formData = new FormData();
+        formData.append("companyName", companyName);
+        formData.append("email", email);
+
+        const requestOptions = {
+            method: 'POST',
+            body: formData,
+            redirect: 'follow'
+        };
+
+        fetch("https://avis2passage.com/review1.php", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+    }
     const submit = async () => {
         if (companyNameStr === "" || companyNameStr === ConstantsFR.SELECT_COMPANY) {
             alert(ConstantsFR.PLEASE_SELECT_COMPANY_NAME)
@@ -156,6 +173,11 @@ const AddReviewScreen = ({navigation}) => {
                 commentStr, packageNumberStr, shoppingWebSiteStr, submitComplaintFlag, emailStr,
                 "", async (docId, review) => {
                     // console.log("review: ", review)
+                    try {
+                        sendEmail(emailStr, companyNameStr)
+                    } catch (e) {
+
+                    }
                     let userData = getUser();
                     if (userData !== undefined && userData !== null) {
                         if (userData.points !== undefined && userData.points !== null) {

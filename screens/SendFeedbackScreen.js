@@ -89,6 +89,27 @@ const SendFeedbackScreen = ({navigation}) => {
         } else if (messageStr === "") {
             alert(ConstantsFR.PLEASE_MESSAGE)
         } else {
+
+            let myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            let raw = JSON.stringify({
+                "email": fromStr,
+                "message": messageStr
+            });
+
+            let requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+
+            fetch("https://avis2passage.com/feedbackmail.php", requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+
             showAlertWithButtons("",
                 ConstantsFR.YOUR_FEEDBACK_SENT,
                 ConstantsFR.OK,
