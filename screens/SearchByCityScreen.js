@@ -49,6 +49,7 @@ const SearchByCityScreen = ({navigation}) => {
     const [filterReviewList, setFilterReviewList] = useState([]);
     const [search, setSearch] = useState('');
     const [isMapStatus, setMapStatus] = useState(false);
+    const [selectedItem, setSelectedItem] = useState(null);
 
     const [markers, setMarkers] = useState([]);
     const [currentLocation, setCurrentLocation] = useState(SAMPLE_REGION);
@@ -273,7 +274,7 @@ const SearchByCityScreen = ({navigation}) => {
         <View style={{
             flex: 1,
             flexGrow: 1,
-            paddingBottom:20,
+            // paddingBottom:20,
             backgroundColor: colors.WHITE,
         }}>
             <SafeAreaView/>
@@ -338,18 +339,123 @@ const SearchByCityScreen = ({navigation}) => {
                 <MapView
                     style={{ flex: 1 }}
                     initialRegion={currentLocation}
+                    onPress={()=>{
+                        setSelectedItem(null)
+                    }}
                 >
                     {markers.map((marker, index) => (
                         <Marker
                             key={index}
                             coordinate={marker.coordinates}
                             title={marker.city}
+                            onPress={()=>{
+                                setSelectedItem(marker)
+                            }}
                         />
                     ))}
 
                 </MapView>
             )}
 
+            {(
+                selectedItem !== null &&
+                <View
+                    style={{
+                        position:'absolute',
+                        bottom:0,
+                        flex:1,
+                        width:"100%",
+                        paddingTop:10,
+                        paddingBottom:10,
+                        backgroundColor:colors.WHITE
+                    }}>
+                    <TouchableOpacity
+                        onPress={() => {
+                            navigation.navigate(ScreenName.REVIEW_DETAILS_SCREEN,{
+                                item : selectedItem
+                            })
+                        }}>
+                        <View
+                            style={{
+                                width: '100%',
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                paddingStart: 10,
+                                paddingEnd: 20,
+                            }}>
+                            <Image
+                                style={{
+                                    marginStart: 10,
+                                    marginTop: 5,
+                                    marginBottom: 5,
+                                    width: 50,
+                                    height: 50,
+                                }}
+                                resizeMode={selectedItem.companySelected.id === "HMeHpTjKctnJpYJKEsWA" ? 'cover' : 'contain'}
+                                source={selectedItem.companySelected.image !== undefined &&
+                                selectedItem.companySelected.image !== null && selectedItem.companySelected.image !== "" ?
+                                    {uri: selectedItem.companySelected.image} :
+                                    require('../assets/images/ic_profile.png')
+                                }>
+                            </Image>
+                            <View style={{
+                                marginStart: 5,
+                                flex:1,
+                                marginTop: 8,
+                                flexDirection: 'column',  // Set flexDirection to 'row' for horizontal arrangement
+
+                            }}>
+                                <Text
+                                    style={{
+                                        fontSize: 16,
+                                        fontWeight: 400,
+                                        fontFamily: fontStyle.SFProTextRegular,
+                                        color: colors.BLACK,
+                                    }}>
+                                    {selectedItem.city}
+                                </Text>
+                                <Text
+                                    numberOfLines={2}            // Set the maximum number of lines
+                                    ellipsizeMode="tail"
+                                    style={{
+                                        flex: 1,
+                                        marginTop:5,
+                                        fontSize: 10,
+                                        fontFamily: fontStyle.SFProTextRegular,
+                                        color: colors.BLACK,
+                                    }}>
+                                    {selectedItem.comment}
+                                </Text>
+                            </View>
+
+                            <View style={{
+                                flex: 1,
+                                alignItems: 'center',
+                                justifyContent: 'flex-end',
+                                flexDirection: 'row'
+                            }}>
+                                <Rating
+                                    readonly
+                                    startingValue={selectedItem.rating}
+                                    ratingColor={colors.PRIMARY_COLOR}
+                                    imageSize={20}
+                                    style={{
+                                        paddingVertical: 10,
+                                        marginEnd: 10,
+                                    }}/>
+                                <Image
+                                    style={{
+                                        width: 8,
+                                        height: 14,
+                                    }}
+                                    resizeMode={'contain'}
+                                    source={require('../assets/images/ic_chevron.png')}>
+                                </Image>
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+            )}
 
         </View>
     );
