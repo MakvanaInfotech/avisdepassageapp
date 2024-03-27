@@ -59,10 +59,10 @@ const SearchByCityScreen = ({navigation}) => {
         let count = 0
         for (const item of reviews) {
             try {
-                if(item !== undefined && item.city !== undefined){
+                if (item !== undefined && item.city !== undefined) {
                     const response = await Geocoder.from(item.city);
-                    const { lat, lng } = response.results[0].geometry.location;
-                    console.log("item.city>>> ",item.city + " lat: "+ lat +" lng: "+ lng)
+                    const {lat, lng} = response.results[0].geometry.location;
+                    console.log("item.city>>> ", item.city + " lat: " + lat + " lng: " + lng)
                     markerList.push({
                         id: count,
                         item: item,
@@ -78,14 +78,14 @@ const SearchByCityScreen = ({navigation}) => {
             }
         }
 
-        if(markerList.length > 0 && markerList[0].coordinates !== undefined){
+        if (markerList.length > 0 && markerList[0].coordinates !== undefined) {
             let coordinate = markerList[0].coordinates
             // console.log("",coordinate)
             setCurrentLocation({
                 latitude: coordinate.latitude, // Initial latitude
                 longitude: coordinate.longitude, // Initial longitude
                 latitudeDelta: 0.0922,
-                longitudeDelta:  LATITUDE_DELTA * ASPECT_RATIO
+                longitudeDelta: LATITUDE_DELTA * ASPECT_RATIO
             })
         }
         setMarkers(markerList);
@@ -105,13 +105,13 @@ const SearchByCityScreen = ({navigation}) => {
                 setReviewList(reviews)
                 let markerList = reviews.filter(item => item.coordinates !== undefined && item.coordinates !== null)
                 setMarkers(markerList);
-                if(markerList.length > 0 && markerList[0].coordinates !== undefined){
+                if (markerList.length > 0 && markerList[0].coordinates !== undefined) {
                     let coordinate = markerList[0].coordinates
                     setCurrentLocation({
                         latitude: coordinate.latitude, // Initial latitude
                         longitude: coordinate.longitude, // Initial longitude
                         latitudeDelta: 0.0822,
-                        longitudeDelta:  LATITUDE_DELTA * ASPECT_RATIO
+                        longitudeDelta: LATITUDE_DELTA * ASPECT_RATIO
                     })
                 }
                 setFilterReviewList(reviews)
@@ -337,9 +337,9 @@ const SearchByCityScreen = ({navigation}) => {
             {(
                 isMapStatus &&
                 <MapView
-                    style={{ flex: 1 }}
+                    style={{flex: 1}}
                     initialRegion={currentLocation}
-                    onPress={()=>{
+                    onPress={() => {
                         setSelectedItem(null)
                     }}
                 >
@@ -348,8 +348,10 @@ const SearchByCityScreen = ({navigation}) => {
                             key={index}
                             coordinate={marker.coordinates}
                             title={marker.city}
-                            onPress={()=>{
-                                setSelectedItem(marker)
+                            onPress={() => {
+                                setTimeout(() => {
+                                    setSelectedItem(marker)
+                                }, 1000)
                             }}
                         />
                     ))}
@@ -361,18 +363,18 @@ const SearchByCityScreen = ({navigation}) => {
                 selectedItem !== null &&
                 <View
                     style={{
-                        position:'absolute',
-                        bottom:0,
-                        flex:1,
-                        width:"100%",
-                        paddingTop:10,
-                        paddingBottom:10,
-                        backgroundColor:colors.WHITE
+                        position: 'absolute',
+                        bottom: 0,
+                        flex: 1,
+                        width: "100%",
+                        paddingTop: 10,
+                        paddingBottom: 10,
+                        backgroundColor: colors.WHITE
                     }}>
                     <TouchableOpacity
                         onPress={() => {
-                            navigation.navigate(ScreenName.REVIEW_DETAILS_SCREEN,{
-                                item : selectedItem
+                            navigation.navigate(ScreenName.REVIEW_DETAILS_SCREEN, {
+                                item: selectedItem
                             })
                         }}>
                         <View
@@ -400,7 +402,7 @@ const SearchByCityScreen = ({navigation}) => {
                             </Image>
                             <View style={{
                                 marginStart: 5,
-                                flex:1,
+                                flex: 1,
                                 marginTop: 8,
                                 flexDirection: 'column',  // Set flexDirection to 'row' for horizontal arrangement
 
@@ -419,7 +421,7 @@ const SearchByCityScreen = ({navigation}) => {
                                     ellipsizeMode="tail"
                                     style={{
                                         flex: 1,
-                                        marginTop:5,
+                                        marginTop: 5,
                                         fontSize: 10,
                                         fontFamily: fontStyle.SFProTextRegular,
                                         color: colors.BLACK,
